@@ -1,0 +1,5461 @@
+BANK 0
+EQU $00 
+LABEL $C800 Vec_Snd_Shadow
+COMMENT_LABEL $C800 Shadow of sound chip registers (15 bytes)
+LABEL $C80F Vec_Btn_State
+COMMENT_LABEL $C80F Current state of all joystick buttons
+LABEL $C810 Vec_Prev_Btns
+COMMENT_LABEL $C810 Previous state of all joystick buttons
+LABEL $C811 Vec_Buttons
+COMMENT_LABEL $C811 Current toggle state of all buttons
+LABEL $C812 Vec_Button_1_1
+COMMENT_LABEL $C812 Current toggle state of stick 1 button 1
+LABEL $C813 Vec_Button_1_2
+COMMENT_LABEL $C813 Current toggle state of stick 1 button 2
+LABEL $C814 Vec_Button_1_3
+COMMENT_LABEL $C814 Current toggle state of stick 1 button 3
+LABEL $C815 Vec_Button_1_4
+COMMENT_LABEL $C815 Current toggle state of stick 1 button 4
+LABEL $C816 Vec_Button_2_1
+COMMENT_LABEL $C816 Current toggle state of stick 2 button 1
+LABEL $C817 Vec_Button_2_2
+COMMENT_LABEL $C817 Current toggle state of stick 2 button 2
+LABEL $C818 Vec_Button_2_3
+COMMENT_LABEL $C818 Current toggle state of stick 2 button 3
+LABEL $C819 Vec_Button_2_4
+COMMENT_LABEL $C819 Current toggle state of stick 2 button 4
+LABEL $C81A Vec_Joy_Resltn
+COMMENT_LABEL $C81A Joystick A/D resolution ($80=min $00=max)
+LABEL $C81B Vec_Joy_1_X
+COMMENT_LABEL $C81B Joystick 1 left/right
+LABEL $C81C Vec_Joy_1_Y
+COMMENT_LABEL $C81C Joystick 1 up/down
+LABEL $C81D Vec_Joy_2_X
+COMMENT_LABEL $C81D Joystick 2 left/right
+LABEL $C81E Vec_Joy_2_Y
+COMMENT_LABEL $C81E Joystick 2 up/down
+LABEL $C81F Vec_Joy_Mux
+COMMENT_LABEL $C81F Joystick enable/mux flags (4 bytes)
+LABEL $C81F Vec_Joy_Mux_1_X
+COMMENT_LABEL $C81F Joystick 1 X enable/mux flag (=1)
+LABEL $C820 Vec_Joy_Mux_1_Y
+COMMENT_LABEL $C820 Joystick 1 Y enable/mux flag (=3)
+LABEL $C821 Vec_Joy_Mux_2_X
+COMMENT_LABEL $C821 Joystick 2 X enable/mux flag (=5)
+LABEL $C822 Vec_Joy_Mux_2_Y
+COMMENT_LABEL $C822 Joystick 2 Y enable/mux flag (=7)
+LABEL $C823 Vec_Misc_Count
+COMMENT_LABEL $C823 Misc counter/flag byte, zero when not in use
+LABEL $C824 Vec_0Ref_Enable
+COMMENT_LABEL $C824 Check0Ref enable flag
+LABEL $C825 Vec_Loop_Count
+COMMENT_LABEL $C825 Loop counter word (incremented in Wait_Recal)
+LABEL $C827 Vec_Brightness
+COMMENT_LABEL $C827 Default brightness
+LABEL $C828 Vec_Dot_Dwell
+COMMENT_LABEL $C828 Dot dwell time?
+LABEL $C829 Vec_Pattern
+COMMENT_LABEL $C829 Dot pattern (bits)
+LABEL $C82A Vec_Text_HW
+COMMENT_LABEL $C82A Default text height and width
+LABEL $C82A Vec_Text_Height
+COMMENT_LABEL $C82A Default text height
+LABEL $C82B Vec_Text_Width
+COMMENT_LABEL $C82B Default text width
+LABEL $C82C Vec_Str_Ptr
+COMMENT_LABEL $C82C Temporary string pointer for Print_Str
+LABEL $C82E Vec_Counters
+COMMENT_LABEL $C82E Six bytes of counters
+LABEL $C82E Vec_Counter_1
+COMMENT_LABEL $C82E First  counter byte
+LABEL $C82F Vec_Counter_2
+COMMENT_LABEL $C82F Second counter byte
+LABEL $C830 Vec_Counter_3
+COMMENT_LABEL $C830 Third  counter byte
+LABEL $C831 Vec_Counter_4
+COMMENT_LABEL $C831 Fourth counter byte
+LABEL $C832 Vec_Counter_5
+COMMENT_LABEL $C832 Fifth  counter byte
+LABEL $C833 Vec_Counter_6
+COMMENT_LABEL $C833 Sixth  counter byte
+LABEL $C834 Vec_RiseRun_Tmp
+COMMENT_LABEL $C834 Temp storage word for rise/run
+LABEL $C836 Vec_Angle
+COMMENT_LABEL $C836 Angle for rise/run and rotation calculations
+LABEL $C837 Vec_Run_Index
+COMMENT_LABEL $C837 Index pair for run
+LABEL $C839 Vec_Rise_Index
+COMMENT_LABEL $C839 Index pair for rise
+LABEL $C83B Vec_RiseRun_Len
+COMMENT_LABEL $C83B length for rise/run
+LABEL $C83D Vec_Rfrsh
+COMMENT_LABEL $C83D Refresh time (divided by 1.5MHz)
+LABEL $C83D Vec_Rfrsh_lo
+COMMENT_LABEL $C83D Refresh time low byte
+LABEL $C83E Vec_Rfrsh_hi
+COMMENT_LABEL $C83E Refresh time high byte
+LABEL $C83F Vec_Music_Work
+COMMENT_LABEL $C83F Music work buffer (14 bytes, backwards?)
+LABEL $C842 Vec_Music_Wk_A
+COMMENT_LABEL $C842 register 10
+LABEL $C845 Vec_Music_Wk_7
+COMMENT_LABEL $C845 register 7
+LABEL $C846 Vec_Music_Wk_6
+COMMENT_LABEL $C846 register 6
+LABEL $C847 Vec_Music_Wk_5
+COMMENT_LABEL $C847 register 5
+LABEL $C84B Vec_Music_Wk_1
+COMMENT_LABEL $C84B register 1
+LABEL $C84D Vec_Freq_Table
+COMMENT_LABEL $C84D Pointer to note-to-frequency table (normally $FC8D)
+LABEL $C84F Vec_Max_Players
+COMMENT_LABEL $C84F Maximum number of players for Select_Game
+LABEL $C850 Vec_Max_Games
+COMMENT_LABEL $C850 Maximum number of games for Select_Game
+LABEL $C84F Vec_ADSR_Table
+COMMENT_LABEL $C84F Storage for first music header word (ADSR table)
+LABEL $C851 Vec_Twang_Table
+COMMENT_LABEL $C851 Storage for second music header word ('twang' table)
+LABEL $C853 Vec_Music_Ptr
+COMMENT_LABEL $C853 Music data pointer
+LABEL $C853 Vec_Expl_ChanA
+COMMENT_LABEL $C853 Used by Explosion_Snd - bit for first channel used?
+LABEL $C854 Vec_Expl_Chans
+COMMENT_LABEL $C854 Used by Explosion_Snd - bits for all channels used?
+LABEL $C855 Vec_Music_Chan
+COMMENT_LABEL $C855 Current sound channel number for Init_Music
+LABEL $C856 Vec_Music_Flag
+COMMENT_LABEL $C856 Music active flag ($00=off $01=start $80=on)
+LABEL $C857 Vec_Duration
+COMMENT_LABEL $C857 Duration counter for Init_Music
+LABEL $C858 Vec_Music_Twang
+COMMENT_LABEL $C858 3 word 'twang' table used by Init_Music
+LABEL $C858 Vec_Expl_1
+COMMENT_LABEL $C858 Four bytes copied from Explosion_Snd's U-reg parameters
+LABEL $C859 Vec_Expl_2
+LABEL $C85A Vec_Expl_3
+LABEL $C85B Vec_Expl_4
+LABEL $C85C Vec_Expl_Chan
+COMMENT_LABEL $C85C Used by Explosion_Snd - channel number in use?
+LABEL $C85D Vec_Expl_ChanB
+COMMENT_LABEL $C85D Used by Explosion_Snd - bit for second channel used?
+LABEL $C85E Vec_ADSR_Timers
+COMMENT_LABEL $C85E ADSR timers for each sound channel (3 bytes)
+LABEL $C861 Vec_Music_Freq
+COMMENT_LABEL $C861 Storage for base frequency of each channel (3 words)
+LABEL $C867 Vec_Expl_Flag
+COMMENT_LABEL $C867 Explosion_Snd initialization flag?
+LABEL $C877 Vec_Expl_Timer
+COMMENT_LABEL $C877 Used by Explosion_Snd
+LABEL $C879 Vec_Num_Players
+COMMENT_LABEL $C879 Number of players selected in Select_Game
+LABEL $C87A Vec_Num_Game
+COMMENT_LABEL $C87A Game number selected in Select_Game
+LABEL $C87B Vec_Seed_Ptr
+COMMENT_LABEL $C87B Pointer to 3-byte random number seed (=$C87D)
+LABEL $C87D Vec_Random_Seed
+COMMENT_LABEL $C87D Default 3-byte random number seed
+LABEL $CBEA Vec_Default_Stk
+COMMENT_LABEL $CBEA Default top-of-stack
+LABEL $CBEB Vec_High_Score
+COMMENT_LABEL $CBEB High score storage (7 bytes)
+LABEL $CBF2 Vec_SWI3_Vector
+COMMENT_LABEL $CBF2 SWI2/SWI3 interrupt vector (3 bytes)
+LABEL $CBF2 Vec_SWI2_Vector
+COMMENT_LABEL $CBF2 SWI2/SWI3 interrupt vector (3 bytes)
+LABEL $CBF5 Vec_FIRQ_Vector
+COMMENT_LABEL $CBF5 FIRQ interrupt vector (3 bytes)
+LABEL $CBF8 Vec_IRQ_Vector
+COMMENT_LABEL $CBF8 IRQ interrupt vector (3 bytes)
+LABEL $CBFB Vec_SWI_Vector
+COMMENT_LABEL $CBFB SWI/NMI interrupt vector (3 bytes)
+LABEL $CBFB Vec_NMI_Vector
+COMMENT_LABEL $CBFB SWI/NMI interrupt vector (3 bytes)
+LABEL $CBFE Vec_Cold_Flag
+COMMENT_LABEL $CBFE Cold start flag (warm start if = $7321)
+LABEL $D000 VIA_port_b
+COMMENT_LABEL $D000 VIA port B data I/O register
+LABEL $D001 VIA_port_a
+COMMENT_LABEL $D001 VIA port A data I/O register (handshaking)
+LABEL $D002 VIA_DDR_b
+COMMENT_LABEL $D002 VIA port B data direction register (0=input 1=output)
+LABEL $D003 VIA_DDR_a
+COMMENT_LABEL $D003 VIA port A data direction register (0=input 1=output)
+LABEL $D004 VIA_t1_cnt_lo
+COMMENT_LABEL $D004 VIA timer 1 count register lo (scale factor)
+LABEL $D005 VIA_t1_cnt_hi
+COMMENT_LABEL $D005 VIA timer 1 count register hi
+LABEL $D006 VIA_t1_lch_lo
+COMMENT_LABEL $D006 VIA timer 1 latch register lo
+LABEL $D007 VIA_t1_lch_hi
+COMMENT_LABEL $D007 VIA timer 1 latch register hi
+LABEL $D008 VIA_t2_lo
+COMMENT_LABEL $D008 VIA timer 2 count/latch register lo (refresh)
+LABEL $D009 VIA_t2_hi
+COMMENT_LABEL $D009 VIA timer 2 count/latch register hi
+LABEL $D00A VIA_shift_reg
+COMMENT_LABEL $D00A VIA shift register
+LABEL $D00B VIA_aux_cntl
+COMMENT_LABEL $D00B VIA auxiliary control register
+LABEL $D00C VIA_cntl
+COMMENT_LABEL $D00C VIA control register
+LABEL $D00D VIA_int_flags
+COMMENT_LABEL $D00D VIA interrupt flags register
+LABEL $D00E VIA_int_enable
+COMMENT_LABEL $D00E VIA interrupt enable register
+LABEL $D00F VIA_port_a_nohs
+COMMENT_LABEL $D00F VIA port A data I/O register (no handshaking)
+LABEL $F000 Cold_Start
+LABEL $F06C Warm_Start
+LABEL $F14C Init_VIA
+LABEL $F164 Init_OS_RAM
+LABEL $F18B Init_OS
+LABEL $F192 Wait_Recal
+LABEL $F1A2 Set_Refresh
+LABEL $F1AA DP_to_D0
+LABEL $F1AF DP_to_C8
+LABEL $F1B4 Read_Btns_Mask
+LABEL $F1BA Read_Btns
+LABEL $F1F5 Joy_Analog
+LABEL $F1F8 Joy_Digital
+LABEL $F256 Sound_Byte
+LABEL $F259 Sound_Byte_x
+LABEL $F25B Sound_Byte_raw
+LABEL $F272 Clear_Sound
+LABEL $F27D Sound_Bytes
+LABEL $F284 Sound_Bytes_x
+LABEL $F289 Do_Sound
+LABEL $F28C Do_Sound_x
+LABEL $F29D Intensity_1F
+LABEL $F2A1 Intensity_3F
+LABEL $F2A5 Intensity_5F
+LABEL $F2A9 Intensity_7F
+LABEL $F2AB Intensity_a
+LABEL $F2BE Dot_ix_b
+LABEL $F2C1 Dot_ix
+LABEL $F2C3 Dot_d
+LABEL $F2C5 Dot_here
+LABEL $F2D5 Dot_List
+LABEL $F2DE Dot_List_Reset
+LABEL $F2E6 Recalibrate
+LABEL $F2F2 Moveto_x_7F
+LABEL $F2FC Moveto_d_7F
+LABEL $F308 Moveto_ix_FF
+LABEL $F30C Moveto_ix_7F
+LABEL $F30E Moveto_ix_a
+LABEL $F310 Moveto_ix
+LABEL $F312 Moveto_d
+LABEL $F34A Reset0Ref_D0
+LABEL $F34F Check0Ref
+LABEL $F354 Reset0Ref
+LABEL $F35B Reset_Pen
+LABEL $F36B Reset0Int
+LABEL $F373 Print_Str_hwyx
+LABEL $F378 Print_Str_yx
+LABEL $F37A Print_Str_d
+LABEL $F385 Print_List_hw
+LABEL $F38A Print_List
+LABEL $F38C Print_List_chk
+LABEL $F391 Print_Ships_x
+LABEL $F393 Print_Ships
+LABEL $F3AD Mov_Draw_VLc_a
+COMMENT_LABEL $F3AD count y x y x ...
+LABEL $F3B1 Mov_Draw_VL_b
+COMMENT_LABEL $F3B1 y x y x ...
+LABEL $F3B5 Mov_Draw_VLcs
+COMMENT_LABEL $F3B5 count scale y x y x ...
+LABEL $F3B7 Mov_Draw_VL_ab
+COMMENT_LABEL $F3B7 y x y x ...
+LABEL $F3B9 Mov_Draw_VL_a
+COMMENT_LABEL $F3B9 y x y x ...
+LABEL $F3BC Mov_Draw_VL
+COMMENT_LABEL $F3BC y x y x ...
+LABEL $F3BE Mov_Draw_VL_d
+COMMENT_LABEL $F3BE y x y x ...
+LABEL $F3CE Draw_VLc
+COMMENT_LABEL $F3CE count y x y x ...
+LABEL $F3D2 Draw_VL_b
+COMMENT_LABEL $F3D2 y x y x ...
+LABEL $F3D6 Draw_VLcs
+COMMENT_LABEL $F3D6 count scale y x y x ...
+LABEL $F3D8 Draw_VL_ab
+COMMENT_LABEL $F3D8 y x y x ...
+LABEL $F3DA Draw_VL_a
+COMMENT_LABEL $F3DA y x y x ...
+LABEL $F3DD Draw_VL
+COMMENT_LABEL $F3DD y x y x ...
+LABEL $F3DF Draw_Line_d
+COMMENT_LABEL $F3DF y x y x ...
+LABEL $F404 Draw_VLp_FF
+COMMENT_LABEL $F404 pattern y x pattern y x ... $01
+LABEL $F408 Draw_VLp_7F
+COMMENT_LABEL $F408 pattern y x pattern y x ... $01
+LABEL $F40C Draw_VLp_scale
+COMMENT_LABEL $F40C scale pattern y x pattern y x ... $01
+LABEL $F40E Draw_VLp_b
+COMMENT_LABEL $F40E pattern y x pattern y x ... $01
+LABEL $F410 Draw_VLp
+COMMENT_LABEL $F410 pattern y x pattern y x ... $01
+LABEL $F434 Draw_Pat_VL_a
+COMMENT_LABEL $F434 y x y x ...
+LABEL $F437 Draw_Pat_VL
+COMMENT_LABEL $F437 y x y x ...
+LABEL $F439 Draw_Pat_VL_d
+COMMENT_LABEL $F439 y x y x ...
+LABEL $F46E Draw_VL_mode
+COMMENT_LABEL $F46E mode y x mode y x ... $01
+LABEL $F495 Print_Str
+LABEL $F511 Random_3
+LABEL $F517 Random
+LABEL $F533 Init_Music_Buf
+LABEL $F53F Clear_x_b
+LABEL $F542 Clear_C8_RAM
+COMMENT_LABEL $F542 never used by GCE carts?
+LABEL $F545 Clear_x_256
+LABEL $F548 Clear_x_d
+LABEL $F550 Clear_x_b_80
+LABEL $F552 Clear_x_b_a
+LABEL $F55A Dec_3_Counters
+LABEL $F55E Dec_6_Counters
+LABEL $F563 Dec_Counters
+LABEL $F56D Delay_3
+COMMENT_LABEL $F56D 30 cycles
+LABEL $F571 Delay_2
+COMMENT_LABEL $F571 25 cycles
+LABEL $F575 Delay_1
+COMMENT_LABEL $F575 20 cycles
+LABEL $F579 Delay_0
+COMMENT_LABEL $F579 12 cycles
+LABEL $F57A Delay_b
+COMMENT_LABEL $F57A 5*B + 10 cycles
+LABEL $F57D Delay_RTS
+COMMENT_LABEL $F57D 5 cycles
+LABEL $F57E Bitmask_a
+LABEL $F584 Abs_a_b
+LABEL $F58B Abs_b
+LABEL $F593 Rise_Run_Angle
+LABEL $F5D9 Get_Rise_Idx
+LABEL $F5DB Get_Run_Idx
+LABEL $F5EF Get_Rise_Run
+LABEL $F5FF Rise_Run_X
+LABEL $F601 Rise_Run_Y
+LABEL $F603 Rise_Run_Len
+LABEL $F610 Rot_VL_ab
+LABEL $F616 Rot_VL
+LABEL $F61F Rot_VL_Mode
+LABEL $F62B Rot_VL_M_dft
+LABEL $F65B Xform_Run_a
+LABEL $F65D Xform_Run
+LABEL $F661 Xform_Rise_a
+LABEL $F663 Xform_Rise
+LABEL $F67F Move_Mem_a_1
+LABEL $F683 Move_Mem_a
+LABEL $F687 Init_Music_chk
+LABEL $F68D Init_Music
+LABEL $F692 Init_Music_x
+LABEL $F7A9 Select_Game
+LABEL $F84F Clear_Score
+LABEL $F85E Add_Score_a
+LABEL $F87C Add_Score_d
+LABEL $F8B7 Strip_Zeros
+LABEL $F8C7 Compare_Score
+LABEL $F8D8 New_High_Score
+LABEL $F8E5 Obj_Will_Hit_u
+LABEL $F8F3 Obj_Will_Hit
+LABEL $F8FF Obj_Hit
+LABEL $F92E Explosion_Snd
+LABEL $FF9F Draw_Grid_VL
+LABEL $FD0D music1
+LABEL $FD1D music2
+LABEL $FD81 music3
+LABEL $FDD3 music4
+LABEL $FE38 music5
+LABEL $FE76 music6
+LABEL $FEC6 music7
+LABEL $FEF8 music8
+LABEL $FF26 music9
+LABEL $FF44 musica
+LABEL $FF62 musicb
+LABEL $FF7A musicc
+LABEL $FF8F musicd
+LABEL $F9F4 Char_Table
+LABEL $FBD4 Char_Table_End
+LABEL $C880 user_ram
+LABEL $C880 music_active
+LABEL $C882 menu_selected_option
+LABEL $C883 morbCounter
+LABEL $C884 lives
+LABEL $C885 score
+LABEL $C88B empty
+LABEL $C88C marcY
+LABEL $C88D marcX
+LABEL $C88E enemyY1
+LABEL $C88F enemyX1
+LABEL $C890 enemyY2
+LABEL $C891 enemyX2
+LABEL $C892 marcVelocity
+LABEL $C893 enemy1VelocityX
+LABEL $C894 enemy1VelocityY
+LABEL $C895 enemy2VelocityX
+LABEL $C896 enemy2VelocityY
+LABEL $C897 frenzyCounter
+LABEL $C898 frenzy_active
+LABEL $C899 totalStuns
+LABEL $C89A totalKills
+LABEL $C89B totalDeaths
+LABEL $C89C gameState
+LABEL $C89D last_joy_y
+LABEL $C89E directionFaced
+LABEL $C89F enemy_available1
+LABEL $C8A0 enemy_available2
+LABEL $C8A1 liveBullet
+LABEL $C8A2 bulletY
+LABEL $C8A3 bulletX
+LABEL $C8A4 bulletVelocityY
+LABEL $C8A5 bulletVelocityX
+LABEL $C8A6 voxStart
+LABEL $C8A7 deathTimer
+LABEL $C8A8 rotangle
+LABEL $C8A9 rotated
+LABEL $E470 TITLE_TEXT_SIZE
+COMMENT_LABEL $E470 HEIGTH, WIDTH (-14, 96)
+LABEL $F160 NORMAL_TEXT_SIZE
+COMMENT_LABEL $F160 HEIGTH, WIDTH (-14, 96)
+LABEL $F355 CREDIT_TEXT_SIZE
+COMMENT_LABEL $F355 HEIGTH, WIDTH (-14, 96)
+LABEL $0080 SCREEN_BOTTOM
+LABEL $0080 SCREEN_LEFT
+EQU $7F SCREEN_RIGHT
+EQU $05 BALL_SIZE
+EQU $6A BALL_INIT_YPOS
+EQU $77 BALL_X_RIGHT
+LABEL $0091 BALL_X_LEFT
+LABEL $0092 PADDLE_INIT_YPOS
+LABEL $0006 BULLETVELOCITY
+EQU $01 VOX_DONE
+EQU $02 VOX_STARTED
+EQU $03 VOX_STARTING
+LABEL $0115 start
+LABEL $9C00 SER_BITTIME
+COMMENT_LABEL $9C00 $009c = 156 cycles = 9615 baud
+LABEL $0021 ser_txbyte
+LABEL $007C ser_txbit
+EQU $4E sertx_loop
+LABEL $005C ser_tx1
+EQU $52 ser_tx0
+LABEL $0062 sertx_next
+EQU $7E sertxbit_loop
+LABEL $00EF VOX_DATAMASK
+COMMENT_LABEL $00EF bit mask for data line
+EQU $20 VOX_STATUSMASK
+COMMENT_LABEL $20 bit mask for status line
+LABEL $00FF VOX_TERM
+COMMENT_LABEL $00FF speech string terminator
+LABEL $0000 vox_addr
+LABEL $008B vox_init
+LABEL $0095 vox_init2
+LABEL $00B7 vox_silence
+LABEL $009C vox_speak
+LABEL $00B6 vox_exit
+LABEL $0080 IY
+COMMENT_LABEL $0080 See, Even, Feed
+LABEL $0081 IH
+COMMENT_LABEL $0081 Sit, Fix, Pin
+LABEL $0082 EY
+COMMENT_LABEL $0082 Hair, Gate, Beige
+LABEL $0083 EH
+COMMENT_LABEL $0083 Met, Check, Red
+LABEL $0084 AY
+COMMENT_LABEL $0084 Hat, Fast, Fan
+LABEL $0085 AX
+COMMENT_LABEL $0085 Cotten
+LABEL $0086 UX
+COMMENT_LABEL $0086 Luck, Up, Uncle
+LABEL $0087 OH
+COMMENT_LABEL $0087 Hot, Clock, Fox
+LABEL $0088 AW
+COMMENT_LABEL $0088 Father, Fall
+LABEL $0089 OW
+COMMENT_LABEL $0089 Comb, Over, Hold
+LABEL $008A UH
+COMMENT_LABEL $008A Book, Could, Should
+LABEL $008B UW
+COMMENT_LABEL $008B Food, June
+LABEL $008C MM
+COMMENT_LABEL $008C Milk, Famous,
+LABEL $008D NE
+COMMENT_LABEL $008D Nip, Danger, Thin
+LABEL $008E NO
+COMMENT_LABEL $008E No, Snow, On
+LABEL $008F NGE
+COMMENT_LABEL $008F Think, Ping
+LABEL $0090 NGO
+COMMENT_LABEL $0090 Hung, Song
+LABEL $0091 LE
+COMMENT_LABEL $0091 Lake, Alarm, Lapel
+LABEL $0092 LO
+COMMENT_LABEL $0092 Clock, Plus, Hello
+LABEL $0093 WW
+COMMENT_LABEL $0093 Wool, Sweat
+LABEL $0094 RR
+COMMENT_LABEL $0094 Ray, Brain, Over
+LABEL $0095 IYRR
+COMMENT_LABEL $0095 Clear, Hear, Year
+LABEL $0096 EYRR
+COMMENT_LABEL $0096 Hair, Stair, Repair
+LABEL $0097 AXRR
+COMMENT_LABEL $0097 Fir, Bird, Burn
+LABEL $0098 AWRR
+COMMENT_LABEL $0098 Part, Farm, Yarn
+LABEL $0099 OWRR
+COMMENT_LABEL $0099 Corn, Four, Your
+LABEL $009A EYIY
+COMMENT_LABEL $009A Gate, Ate, Ray
+LABEL $009B OHIY
+COMMENT_LABEL $009B Mice, Fight, White
+LABEL $009C OWIY
+COMMENT_LABEL $009C Boy, Toy, Voice
+LABEL $009D OHIH
+COMMENT_LABEL $009D Sky, Five, I
+LABEL $009E IYEH
+COMMENT_LABEL $009E Yes, Yarn, Million
+LABEL $009F EHLL
+COMMENT_LABEL $009F Saddle, Angle, Spell
+LABEL $00A0 IYUW
+COMMENT_LABEL $00A0 Cute, Few,
+LABEL $00A1 AXUW
+COMMENT_LABEL $00A1 Brown, Clown, Thousan
+LABEL $00A2 IHWW
+COMMENT_LABEL $00A2 Two, New, Zoo
+LABEL $00A3 AYWW
+COMMENT_LABEL $00A3 Our, Ouch, Owl
+LABEL $00A4 OWWW
+COMMENT_LABEL $00A4 Go, Hello, Snow
+LABEL $00A5 JH
+COMMENT_LABEL $00A5 Dodge, Jet, Savage
+LABEL $00A6 VV
+COMMENT_LABEL $00A6 Vest, Even,
+LABEL $00A7 ZZ
+COMMENT_LABEL $00A7 Zoo, Zap
+LABEL $00A8 ZH
+COMMENT_LABEL $00A8 Azure, Treasure
+LABEL $00A9 DH
+COMMENT_LABEL $00A9 There, That, This
+LABEL $00AA BE
+COMMENT_LABEL $00AA Bear, Bird, Beed
+LABEL $00AB BO
+COMMENT_LABEL $00AB Bone, Book Brown
+LABEL $00AC EB
+COMMENT_LABEL $00AC Cab, Crib, Web
+LABEL $00AD OB
+COMMENT_LABEL $00AD Bob, Sub, Tub
+LABEL $00AE DE
+COMMENT_LABEL $00AE Deep, Date, Divide
+LABEL $00AF DO
+COMMENT_LABEL $00AF Do, Dust, Dog
+LABEL $00B0 ED
+COMMENT_LABEL $00B0 Could, Bird
+LABEL $00B1 OD
+COMMENT_LABEL $00B1 Bud, Food
+LABEL $00B2 GE
+COMMENT_LABEL $00B2 Get, Gate, Guest,
+LABEL $00B3 GO
+COMMENT_LABEL $00B3 Got, Glue, Goo
+LABEL $00B4 EG
+COMMENT_LABEL $00B4 Peg, Wig
+LABEL $00B5 OG
+COMMENT_LABEL $00B5 Dog, Peg
+LABEL $00B6 CH
+COMMENT_LABEL $00B6 Church, Feature, March
+LABEL $00B7 HE
+COMMENT_LABEL $00B7 Help, Hand, Hair
+LABEL $00B8 HO
+COMMENT_LABEL $00B8 Hoe, Hot, Hug
+LABEL $00B9 WH
+COMMENT_LABEL $00B9 Who, Whale, White
+LABEL $00BA FF
+COMMENT_LABEL $00BA Food, Effort, Off
+LABEL $00BB SE
+COMMENT_LABEL $00BB See, Vest, Plus
+LABEL $00BC SO
+COMMENT_LABEL $00BC So, Sweat
+LABEL $00BD SH
+COMMENT_LABEL $00BD Ship, Fiction, Leash
+LABEL $00BE TH
+COMMENT_LABEL $00BE Thin, month
+LABEL $00BF TT
+COMMENT_LABEL $00BF Part, Little, Sit
+LABEL $00C0 TU
+COMMENT_LABEL $00C0 To, Talk, Ten
+LABEL $00C1 TS
+COMMENT_LABEL $00C1 Parts, Costs, Robots
+LABEL $00C2 KE
+COMMENT_LABEL $00C2 Can't, Clown, Key
+LABEL $00C3 KO
+COMMENT_LABEL $00C3 Comb, Quick, Fox
+LABEL $00C4 EK
+COMMENT_LABEL $00C4 Speak, Task
+LABEL $00C5 OK
+COMMENT_LABEL $00C5 Book, Took, October
+LABEL $00C6 PE
+COMMENT_LABEL $00C6 People, Computer
+LABEL $00C7 PO
+COMMENT_LABEL $00C7 Paw, Copy
+LABEL $00C8 R0
+LABEL $00C9 R1
+LABEL $00CA R2
+LABEL $00CB R3
+LABEL $00CC R4
+LABEL $00CD R5
+LABEL $00CE R6
+LABEL $00CF R7
+LABEL $00D0 R8
+LABEL $00D1 R9
+LABEL $00D2 A0
+COMMENT_LABEL $00D2 Sounds a bit like the Jungle Hunt rope noise
+LABEL $00D3 A1
+COMMENT_LABEL $00D3 Rising "Giggle Stick" (remember the Giggle Stick?)
+LABEL $00D4 A2
+COMMENT_LABEL $00D4 Falling "Giggle Stick"
+LABEL $00D5 A3
+COMMENT_LABEL $00D5 Rising "Giggle Stick" (higher)
+LABEL $00D6 A4
+COMMENT_LABEL $00D6 Rising sweep
+LABEL $00D7 A5
+COMMENT_LABEL $00D7 Siren (fall, then rise)
+LABEL $00D8 A6
+COMMENT_LABEL $00D8 Fast rising siren
+LABEL $00D9 A7
+COMMENT_LABEL $00D9 Slow rising siren
+LABEL $00DA A8
+COMMENT_LABEL $00DA Whoot-wheet
+LABEL $00DB A9
+COMMENT_LABEL $00DB High-pitched falling siren
+LABEL $00DC B0
+COMMENT_LABEL $00DC High beep
+LABEL $00DD B1
+COMMENT_LABEL $00DD R2D2 falling
+LABEL $00DE B2
+COMMENT_LABEL $00DE R2D2 talking 1
+LABEL $00DF B3
+COMMENT_LABEL $00DF R2D2 talking 2
+LABEL $00E0 B4
+COMMENT_LABEL $00E0 AM radio tuning (long)
+LABEL $00E1 B5
+COMMENT_LABEL $00E1 AM radio tuning (short)
+LABEL $00E2 B6
+COMMENT_LABEL $00E2 Bleep (sci-fi button press)
+LABEL $00E3 B7
+COMMENT_LABEL $00E3 2-tone
+LABEL $00E4 B8
+COMMENT_LABEL $00E4 Air leaking from a balloon
+LABEL $00E5 B9
+COMMENT_LABEL $00E5 Sci-fi "computing" noise
+LABEL $00E6 C0
+COMMENT_LABEL $00E6 Laser gun [*]
+LABEL $00E7 C1
+COMMENT_LABEL $00E7 Sound like "Cry"
+LABEL $00E8 C2
+COMMENT_LABEL $00E8 Sounds like "Words" [*]
+LABEL $00E9 C3
+COMMENT_LABEL $00E9 Cricket [*]
+LABEL $00EA C4
+COMMENT_LABEL $00EA Oui [*]
+LABEL $00EB C5
+LABEL $00EC C6
+COMMENT_LABEL $00EC "Yoink" [*]
+LABEL $00ED C7
+LABEL $00EE C8
+COMMENT_LABEL $00EE R2D2 raspberry
+LABEL $00EF C9
+COMMENT_LABEL $00EF R2D2 chirp
+LABEL $00FC M0
+COMMENT_LABEL $00FC Sonar Ping
+LABEL $00FD M1
+COMMENT_LABEL $00FD Pistol Shot (actually, sounds more like a snare drum)
+LABEL $00FE M2
+COMMENT_LABEL $00FE WOW [*]
+LABEL $00FC PING
+LABEL $00FD SHOT
+LABEL $00FE WOW
+LABEL $00F0 D0
+COMMENT_LABEL $00F0 0
+LABEL $00F1 D1
+COMMENT_LABEL $00F1 1
+LABEL $00F2 D2
+COMMENT_LABEL $00F2 2
+LABEL $00F3 D3
+COMMENT_LABEL $00F3 3
+LABEL $00F4 D4
+COMMENT_LABEL $00F4 4
+LABEL $00F5 D5
+COMMENT_LABEL $00F5 5
+LABEL $00F6 D6
+COMMENT_LABEL $00F6 6
+LABEL $00F7 D7
+COMMENT_LABEL $00F7 7
+LABEL $00F8 D8
+COMMENT_LABEL $00F8 8
+LABEL $00F9 D9
+COMMENT_LABEL $00F9 9
+LABEL $00FA D10
+COMMENT_LABEL $00FA *
+LABEL $00FB D11
+COMMENT_LABEL $00FB #
+EQU $00 PAUSE0
+COMMENT_LABEL $00 Pause 0 (0ms, the SpeakJet equivalent of NOP?)
+EQU $01 PAUSE1
+COMMENT_LABEL $01 Pause 1 (100ms, don't wait for silence)
+EQU $02 PAUSE2
+COMMENT_LABEL $02 Pause 2 (200ms, don't wait for silence)
+EQU $03 PAUSE3
+COMMENT_LABEL $03 Pause 3 (700ms, don't wait for silence)
+EQU $04 PAUSE4
+COMMENT_LABEL $04 Pause 4 (30ms, wait for silence)
+EQU $05 PAUSE5
+COMMENT_LABEL $05 Pause 5 (60ms, wait for silence)
+EQU $06 PAUSE6
+COMMENT_LABEL $06 Pause 6 (90ms, wait for silence)
+LABEL $00FF EOP
+COMMENT_LABEL $00FF End of Phrase
+LABEL $00FF END
+EQU $07 FAST
+COMMENT_LABEL $07 Play Next Sound Fast
+EQU $08 SLOW
+COMMENT_LABEL $08 Play Next Sound Slow
+EQU $0E STRESS
+COMMENT_LABEL $0E Play Next Sound High Tone
+EQU $0F RELAX
+COMMENT_LABEL $0F Play Next Sound Low Tone
+EQU $10 WAIT
+COMMENT_LABEL $10 Wait
+EQU $14 VOLUME
+COMMENT_LABEL $14 Volume, X = 0-127, default 96
+EQU $15 SPEED
+COMMENT_LABEL $15 Speed,  X = 0-127, default 114
+EQU $16 PITCH
+COMMENT_LABEL $16 Pitch,  X = 0-255 (in Hz), default 88
+EQU $17 BEND
+COMMENT_LABEL $17 Bend,   X = 0-15, default 5
+EQU $1A RPT
+COMMENT_LABEL $1A Repeat, X = 0-255 (# of times to repeat next code)
+EQU $1E DELAY
+COMMENT_LABEL $1E Delay,  X = 0-255 (in 10ms intervals)
+EQU $1F RESET
+COMMENT_LABEL $1F Reset Defaults for Volume, Speed, Pitch, Bend
+LABEL $00B9 speechData
+LABEL $00E2 speechData2
+LABEL $0115 bootup_game
+LABEL $0123 init_vars
+LABEL $01A7 title_screen
+LABEL $031D game_play
+LABEL $087C gameOver
+LABEL $01BF title_screen_loop
+LABEL $08F1 start_my_sound
+LABEL $0212 check_title_input
+LABEL $0209 check_selected_option
+LABEL $0235 main_choice
+LABEL $0A7E vData
+LABEL $0906 draw_synced_list
+LABEL $0957 title_start_string
+LABEL $0978 title_credit_string
+LABEL $024C draw_credit_icon
+LABEL $0241 draw_start_icon
+LABEL $0227 zero_check
+LABEL $022C update_title_icon
+LABEL $0240 leave_title
+LABEL $0257 credits_screen
+LABEL $09F7 onet_string
+LABEL $09FA twot_string
+LABEL $0271 credits_screen_loop
+LABEL $02B2 check_morbius
+LABEL $0281 done_morbius_check
+LABEL $02CA check_credit_button
+LABEL $0980 credits_director_string
+LABEL $0996 credits_thanks_string
+LABEL $09C7 credits_retro_string
+LABEL $09A8 credits_marvel_string
+LABEL $02C2 enterMorb
+LABEL $02CB morbius_screen
+LABEL $02E5 morbius_screen_loop
+LABEL $02F5 noVoxStart
+LABEL $14F8 vData4
+LABEL $0A45 silence
+LABEL $033F game_play_loop
+LABEL $036A drawPlayer
+LABEL $0483 drawBorders
+LABEL $049B drawWeapon
+LABEL $05A5 drawEnemy1
+LABEL $0640 drawEnemy2
+LABEL $06CF drawCollisions
+LABEL $083E drawScore
+LABEL $0856 drawLives
+LABEL $03F0 find_direction
+LABEL $0442 check_direction
+LABEL $0388 readjoystick
+LABEL $03B6 xready
+LABEL $03A4 lmove
+LABEL $0392 rmove
+LABEL $03EF yready
+LABEL $03D6 dmove
+LABEL $03BD umove
+LABEL $03D1 blockedUp
+LABEL $03EA blockedDown
+LABEL $0402 yesJoy
+LABEL $0412 positiveY
+LABEL $041C negativeY
+LABEL $0424 checkX
+LABEL $042F positiveX
+LABEL $0439 negativeX
+LABEL $0441 directionDone
+LABEL $0467 up
+LABEL $046B right
+LABEL $046F ur
+LABEL $0473 down
+LABEL $0477 dr
+LABEL $047B left
+LABEL $047F ul
+LABEL $1B53 marcFaceDL
+LABEL $1905 marcFaceU
+LABEL $197B marcFaceR
+LABEL $1C3F marcFaceUR
+LABEL $1A67 marcFaceD
+LABEL $1BC9 marcFaceDR
+LABEL $19F1 marcFaceL
+LABEL $1ADD marcFaceUL
+LABEL $0A2A borders
+LABEL $04A5 noInput
+LABEL $0503 createBullet
+LABEL $04AD bulletExists
+LABEL $04AD no_y_waitbullet
+LABEL $04B6 y_change_donebullet
+LABEL $04B6 no_x_waitbullet
+LABEL $04BF x_change_donebullet
+LABEL $04CD check_leftbullet
+LABEL $04D6 x_right_okbullet
+LABEL $04D6 x_left_okbullet
+LABEL $04E7 check_for_upper_borderbullet
+LABEL $04F3 nothing_happensbullet
+LABEL $04F3 draw_ball_on_screenbullet
+LABEL $0A3C ball
+LABEL $0543 upBullet
+LABEL $0551 rightBullet
+LABEL $055F urBullet
+LABEL $056D downBullet
+LABEL $057B drBullet
+LABEL $0589 leftBullet
+LABEL $0597 ulBullet
+LABEL $0A4D turtle_line_list
+LABEL $0A06 alus
+LABEL $05AF ball_is_available
+LABEL $061E get_new_ball
+LABEL $05AF no_y_wait
+LABEL $05B8 y_change_done
+LABEL $05B8 no_x_wait
+LABEL $05C1 x_change_done
+LABEL $05CD check_left
+LABEL $05D4 x_right_ok
+LABEL $05D4 x_left_ok
+LABEL $05F5 check_for_upper_border
+LABEL $05FF nothing_happens
+LABEL $05F2 notStunned1
+LABEL $05FF draw_ball_on_screen
+LABEL $188C vData5
+LABEL $063A positiv_x
+LABEL $064A ball_is_available2
+LABEL $06AD get_new_ball2
+LABEL $064A no_y_wait2
+LABEL $0653 y_change_done2
+LABEL $0653 no_x_wait2
+LABEL $065C x_change_done2
+LABEL $0668 check_left2
+LABEL $066F x_right_ok2
+LABEL $066F x_left_ok2
+LABEL $068A check_for_upper_border2
+LABEL $0694 nothing_happens2
+LABEL $0687 notStunned2
+LABEL $0694 draw_ball_on_screen2
+LABEL $06C9 positiv_x2
+LABEL $071D enemy2stuff
+LABEL $06EA alreadyStunnedMarc1
+LABEL $07D8 PlayerDeath
+LABEL $0715 noFrenzy
+LABEL $071A doneEnemy1Score
+LABEL $076B bulletColl1
+LABEL $0738 alreadyStunnedMarc2
+LABEL $0763 noFrenzy2
+LABEL $0768 doneEnemy2Score
+LABEL $07D7 alldone
+LABEL $07A1 bulletColl2
+LABEL $079C alreadyStunnedBullet1
+LABEL $07D2 alreadyStunnedBullet2
+LABEL $0801 deathAnim
+LABEL $0962 dead_string
+LABEL $096C dead2_string
+LABEL $083D animDone
+LABEL $0872 threeLives
+LABEL $0877 twoLives
+LABEL $09FD one_string
+LABEL $086A livesDrawn
+LABEL $0A03 three_string
+LABEL $0A00 two_string
+LABEL $089A game_over_loop
+LABEL $08AA noVoxStart2
+LABEL $1245 vData3
+LABEL $09D9 gameover_string
+LABEL $09E3 rise_string
+LABEL $08F0 restartGame
+LABEL $0900 continue_music
+EQU $07 ZERO_DELAY
+LABEL $090C sync
+LABEL $0954 drawdone
+LABEL $0919 zeroLoop
+LABEL $092D moveTo
+LABEL $0934 nextListEntry
+LABEL $094C setPatternLoop
+LABEL $09B6 credits_vec_string
+EQU $19 SPRITE_BLOW_UP
+LABEL $0A7E VectorList
+COMMENT_LABEL $0A7E moon knight
+LABEL $0F1A VectorList2
+EQU $01 BLOW_UP
+LABEL $0F1A vData2
+LABEL $1245 VectorList3
+LABEL $14F8 VectorList4
+LABEL $188C VectorList5
+LABEL $1CB5 *
+LABEL $0115 *xfer
+COMMENT_LINE $0000 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+COMMENT_LINE $0000 this file contains includes for vectrex BIOS functions and variables      ;
+COMMENT_LINE $0000 it was written by Bruce Tomlin, slighte changed by Malban                 ;
+COMMENT_LINE $0000 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+COMMENT_LINE $0000 $C839   ;Pointer to copyright string during startup
+COMMENT_LINE $0000 $C83B   ;High score cold-start flag (=0 if valid)
+COMMENT_LINE $0000 $C83C   ;temp byte
+COMMENT_LINE $0000 $C843   ;        register 9
+COMMENT_LINE $0000 $C844   ;        register 8
+COMMENT_LINE $0000 $C848   ;        register 4
+COMMENT_LINE $0000 $C849   ;        register 3
+COMMENT_LINE $0000 $C84A   ;        register 2
+COMMENT_LINE $0000 $C84C   ;        register 0
+COMMENT_LINE $0000 $C85E   ;Scratch 'score' storage for Display_Option (7 bytes)
+COMMENT_LINE $0000 $C868...$C876   ;Unused?
+COMMENT_LINE $0000 $C878   ;Unused?
+COMMENT_LINE $0000 $C880 - $CBEA is user RAM  ;
+COMMENT_LINE $0000 0 sample/hold (0=enable  mux 1=disable mux)
+COMMENT_LINE $0000 1 mux sel 0
+COMMENT_LINE $0000 2 mux sel 1
+COMMENT_LINE $0000 3 sound BC1
+COMMENT_LINE $0000 4 sound BDIR
+COMMENT_LINE $0000 5 comparator input
+COMMENT_LINE $0000 6 external device (slot pin 35) initialized to input
+COMMENT_LINE $0000 7 /RAMP
+COMMENT_LINE $0000 0 PA latch enable
+COMMENT_LINE $0000 1 PB latch enable
+COMMENT_LINE $0000 2 \                     110=output to CB2 under control of phase 2 clock
+COMMENT_LINE $0000 3  > shift register control     (110 is the only mode used by the Vectrex ROM)
+COMMENT_LINE $0000 4 /
+COMMENT_LINE $0000 5 0=t2 one shot                 1=t2 free running
+COMMENT_LINE $0000 6 0=t1 one shot                 1=t1 free running
+COMMENT_LINE $0000 7 0=t1 disable PB7 output       1=t1 enable PB7 output
+COMMENT_LINE $0000 0 CA1 control     CA1 -> SW7    0=IRQ on low 1=IRQ on high
+COMMENT_LINE $0000 1 \
+COMMENT_LINE $0000 2  > CA2 control  CA2 -> /ZERO  110=low 111=high
+COMMENT_LINE $0000 3 /
+COMMENT_LINE $0000 4 CB1 control     CB1 -> NC     0=IRQ on low 1=IRQ on high
+COMMENT_LINE $0000 5 \
+COMMENT_LINE $0000 6  > CB2 control  CB2 -> /BLANK 110=low 111=high
+COMMENT_LINE $0000 7 /
+COMMENT_LINE $0000 bit                             cleared by
+COMMENT_LINE $0000 0 CA2 interrupt flag            reading or writing port A I/O
+COMMENT_LINE $0000 1 CA1 interrupt flag            reading or writing port A I/O
+COMMENT_LINE $0000 2 shift register interrupt flag reading or writing shift register
+COMMENT_LINE $0000 3 CB2 interrupt flag            reading or writing port B I/O
+COMMENT_LINE $0000 4 CB1 interrupt flag            reading or writing port A I/O
+COMMENT_LINE $0000 5 timer 2 interrupt flag        read t2 low or write t2 high
+COMMENT_LINE $0000 6 timer 1 interrupt flag        read t1 count low or write t1 high
+COMMENT_LINE $0000 7 IRQ status flag               write logic 0 to IER or IFR bit
+COMMENT_LINE $0000 0 CA2 interrupt enable
+COMMENT_LINE $0000 1 CA1 interrupt enable
+COMMENT_LINE $0000 2 shift register interrupt enable
+COMMENT_LINE $0000 3 CB2 interrupt enable
+COMMENT_LINE $0000 4 CB1 interrupt enable
+COMMENT_LINE $0000 5 timer 2 interrupt enable
+COMMENT_LINE $0000 6 timer 1 interrupt enable
+COMMENT_LINE $0000 7 IER set/clear control
+COMMENT_LINE $0000 Rot_VL_dft      EQU     $F637   ;
+COMMENT_LINE $0000 Rot_VL_ab       EQU     $F610   ;
+COMMENT_LINE $0000 Rot_VL          EQU     $F616   ;
+COMMENT_LINE $0000 Rot_VL_Mode_a   EQU     $F61F   ;
+COMMENT_LINE $0000 Rot_VL_Mode     EQU     $F62B   ;
+COMMENT_LINE $0000 Rot_VL_dft      EQU     $F637   ;
+COMMENT_LINE $0000 Required Init Block
+COMMENT_LINE $0000 GCE is necessary
+FORCE_SYMBOL $001E start
+COMMENT_LINE $0021 Vec Vox routines
+COMMENT $0021 VecVox output routines
+COMMENT_LINE $0021 VECVOX.I
+COMMENT_LINE $0021 Copyright (c) 2004 Alex Herbert
+COMMENT_LINE $0021 Include the serial driver
+COMMENT_LINE $0021 SER_JI.I - Serial Output on Joystick port, Inverted
+COMMENT_LINE $0021 Copyright (c) Alex Herbert 2002
+COMMENT_LINE $0021 This code assumes that the following constant have been declared.
+COMMENT_LINE $0021 If not... un-comment them!
+COMMENT_LINE $0021 VIA_port_b   equ     $d000
+COMMENT_LINE $0021 VIA_port_a     equ     $d001
+COMMENT_LINE $0021 VIA_DDR_a    equ     $d003
+COMMENT_LINE $0021 VIA_t1_cnt_lo  equ     $d004
+COMMENT_LINE $0021 VIA_aux_cntl  equ     $d00b
+COMMENT_LINE $0021 VIA_int_flags   equ     $d00d
+COMMENT_LINE $0021 0 sample/hold (0=enable mux 1=disable mux)
+COMMENT_LINE $0021 1 mux sel 0
+COMMENT_LINE $0021 2 mux sel 1
+COMMENT_LINE $0021 3 sound BC1
+COMMENT_LINE $0021 4 sound BDIR
+COMMENT_LINE $0021 5 comparator input
+COMMENT_LINE $0021 6 external device (slot pin 35) initialized to input
+COMMENT_LINE $0021 7 /RAMP
+COMMENT_LINE $0021 0 PA latch enable
+COMMENT_LINE $0021 1 PB latch enable
+COMMENT_LINE $0021 2 \ 110=output to CB2 under control of phase 2 clock
+COMMENT_LINE $0021 3 > shift register control (110 is the only mode used by the Vectrex ROM)
+COMMENT_LINE $0021 4 /
+COMMENT_LINE $0021 5 0=t2 one shot 1=t2 free running
+COMMENT_LINE $0021 6 0=t1 one shot 1=t1 free running
+COMMENT_LINE $0021 7 0=t1 disable PB7 output 1=t1 enable PB7 output
+COMMENT_LINE $0021 0 CA1 control CA1 -> SW7 0=IRQ on low 1=IRQ on high
+COMMENT_LINE $0021 1 \
+COMMENT_LINE $0021 2 > CA2 control CA2 -> /ZERO 110=low 111=high
+COMMENT_LINE $0021 3 /
+COMMENT_LINE $0021 4 CB1 control CB1 -> NC 0=IRQ on low 1=IRQ on high
+COMMENT_LINE $0021 5 \
+COMMENT_LINE $0021 6 > CB2 control CB2 -> /BLANK 110=low 111=high
+COMMENT_LINE $0021 7 /
+COMMENT_LINE $0021 bit cleared by
+COMMENT_LINE $0021 0 CA2 interrupt flag reading or writing port A I/O
+COMMENT_LINE $0021 1 CA1 interrupt flag reading or writing port A I/O
+COMMENT_LINE $0021 2 shift register interrupt flag reading or writing shift register
+COMMENT_LINE $0021 3 CB2 interrupt flag reading or writing port B I/O
+COMMENT_LINE $0021 4 CB1 interrupt flag reading or writing port A I/O
+COMMENT_LINE $0021 5 timer 2 interrupt flag read t2 low or write t2 high
+COMMENT_LINE $0021 6 timer 1 interrupt flag read t1 count low or write t1 high
+COMMENT_LINE $0021 7 IRQ status flag write logic 0 to IER or IFR bit
+COMMENT_LINE $0021 0 CA2 interrupt enable
+COMMENT_LINE $0021 1 CA1 interrupt enable
+COMMENT_LINE $0021 2 shift register interrupt enable
+COMMENT_LINE $0021 3 CB2 interrupt enable
+COMMENT_LINE $0021 4 CB1 interrupt enable
+COMMENT_LINE $0021 5 timer 2 interrupt enable
+COMMENT_LINE $0021 6 timer 1 interrupt enable
+COMMENT_LINE $0021 7 IER set/clear control
+COMMENT_LINE $0021 Baud rate setting
+COMMENT_LINE $0021 Subroutines
+COMMENT $0021 assume dp = $d0
+COMMENT_LINE $0021 ser_txbyte
+COMMENT_LINE $0021 ----------
+COMMENT_LINE $0021 Function:
+COMMENT_LINE $0021 transmit byte serially (8n1, inverted) via joystick ports.
+COMMENT_LINE $0021 On entry:
+COMMENT_LINE $0021 a = byte to transmit
+COMMENT_LINE $0021 dp = $d0
+COMMENT_LINE $0021 On exit:
+COMMENT_LINE $0021 d,cc = corrupted
+COMMENT_LINE $0021 Stack usage:
+COMMENT_LINE $0021 5 bytes (7 if you include the return address)
+COMMENT $0021 put data on stack
+FORCE_NO_SYMBOL $0023
+COMMENT_LINE $0026 load PSG latch address with (BC1 + BDIR = 11)
+COMMENT $0026 PSG register 7
+FORCE_SYMBOL $0026 VIA_port_b
+FORCE_NO_SYMBOL $0028
+COMMENT $002B T1 mode = free-run, no output on RAMP (PB7)
+FORCE_SYMBOL $002B VIA_aux_cntl
+COMMENT $002D PSG inactive (BC1 + BDIR = 00)
+FORCE_SYMBOL $002D VIA_port_b
+FORCE_SYMBOL $002F SER_BITTIME
+COMMENT $0032 set and start timer (T1)
+FORCE_SYMBOL $0032 VIA_t1_cnt_lo
+FORCE_NO_SYMBOL $0034
+COMMENT $0037 6522 I/O port data direction = input
+FORCE_SYMBOL $0037 VIA_DDR_a
+COMMENT $0039 enable PSG reading (BC1 + BDIR = 01)
+FORCE_SYMBOL $0039 VIA_port_b
+COMMENT $003B loop counter (here for timing)
+FORCE_NO_SYMBOL $003B
+COMMENT $003D read PSG register 7
+FORCE_SYMBOL $003D VIA_port_a
+COMMENT $003F save PSG R7 and loop counter on stack
+COMMENT $0041 set bit 6, meaning this will be our "zero" start bit
+FORCE_NO_SYMBOL $0041
+COMMENT_LINE $0043 bit 6 set means that portA is in output mode
+COMMENT_LINE $0043 output of "Output Data portA" which is "$ef"
+COMMENT_LINE $0043 which is a 1 for all but bit 4
+COMMENT_LINE $0043 bit 4 is our vecVoice "dataline"
+COMMENT $0043 store data for PSG write (to DAC)
+FORCE_SYMBOL $0043 VIA_port_a
+FORCE_NO_SYMBOL $0045
+COMMENT $0048 disable PSG reading (BC1 + BDIR = 00)
+FORCE_SYMBOL $0048 VIA_port_b
+COMMENT $004A 6522 I/O direction = output (ff = all bits)
+FORCE_SYMBOL $004A VIA_DDR_a
+COMMENT $004C transmit start bit [0] hey
+COMMENT $004E shift next data bit into carry
+FORCE_NO_SYMBOL $004E
+FORCE_NO_SYMBOL $0052
+FORCE_NO_SYMBOL $0054
+COMMENT $0056 store data for PSG write
+FORCE_SYMBOL $0056 VIA_port_a
+COMMENT $0058 transmit data bit [0]
+FORCE_NO_SYMBOL $005C
+COMMENT $005E store data for PSG write
+FORCE_SYMBOL $005E VIA_port_a
+COMMENT $0060 transmit data bit [1]
+COMMENT $0062 decrement loop counter
+FORCE_NO_SYMBOL $0062
+COMMENT $0064 loop if more bits to send
+FORCE_NO_SYMBOL $0066
+COMMENT $0068 store data for PSG write
+FORCE_SYMBOL $0068 VIA_port_a
+COMMENT $006A tansmit stop bit [1]
+FORCE_NO_SYMBOL $006C
+COMMENT $006E T1 = single-shot, no output on RAMP (PB7)
+FORCE_SYMBOL $006E VIA_aux_cntl
+FORCE_NO_SYMBOL $0070
+COMMENT $0073 force T1 timeout
+FORCE_SYMBOL $0073 VIA_t1_cnt_lo
+FORCE_NO_SYMBOL $0075
+COMMENT $0077 T1 = single-shot, RAMP output (PB7) enabled
+FORCE_SYMBOL $0077 VIA_aux_cntl
+COMMENT $0079 restore stack
+FORCE_NO_SYMBOL $0079
+FORCE_NO_SYMBOL $007C
+COMMENT $007E test T1 interrupt flag
+FORCE_SYMBOL $007E VIA_int_flags
+COMMENT $0080 loop until T1 timeout
+COMMENT $0082 (BC1 + BDIR = 10)
+FORCE_NO_SYMBOL $0082
+COMMENT $0084 enable PSG register write
+FORCE_SYMBOL $0084 VIA_port_b
+COMMENT $0086 latch data (BC1 + BDIR = 00)
+FORCE_SYMBOL $0086 VIA_port_b
+COMMENT $0088 clear T1 interrupt flag
+FORCE_SYMBOL $0088 VIA_t1_cnt_lo
+COMMENT_LINE $008B Constants
+COMMENT_LINE $008B Variables
+COMMENT_LINE $008B These routines require 2 bytes of RAM for the following variable:
+COMMENT_LINE $008B vox_addr - 16-bit pointer to next byte in speech string.
+COMMENT_LINE $008B You may wish to comment out the following lines and declare vox_addr
+COMMENT_LINE $008B elsewhere in your code.
+COMMENT_LINE $0002 Subroutines
+COMMENT_LINE $008B vox_init
+COMMENT_LINE $008B --------
+COMMENT_LINE $008B Function:
+COMMENT_LINE $008B Prepare joystick port for serial transmission and initialize
+COMMENT_LINE $008B speech string pointer.
+COMMENT_LINE $008B Usage:
+COMMENT_LINE $008B Call vox_init once at the start of your program.
+COMMENT_LINE $008B Note:
+COMMENT_LINE $008B This routine writes $ef to PSG register 14 by calling Exec ROM
+COMMENT_LINE $008B routine WRREG ($f256).  This is to mask serial output from all
+COMMENT_LINE $008B joystick pins except the data line. (Port 2, pin 1.)
+COMMENT_LINE $008B Care should be taken to not overwrite this register.  (There's
+COMMENT_LINE $008B normally no reason to do so.)
+COMMENT_LINE $008B Caution:
+COMMENT_LINE $008B The dp register will be = to $d0.
+FORCE_NO_SYMBOL $008B
+COMMENT $008D dp = $d0
+COMMENT $0092 WRREG (write data mask to PSG reg 14)
+FORCE_NO_SYMBOL $0092
+FORCE_SYMBOL $0095 vox_silence
+COMMENT $0098 point to 'silence' speech string
+FORCE_SYMBOL $0098 vox_addr
+COMMENT_LINE $009C vox_speak
+COMMENT_LINE $009C ---------
+COMMENT_LINE $009C Function:
+COMMENT_LINE $009C Sends speech data to the VecVox.
+COMMENT_LINE $009C Usage:
+COMMENT_LINE $009C Call vox_speak once per frame. (I.e. stick it in your main loop)
+COMMENT_LINE $009C See note below.
+COMMENT_LINE $009C Then, just store the start address of a speech string in
+COMMENT_LINE $009C vox_addr when you want the VecVox to speak, and let this
+COMMENT_LINE $009C routine do the work!
+COMMENT_LINE $009C To abort speech in progress, point vox_addr at vox_silence or
+COMMENT_LINE $009C call vox_init2 (which does exactly that).
+COMMENT_LINE $009C Note:
+COMMENT_LINE $009C 1. This subroutine requires that the current joystick button
+COMMENT_LINE $009C status is held at RAM address $c80f (TRIGGR).  This is usually
+COMMENT_LINE $009C = by calling the Executive ROM routine INPUT (a.k.a.
+COMMENT_LINE $009C read_switches2) at $F1BA.
+COMMENT_LINE $009C 2. Speech strings should be terminated with VOX_TERM. ($ff)
+COMMENT_LINE $009C Caution:
+COMMENT_LINE $009C Contents of the dp register may (or may not) be = to $d0.
+COMMENT $009C get joystick buttons (TRIGGR)
+FORCE_NO_SYMBOL $009C
+COMMENT $009F mask "buffer full" status
+FORCE_SYMBOL $009F VOX_STATUSMASK
+COMMENT $00A1 exit if no room in buffer
+COMMENT $00A3 get speech pointer
+FORCE_SYMBOL $00A3 vox_addr
+COMMENT $00A6 read next byte
+COMMENT $00A8 end of string?
+FORCE_SYMBOL $00A8 VOX_TERM
+COMMENT $00AA ...if so, exit
+COMMENT $00AC store speech pointer
+FORCE_SYMBOL $00AC vox_addr
+FORCE_NO_SYMBOL $00AF
+COMMENT $00B1 direct page = $d0
+COMMENT $00B3 send byte
+FORCE_SYMBOL $00B3 ser_txbyte
+COMMENT_LINE $00B6 lda      #VOX_DONE
+COMMENT_LINE $00B6 sta      voxStart
+COMMENT_LINE $00B7 Silence string
+COMMENT_LINE $00B7 Initial speech string.  Point vox_addr here to abort speech
+COMMENT_LINE $00B7 in progress.
+COMMENT_LINE $00B9 Speech strings
+COMMENT_LINE $00B9 /* vim: = filetype=dasm: */
+COMMENT_LINE $00B9 jetphones.inc
+COMMENT_LINE $00B9 V0.9: B. Watson 20060621
+COMMENT_LINE $00B9 Useful constants for developing AtariVox applications with DASM.
+COMMENT_LINE $00B9 This is basically a DASM-readable version of pages 15 and 16 of the
+COMMENT_LINE $00B9 SpeakJet manual. The phoneme names were taken straight from the manual.
+COMMENT_LINE $00B9 The pause and control code names were assigned by me, but they're
+COMMENT_LINE $00B9 pretty obvious. Also, I'm adding descriptive aliases for the non-speech
+COMMENT_LINE $00B9 noises (e.g. SHOT = M1 (the "Pistol Shot").
+COMMENT_LINE $00B9 See "phrases.inc" for example usage.
+COMMENT_LINE $00B9 Phonemes/allophones:
+COMMENT_LINE $00B9 Various noises, non-speech:
+COMMENT_LINE $00B9 R0-R9: Robot
+COMMENT_LINE $00B9 R0 - R9 make up a musical scale of sorts.
+COMMENT_LINE $00B9 None of these are affected by the PITCH command,
+COMMENT_LINE $00B9 though they are affected by SPEED and BEND.
+COMMENT_LINE $00B9 I can't come up with good descriptions for 235 or 237, try them yourself
+COMMENT_LINE $00B9 Only those marked with [*] are affected by the PITCH command.
+COMMENT_LINE $00B9 The manual lists these as:
+COMMENT_LINE $00B9 A0-A9: Alarm
+COMMENT_LINE $00B9 B0-B9: Beeps
+COMMENT_LINE $00B9 C0-C9: Biological
+COMMENT_LINE $00B9 M0-M2: Miscellaneous
+COMMENT_LINE $00B9 Convenient names for some of the weird noises:
+COMMENT_LINE $00B9 DTMF (Touch tone) phone tones:
+COMMENT_LINE $00B9 Pauses of various durations:
+COMMENT_LINE $00B9 Control codes:
+COMMENT_LINE $00B9 These need a parameter equ  (X) to follow them:
+COMMENT_LINE $00B9 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+COMMENT_LINE $00B9 The rest of this file was copied and pasted from speakjetmanual.pdf.
+COMMENT_LINE $00B9 I didn't bother to format it nicely :)
+COMMENT_LINE $00B9 24  PortCtr, X
+COMMENT_LINE $00B9 25  Port, X
+COMMENT_LINE $00B9 26  Repeat, X
+COMMENT_LINE $00B9 28  Call Phrase, X
+COMMENT_LINE $00B9 29  Goto Phrase, X
+COMMENT_LINE $00B9 Control Codes Details:
+COMMENT_LINE $00B9 0 - 6 = Pauses.
+COMMENT_LINE $00B9 Pauses of various durations, these will cause the volume to ramp down, wait a specified
+COMMENT_LINE $00B9 amount of time and the ramp back up.  1, 2 & 3, ramp the volume while the format
+COMMENT_LINE $00B9 frequencies are being changed. 4, 5 & 6 wait for silence before changing the format
+COMMENT_LINE $00B9 frequencies.
+COMMENT_LINE $00B9 0 = 0ms   1 = 100ms   2 = 200ms  3 = 700ms
+COMMENT_LINE $00B9 4 = 30ms    5 = 60ms   6 = 90ms
+COMMENT_LINE $00B9 7 = Fast.
+COMMENT_LINE $00B9 Plays the next phoneme at 1/2 the time it normally would play.
+COMMENT_LINE $00B9 8 = Slow
+COMMENT_LINE $00B9 Plays the next phoneme at 1 and 1/2 the time it normally would play.
+COMMENT_LINE $00B9 14 = Stress.
+COMMENT_LINE $00B9 Plays the next phoneme with a small amount of stress in the voice.
+COMMENT_LINE $00B9 15 = Relax
+COMMENT_LINE $00B9 Plays the next phoneme with a small amount of relaxation in the voice.
+COMMENT_LINE $00B9 16 = Wait
+COMMENT_LINE $00B9 This command will stop the voicing and wait for a start command.  The Start command
+COMMENT_LINE $00B9 can be issued by either sending the SCP start command or by changing the state of one
+COMMENT_LINE $00B9 of the input lines that has been previously = to do a Start.
+COMMENT_LINE $00B9 20 = Volume, X
+COMMENT_LINE $00B9 This command sets the master volume level.  A value will need to be sent after the
+COMMENT_LINE $00B9 volume command that specifies the desired volume. Volume levels can range from 0 to
+COMMENT_LINE $00B9 127.  The default is 96.
+COMMENT_LINE $00B9 21 = Speed, X
+COMMENT_LINE $00B9 This command sets the play speed.  A value will need to be sent after the speed
+COMMENT_LINE $00B9 command that specifies the desired speed.  Speeds can range from 0 to 127. The
+COMMENT_LINE $00B9 default is 114.
+COMMENT_LINE $00B9 22 = Pitch, X
+COMMENT_LINE $00B9 This command sets the Vocalization Pitch in Hertz.  A value will need to be sent after
+COMMENT_LINE $00B9 the pitch command that specifies the desired pitch. The vocalization pitch is what makes
+COMMENT_LINE $00B9 a voice sound High pitched or Low pitched.  For singing, the pitch has a range of 3 full
+COMMENT_LINE $00B9 octaves (32Hz to 240hz).  The Vocalization Pitch works only on sounds that are voiced.
+COMMENT_LINE $00B9 Pitches can range from 0 to 255.  The default is 88. Note that anything under 30 starts
+COMMENT_LINE $00B9 to sound like clicks instead of a voice.  Also Note that a value of 0 = 0 Hz and thusly, will
+COMMENT_LINE $00B9 not actually vocalize.
+COMMENT_LINE $00B9 23 = Bend, X
+COMMENT_LINE $00B9 This command sets the frequency Bend.  A value will need to be sent after the Bend
+COMMENT_LINE $00B9 command that specifies the desired Bend. The frequency Bend adjusts the output
+COMMENT_LINE $00B9 frequencies of the oscillators. This will change the voicing from a deep-hollow sounding
+COMMENT_LINE $00B9 voice to a High-metallic sounding voice. Bends can range from 0 to 15.  The default is 5.
+COMMENT_LINE $00B9 24 = PortCtr, X
+COMMENT_LINE $00B9 This command sets the Port Control Value.  A value will need to be sent after the
+COMMENT_LINE $00B9 PortCtr command that specifies the desired function of the output lines.  The Output line
+COMMENT_LINE $00B9 control bits are binaurally encoded where a 1 indicates that the output function is chip
+COMMENT_LINE $00B9 controlled and a 0 indicates that the output function is user controlled. Bit 0 corresponds
+COMMENT_LINE $00B9 to OUT0, etc... PortCtr values can range from 0 to 7.  The default is 7.
+COMMENT_LINE $00B9 25 = Port, X
+COMMENT_LINE $00B9 This command sets the Port Output Value.  A value will need to be sent after the Port
+COMMENT_LINE $00B9 command that specifies the desired state of the output lines. When the Output line
+COMMENT_LINE $00B9 control bits are = to 0, the corresponding port bit is represented on the output line. Bit
+COMMENT_LINE $00B9 0 corresponds to OUT0, etc... Port values can range from 0 to 7.  The default is 0.
+COMMENT_LINE $00B9 26 = Repeat, X
+COMMENT_LINE $00B9 This command sets a number of times to Repeat the next code.  A value will need to be
+COMMENT_LINE $00B9 sent after the Repeat command that specifies the number of times to repeat the next
+COMMENT_LINE $00B9 command.
+COMMENT_LINE $00B9 The Repeat range is from 0 to 255.
+COMMENT_LINE $00B9 28 = Call Phrase, X
+COMMENT_LINE $00B9 This command specifies which EEPROM phrase to play then to return from.
+COMMENT_LINE $00B9 This can be nested 3 deep maximum.
+COMMENT_LINE $00B9 29 = Goto Phrase, X
+COMMENT_LINE $00B9 This command specifies which EEPROM phrase to play.
+COMMENT_LINE $00B9 30 = Delay, X
+COMMENT_LINE $00B9 This command specifies the number of 10ms intervals to delay before continuing
+COMMENT_LINE $00B9 on to the next code. The Delay range is from 0 to 255.
+COMMENT_LINE $00B9 31 = Reset
+COMMENT_LINE $00B9 This command resets the Volume, Speed, Pitch and Bend to the default values.
+COMMENT_LINE $0115 main game loop
+FORCE_SYMBOL $0115 init_vars
+FORCE_SYMBOL $0118 title_screen
+FORCE_SYMBOL $011B game_play
+FORCE_SYMBOL $011E gameOver
+COMMENT $0123 VecVox: initialize variables
+FORCE_SYMBOL $0123 vox_init
+FORCE_SYMBOL $0126 DP_to_D0
+FORCE_NO_SYMBOL $0129
+FORCE_SYMBOL $012B Vec_Joy_Mux_1_X
+FORCE_NO_SYMBOL $012E
+FORCE_SYMBOL $0130 Vec_Joy_Mux_1_Y
+FORCE_NO_SYMBOL $0133
+FORCE_SYMBOL $0136 Vec_Joy_Mux_2_X
+FORCE_SYMBOL $0139 Vec_Joy_Mux_2_Y
+FORCE_SYMBOL $013C menu_selected_option
+FORCE_SYMBOL $013F music_active
+FORCE_SYMBOL $0142 score
+FORCE_SYMBOL $0145 empty
+FORCE_SYMBOL $0148 marcY
+FORCE_SYMBOL $014B marcX
+FORCE_SYMBOL $014E enemyX1
+FORCE_SYMBOL $0151 enemyX2
+FORCE_SYMBOL $0154 gameState
+FORCE_SYMBOL $0157 last_joy_y
+FORCE_SYMBOL $015A frenzyCounter
+FORCE_SYMBOL $015D frenzy_active
+FORCE_SYMBOL $0160 totalStuns
+FORCE_SYMBOL $0163 totalKills
+FORCE_SYMBOL $0166 totalDeaths
+FORCE_SYMBOL $0169 enemy_available1
+FORCE_SYMBOL $016C enemy_available2
+FORCE_SYMBOL $016F morbCounter
+FORCE_SYMBOL $0172 directionFaced
+FORCE_SYMBOL $0175 liveBullet
+FORCE_SYMBOL $0178 bulletY
+FORCE_SYMBOL $017B bulletX
+FORCE_SYMBOL $017E rotangle
+FORCE_NO_SYMBOL $0181
+FORCE_SYMBOL $0183 marcVelocity
+FORCE_NO_SYMBOL $0186
+FORCE_SYMBOL $0188 lives
+FORCE_SYMBOL $018B BULLETVELOCITY
+FORCE_SYMBOL $018E bulletVelocityY
+FORCE_SYMBOL $0191 bulletVelocityX
+COMMENT_LINE $0194 sta	rotangle
+FORCE_SYMBOL $0194 VOX_STARTING
+FORCE_SYMBOL $0196 voxStart
+FORCE_NO_SYMBOL $0199
+FORCE_SYMBOL $019B enemyY1
+FORCE_SYMBOL $019E enemyY2
+FORCE_SYMBOL $01A3 enemyX2
+FORCE_SYMBOL $01A7 Read_Btns
+FORCE_SYMBOL $01AA DP_to_C8
+FORCE_SYMBOL $01AD NORMAL_TEXT_SIZE
+FORCE_SYMBOL $01B0 Vec_Text_HW
+FORCE_NO_SYMBOL $01B2
+FORCE_SYMBOL $01B4 gameState
+COMMENT $01B6 load #1
+FORCE_NO_SYMBOL $01B6
+COMMENT $01B8 set this as marker for music start
+FORCE_SYMBOL $01B8 Vec_Music_Flag
+COMMENT $01BA load a music structure
+FORCE_SYMBOL $01BA music8
+FORCE_SYMBOL $01BD music_active
+FORCE_SYMBOL $01BF start_my_sound
+COMMENT $01C2 breaks lda
+FORCE_SYMBOL $01C2 Wait_Recal
+FORCE_SYMBOL $01C5 DP_to_D0
+FORCE_SYMBOL $01C8 Intensity_5F
+FORCE_SYMBOL $01CB check_title_input
+FORCE_SYMBOL $01CE check_selected_option
+FORCE_SYMBOL $01D1 Do_Sound
+FORCE_SYMBOL $01D4 Read_Btns
+FORCE_NO_SYMBOL $01D7
+COMMENT $01D9 then checks the selected main menu choice, if 0 then start game, if 1 go credits
+COMMENT $01DD address of list
+FORCE_SYMBOL $01DD vData
+COMMENT $01E0 Text position relative Y
+FORCE_NO_SYMBOL $01E0
+COMMENT $01E2 Text position relative X
+FORCE_NO_SYMBOL $01E2
+COMMENT $01E4 in x position of list
+COMMENT $01E6 scale positioning
+FORCE_NO_SYMBOL $01E6
+COMMENT $01E8 scale move in list
+FORCE_NO_SYMBOL $01E8
+FORCE_SYMBOL $01EA draw_synced_list
+FORCE_SYMBOL $01ED Reset0Ref
+FORCE_SYMBOL $01F0 title_start_string
+FORCE_SYMBOL $01F7 Print_Str_d
+FORCE_SYMBOL $01FA title_credit_string
+FORCE_SYMBOL $01FD Reset0Ref
+FORCE_SYMBOL $0204 Print_Str_d
+FORCE_NO_SYMBOL $0209
+FORCE_SYMBOL $020B menu_selected_option
+FORCE_SYMBOL $0212 Joy_Digital
+FORCE_SYMBOL $0215 DP_to_C8
+COMMENT $0218 only jump if last joy pos was zero
+FORCE_SYMBOL $0218 last_joy_y
+FORCE_SYMBOL $021A Vec_Joy_1_Y
+COMMENT $021C store this joystick position
+FORCE_SYMBOL $021C last_joy_y
+FORCE_SYMBOL $021E DP_to_D0
+FORCE_SYMBOL $0221 last_joy_y
+COMMENT $0224 no joystick input available
+FORCE_NO_SYMBOL $0227
+FORCE_SYMBOL $022C menu_selected_option
+FORCE_NO_SYMBOL $022F
+FORCE_SYMBOL $0231 menu_selected_option
+FORCE_SYMBOL $0235 menu_selected_option
+COMMENT $0238 enter gameplay if first option selected
+COMMENT $023A jump to credits if second option selected
+FORCE_SYMBOL $023A credits_screen
+COMMENT $023D return to title screen
+FORCE_SYMBOL $0241 onet_string
+FORCE_SYMBOL $0248 Print_Str_d
+FORCE_SYMBOL $024C twot_string
+FORCE_SYMBOL $0253 Print_Str_d
+FORCE_SYMBOL $0257 DP_to_C8
+FORCE_SYMBOL $025A CREDIT_TEXT_SIZE
+FORCE_SYMBOL $025D Vec_Text_HW
+COMMENT $025F set DP...
+FORCE_SYMBOL $025F DP_to_C8
+FORCE_NO_SYMBOL $0262
+FORCE_SYMBOL $0264 gameState
+FORCE_NO_SYMBOL $0266
+FORCE_SYMBOL $0268 morbCounter
+COMMENT $026A set this as marker for music start
+FORCE_SYMBOL $026A Vec_Music_Flag
+COMMENT $026C load a music structure
+FORCE_SYMBOL $026C music3
+FORCE_SYMBOL $026F music_active
+FORCE_SYMBOL $0271 start_my_sound
+FORCE_SYMBOL $0274 Wait_Recal
+FORCE_SYMBOL $0277 Do_Sound
+FORCE_SYMBOL $027A Read_Btns
+FORCE_NO_SYMBOL $027D
+FORCE_NO_SYMBOL $0281
+FORCE_SYMBOL $0285 Intensity_5F
+FORCE_SYMBOL $0288 credits_director_string
+FORCE_NO_SYMBOL $028B
+FORCE_SYMBOL $028F Print_Str_d
+FORCE_SYMBOL $0292 credits_thanks_string
+FORCE_NO_SYMBOL $0295
+FORCE_SYMBOL $0299 Print_Str_d
+FORCE_SYMBOL $029C credits_retro_string
+FORCE_SYMBOL $02A3 Print_Str_d
+FORCE_SYMBOL $02A6 credits_marvel_string
+FORCE_SYMBOL $02AD Print_Str_d
+FORCE_SYMBOL $02B2 DP_to_D0
+FORCE_NO_SYMBOL $02B5
+FORCE_SYMBOL $02B7 morbCounter
+FORCE_SYMBOL $02BA morbCounter
+FORCE_SYMBOL $02BD enterMorb
+FORCE_NO_SYMBOL $02C2
+FORCE_SYMBOL $02C4 morbCounter
+COMMENT_LINE $02CB this screen is pretty morbin (not really)
+FORCE_SYMBOL $02CB DP_to_C8
+FORCE_SYMBOL $02CE CREDIT_TEXT_SIZE
+FORCE_SYMBOL $02D1 Vec_Text_HW
+COMMENT $02D3 set DP...
+FORCE_SYMBOL $02D3 DP_to_C8
+COMMENT $02D6 load #1
+FORCE_NO_SYMBOL $02D6
+FORCE_SYMBOL $02D8 gameState
+FORCE_SYMBOL $02DA VOX_STARTING
+FORCE_SYMBOL $02DC voxStart
+COMMENT $02DE set this as marker for music start
+FORCE_SYMBOL $02DE Vec_Music_Flag
+COMMENT $02E0 load a music structure
+FORCE_SYMBOL $02E0 music1
+FORCE_SYMBOL $02E3 music_active
+COMMENT_LINE $02E5 jsr	DP_to_D0
+COMMENT_LINE $02E5 direct	$D0
+FORCE_SYMBOL $02E5 voxStart
+FORCE_SYMBOL $02E7 VOX_STARTING
+FORCE_SYMBOL $02EB VOX_STARTED
+FORCE_SYMBOL $02ED voxStart
+FORCE_SYMBOL $02EF speechData2
+COMMENT $02F2 start vox
+FORCE_SYMBOL $02F2 vox_addr
+FORCE_SYMBOL $02F5 start_my_sound
+FORCE_SYMBOL $02F8 Wait_Recal
+FORCE_SYMBOL $02FB Do_Sound
+FORCE_SYMBOL $02FE Read_Btns
+FORCE_NO_SYMBOL $0301
+FORCE_SYMBOL $0305 vox_speak
+FORCE_SYMBOL $0308 Intensity_5F
+COMMENT $030B address of list
+FORCE_SYMBOL $030B vData4
+COMMENT $030E Text position relative Y
+FORCE_NO_SYMBOL $030E
+COMMENT $0310 Text position relative X
+FORCE_NO_SYMBOL $0310
+COMMENT $0312 in x position of list
+COMMENT $0314 scale positioning
+FORCE_NO_SYMBOL $0314
+COMMENT $0316 scale move in list
+FORCE_NO_SYMBOL $0316
+FORCE_SYMBOL $0318 draw_synced_list
+FORCE_SYMBOL $031D DP_to_D0
+FORCE_SYMBOL $0320 CREDIT_TEXT_SIZE
+FORCE_SYMBOL $0323 Vec_Text_HW
+FORCE_NO_SYMBOL $0326
+FORCE_SYMBOL $0328 gameState
+FORCE_SYMBOL $032B score
+FORCE_SYMBOL $032E Clear_Score
+COMMENT $0331 set DP...
+FORCE_SYMBOL $0331 DP_to_C8
+COMMENT $0334 load #1
+FORCE_NO_SYMBOL $0334
+COMMENT $0336 set this as marker for music start
+FORCE_SYMBOL $0336 Vec_Music_Flag
+COMMENT $0339 load a music structure
+FORCE_SYMBOL $0339 silence
+FORCE_SYMBOL $033C music_active
+FORCE_SYMBOL $033F start_my_sound
+FORCE_SYMBOL $0342 Wait_Recal
+FORCE_SYMBOL $0345 Do_Sound
+FORCE_SYMBOL $0348 drawPlayer
+FORCE_SYMBOL $034B drawBorders
+FORCE_SYMBOL $034E drawWeapon
+FORCE_SYMBOL $0351 drawEnemy1
+FORCE_SYMBOL $0354 drawEnemy2
+FORCE_SYMBOL $0357 drawCollisions
+FORCE_SYMBOL $035A drawScore
+FORCE_SYMBOL $035D drawLives
+FORCE_NO_SYMBOL $0360
+FORCE_SYMBOL $0362 lives
+COMMENT $036A determine direction faced
+FORCE_SYMBOL $036A find_direction
+COMMENT_LINE $036D jsr	Intensity_5F
+COMMENT_LINE $036D lda	marcY
+COMMENT_LINE $036D ldb	marcX
+COMMENT_LINE $036D jsr	Moveto_d_7F
+FORCE_SYMBOL $036D Intensity_5F
+FORCE_SYMBOL $0370 marcY
+COMMENT $0373 move to rel position D and scale factor 7F
+FORCE_SYMBOL $0373 Moveto_d_7F
+COMMENT_LINE $0376 LDX     #vData5
+COMMENT $0376 get sprite from direction
+FORCE_SYMBOL $0376 check_direction
+COMMENT $0379 Text position relative Y
+FORCE_SYMBOL $0379 marcY
+COMMENT $037C Text position relative X
+FORCE_SYMBOL $037C marcX
+COMMENT $037F in x position of list
+COMMENT $0381 scale positioning
+FORCE_NO_SYMBOL $0381
+COMMENT $0383 scale move in list
+FORCE_NO_SYMBOL $0383
+FORCE_SYMBOL $0385 draw_synced_list
+COMMENT_LINE $0388 lda 	#17		; Number of vectors
+COMMENT_LINE $0388 ldb	#128		; Scaling
+COMMENT_LINE $0388 jsr	Mov_Draw_VL_ab
+COMMENT $0388 Reads joystick
+FORCE_SYMBOL $0388 Joy_Digital
+FORCE_SYMBOL $038B Vec_Joy_1_X
+FORCE_SYMBOL $0392 marcX
+FORCE_NO_SYMBOL $0395
+FORCE_SYMBOL $0399 marcX
+FORCE_SYMBOL $039C marcVelocity
+FORCE_SYMBOL $039F marcX
+FORCE_SYMBOL $03A4 marcX
+FORCE_SYMBOL $03AB marcX
+FORCE_SYMBOL $03AE marcVelocity
+FORCE_SYMBOL $03B1 marcX
+COMMENT_LINE $03B6 check vertical joystick
+FORCE_SYMBOL $03B6 Vec_Joy_1_Y
+FORCE_SYMBOL $03BD marcY
+FORCE_NO_SYMBOL $03C0
+FORCE_SYMBOL $03C6 marcY
+FORCE_SYMBOL $03C9 marcVelocity
+FORCE_SYMBOL $03CC marcY
+FORCE_NO_SYMBOL $03D1
+FORCE_SYMBOL $03D3 marcY
+FORCE_SYMBOL $03D6 marcY
+FORCE_SYMBOL $03DF marcY
+FORCE_SYMBOL $03E2 marcVelocity
+FORCE_SYMBOL $03E5 marcY
+FORCE_SYMBOL $03EC marcY
+FORCE_SYMBOL $03F0 Joy_Digital
+FORCE_SYMBOL $03F3 Vec_Joy_1_Y
+FORCE_NO_SYMBOL $03F6
+FORCE_SYMBOL $03FA Vec_Joy_1_X
+FORCE_NO_SYMBOL $03FD
+FORCE_NO_SYMBOL $0402
+FORCE_SYMBOL $0404 directionFaced
+FORCE_SYMBOL $0407 Vec_Joy_1_Y
+FORCE_NO_SYMBOL $040A
+FORCE_NO_SYMBOL $0412
+FORCE_SYMBOL $0414 directionFaced
+FORCE_SYMBOL $0417 directionFaced
+FORCE_NO_SYMBOL $041C
+FORCE_SYMBOL $041E directionFaced
+FORCE_SYMBOL $0421 directionFaced
+FORCE_SYMBOL $0424 Vec_Joy_1_X
+FORCE_NO_SYMBOL $0427
+FORCE_NO_SYMBOL $042F
+FORCE_SYMBOL $0431 directionFaced
+FORCE_SYMBOL $0434 directionFaced
+FORCE_NO_SYMBOL $0439
+FORCE_SYMBOL $043B directionFaced
+FORCE_SYMBOL $043E directionFaced
+FORCE_SYMBOL $0442 directionFaced
+FORCE_NO_SYMBOL $0445
+FORCE_NO_SYMBOL $0449
+FORCE_NO_SYMBOL $044D
+FORCE_NO_SYMBOL $0451
+FORCE_NO_SYMBOL $0455
+FORCE_NO_SYMBOL $0459
+FORCE_NO_SYMBOL $045D
+FORCE_NO_SYMBOL $0461
+COMMENT $0463 bottom left
+FORCE_SYMBOL $0463 marcFaceDL
+FORCE_SYMBOL $0467 marcFaceU
+FORCE_SYMBOL $046B marcFaceR
+FORCE_SYMBOL $046F marcFaceUR
+FORCE_SYMBOL $0473 marcFaceD
+FORCE_SYMBOL $0477 marcFaceDR
+FORCE_SYMBOL $047B marcFaceL
+FORCE_SYMBOL $047F marcFaceUL
+FORCE_SYMBOL $0483 Reset0Ref
+FORCE_SYMBOL $0486 Intensity_5F
+COMMENT $0489 Y
+FORCE_NO_SYMBOL $0489
+COMMENT $048B X
+FORCE_NO_SYMBOL $048B
+FORCE_SYMBOL $048D Moveto_d_7F
+COMMENT $0490 Drawing the edges
+FORCE_SYMBOL $0490 borders
+COMMENT $0493 Vectors
+FORCE_NO_SYMBOL $0493
+COMMENT $0495 Scaling
+FORCE_NO_SYMBOL $0495
+FORCE_SYMBOL $0497 Mov_Draw_VL_ab
+FORCE_SYMBOL $049B Read_Btns
+FORCE_NO_SYMBOL $049E
+FORCE_SYMBOL $04A2 createBullet
+FORCE_SYMBOL $04A5 liveBullet
+FORCE_NO_SYMBOL $04A8
+COMMENT_LINE $04AD now we change the y position
+FORCE_SYMBOL $04AD bulletY
+FORCE_SYMBOL $04B0 bulletVelocityY
+FORCE_SYMBOL $04B3 bulletY
+COMMENT_LINE $04B6 now we change the x position
+FORCE_SYMBOL $04B6 bulletX
+FORCE_SYMBOL $04B9 bulletVelocityX
+FORCE_SYMBOL $04BC bulletX
+COMMENT_LINE $04BF now we check borders
+COMMENT $04BF in what direction is the ball moving?
+FORCE_SYMBOL $04BF bulletVelocityX
+COMMENT $04C2 negative, than we check left border
+COMMENT $04C4 ball right out of bounds?
+FORCE_SYMBOL $04C4 BALL_X_RIGHT
+FORCE_NO_SYMBOL $04C8
+FORCE_SYMBOL $04CA liveBullet
+COMMENT $04CD ball left out of bounds?
+FORCE_SYMBOL $04CD BALL_X_LEFT
+FORCE_NO_SYMBOL $04D1
+FORCE_SYMBOL $04D3 liveBullet
+FORCE_SYMBOL $04D6 bulletVelocityY
+COMMENT_LINE $04DB now we check if bottom
+FORCE_SYMBOL $04DB bulletY
+COMMENT_LINE $04E2 LDA     #PADDLE_INIT_YPOS
+COMMENT_LINE $04E2 STA     bulletY
+FORCE_NO_SYMBOL $04E2
+FORCE_SYMBOL $04E4 liveBullet
+COMMENT_LINE $04E7 now we check if we are at the upper border
+FORCE_SYMBOL $04E7 bulletY
+FORCE_NO_SYMBOL $04EA
+COMMENT_LINE $04EE LDA     #BALL_INIT_YPOS
+COMMENT_LINE $04EE STA     bulletY
+FORCE_NO_SYMBOL $04EE
+FORCE_SYMBOL $04F0 liveBullet
+FORCE_SYMBOL $04F3 Reset0Ref
+FORCE_SYMBOL $04F6 bulletY
+COMMENT $04F9 move to rel position D and scale factor 7F
+FORCE_SYMBOL $04F9 Moveto_d_7F
+FORCE_SYMBOL $04FC ball
+FORCE_SYMBOL $04FF Draw_VLc
+FORCE_NO_SYMBOL $0503
+FORCE_SYMBOL $0505 liveBullet
+FORCE_SYMBOL $0508 marcY
+FORCE_SYMBOL $050B bulletY
+FORCE_SYMBOL $050E marcX
+FORCE_SYMBOL $0511 bulletX
+FORCE_SYMBOL $0514 directionFaced
+FORCE_NO_SYMBOL $0517
+FORCE_NO_SYMBOL $051B
+FORCE_NO_SYMBOL $051F
+FORCE_NO_SYMBOL $0523
+FORCE_NO_SYMBOL $0527
+FORCE_NO_SYMBOL $052B
+FORCE_NO_SYMBOL $052F
+FORCE_NO_SYMBOL $0533
+FORCE_SYMBOL $0535 turtle_line_list
+FORCE_SYMBOL $053A bulletVelocityY
+FORCE_SYMBOL $053F bulletVelocityX
+FORCE_SYMBOL $0543 alus
+FORCE_SYMBOL $0548 bulletVelocityY
+FORCE_NO_SYMBOL $054B
+FORCE_SYMBOL $054D bulletVelocityX
+FORCE_SYMBOL $0551 alus
+FORCE_NO_SYMBOL $0554
+FORCE_SYMBOL $0556 bulletVelocityY
+FORCE_SYMBOL $055B bulletVelocityX
+FORCE_SYMBOL $055F turtle_line_list
+FORCE_SYMBOL $0564 bulletVelocityY
+FORCE_SYMBOL $0569 bulletVelocityX
+FORCE_SYMBOL $056D alus
+FORCE_SYMBOL $0572 bulletVelocityY
+FORCE_NO_SYMBOL $0575
+FORCE_SYMBOL $0577 bulletVelocityX
+FORCE_SYMBOL $057B turtle_line_list
+FORCE_SYMBOL $0580 bulletVelocityY
+FORCE_SYMBOL $0585 bulletVelocityX
+FORCE_SYMBOL $0589 alus
+FORCE_NO_SYMBOL $058C
+FORCE_SYMBOL $058E bulletVelocityY
+FORCE_SYMBOL $0593 bulletVelocityX
+FORCE_SYMBOL $0597 turtle_line_list
+FORCE_SYMBOL $059C bulletVelocityY
+FORCE_SYMBOL $05A1 bulletVelocityX
+COMMENT $05A5 check if there is an enemy
+FORCE_SYMBOL $05A5 enemy_available1
+FORCE_NO_SYMBOL $05A8
+COMMENT $05AA if not
+COMMENT $05AC get a new enemy
+FORCE_SYMBOL $05AC get_new_ball
+COMMENT_LINE $05AF now we change the y position
+FORCE_SYMBOL $05AF enemyY1
+FORCE_SYMBOL $05B2 enemy1VelocityY
+FORCE_SYMBOL $05B5 enemyY1
+COMMENT_LINE $05B8 now we change the x position
+FORCE_SYMBOL $05B8 enemyX1
+FORCE_SYMBOL $05BB enemy1VelocityX
+FORCE_SYMBOL $05BE enemyX1
+COMMENT_LINE $05C1 now we check if the ball bounces off a wall
+COMMENT $05C1 check direction then border
+FORCE_SYMBOL $05C1 enemy1VelocityX
+FORCE_SYMBOL $05C6 BALL_X_RIGHT
+COMMENT $05CA reflect direction
+FORCE_SYMBOL $05CA enemy1VelocityX
+FORCE_SYMBOL $05CD BALL_X_LEFT
+COMMENT $05D1 reflect direction
+FORCE_SYMBOL $05D1 enemy1VelocityX
+COMMENT $05D4 checking for Y
+FORCE_SYMBOL $05D4 enemy1VelocityY
+COMMENT_LINE $05D9 now we check if bottom
+FORCE_SYMBOL $05D9 enemyY1
+FORCE_SYMBOL $05DC PADDLE_INIT_YPOS
+FORCE_NO_SYMBOL $05E0
+FORCE_SYMBOL $05E2 enemy1VelocityX
+FORCE_SYMBOL $05E7 enemy_available1
+FORCE_SYMBOL $05EA frenzy_active
+FORCE_SYMBOL $05ED frenzyCounter
+COMMENT $05F0 remove orange eye status
+COMMENT_LINE $05F2 LDA     #PADDLE_INIT_YPOS    ; otherwise use init position
+COMMENT_LINE $05F2 STA     enemyY1
+COMMENT $05F2 reflect direction
+FORCE_SYMBOL $05F2 enemy1VelocityY
+COMMENT_LINE $05F5 now we check if we are at the upper border
+FORCE_SYMBOL $05F5 enemyY1
+FORCE_SYMBOL $05F8 BALL_INIT_YPOS
+COMMENT_LINE $05FC LDA     #BALL_INIT_YPOS    ; otherwise use init position
+COMMENT_LINE $05FC STA     enemyY1
+COMMENT $05FC reflect direction
+FORCE_SYMBOL $05FC enemy1VelocityY
+FORCE_SYMBOL $05FF Reset0Ref
+FORCE_SYMBOL $0602 Intensity_3F
+FORCE_SYMBOL $0605 enemyY1
+COMMENT $0608 move to rel position D and scale factor 7F
+FORCE_SYMBOL $0608 Moveto_d_7F
+COMMENT_LINE $060B LDX     #vData5
+COMMENT $060B address of list
+FORCE_SYMBOL $060B vData5
+COMMENT $060E Text position relative Y
+FORCE_SYMBOL $060E enemyY1
+COMMENT $0611 Text position relative X
+FORCE_SYMBOL $0611 enemyX1
+COMMENT $0614 in x position of list
+COMMENT $0616 scale positioning
+FORCE_NO_SYMBOL $0616
+COMMENT $0618 scale move in list
+FORCE_NO_SYMBOL $0618
+FORCE_SYMBOL $061A draw_synced_list
+COMMENT_LINE $061D JSR     Draw_VLc
+COMMENT $061E create enemy
+FORCE_NO_SYMBOL $061E
+FORCE_SYMBOL $0620 enemy_available1
+COMMENT $0623 start at top of screen
+FORCE_SYMBOL $0623 BALL_INIT_YPOS
+FORCE_SYMBOL $0625 enemyY1
+COMMENT $0628 ball y speed, negativ, since ball must move down
+FORCE_SYMBOL $062A frenzy_active
+COMMENT $062D velocityY changes if frenzy
+FORCE_SYMBOL $062D enemy1VelocityY
+COMMENT $0630 get random and decrease size to reasonable amount
+FORCE_SYMBOL $0630 Random
+FORCE_NO_SYMBOL $0633
+FORCE_NO_SYMBOL $0635
+FORCE_SYMBOL $0637 enemyX1
+FORCE_NO_SYMBOL $063A
+FORCE_SYMBOL $063C enemy1VelocityX
+COMMENT $0640 check if there is an enemy
+FORCE_SYMBOL $0640 enemy_available2
+FORCE_NO_SYMBOL $0643
+COMMENT $0647 spawn a new enemy
+FORCE_SYMBOL $0647 get_new_ball2
+COMMENT_LINE $064A now we change the y position
+FORCE_SYMBOL $064A enemyY2
+FORCE_SYMBOL $064D enemy2VelocityY
+FORCE_SYMBOL $0650 enemyY2
+COMMENT_LINE $0653 now we change the x position
+FORCE_SYMBOL $0653 enemyX2
+FORCE_SYMBOL $0656 enemy2VelocityX
+FORCE_SYMBOL $0659 enemyX2
+COMMENT_LINE $065C now we check if the ball bounces off a wall
+COMMENT $065C check direction of ball and check border
+FORCE_SYMBOL $065C enemy2VelocityX
+COMMENT $0661 ball right out of bounds?
+FORCE_SYMBOL $0661 BALL_X_RIGHT
+COMMENT $0665 yes, than change direction
+FORCE_SYMBOL $0665 enemy2VelocityX
+COMMENT $0668 ball left out of bounds?
+FORCE_SYMBOL $0668 BALL_X_LEFT
+COMMENT $066C reflect direction
+FORCE_SYMBOL $066C enemy2VelocityX
+FORCE_SYMBOL $066F enemy2VelocityY
+COMMENT_LINE $0674 now we check if bottom
+FORCE_SYMBOL $0674 enemyY2
+FORCE_SYMBOL $0677 PADDLE_INIT_YPOS
+FORCE_NO_SYMBOL $067B
+FORCE_SYMBOL $067D enemy2VelocityX
+FORCE_SYMBOL $0682 enemy_available2
+COMMENT_LINE $0685 sta	frenzy_active
+COMMENT_LINE $0685 sta	frenzyCounter
+COMMENT $0685 remove orange eye status
+COMMENT_LINE $0687 lda     #PADDLE_INIT_YPOS
+COMMENT_LINE $0687 sta     enemyY2
+COMMENT $0687 and reflect, using opposite y speed
+FORCE_SYMBOL $0687 enemy2VelocityY
+COMMENT_LINE $068A now we check if we are at the upper border
+FORCE_SYMBOL $068A enemyY2
+FORCE_SYMBOL $068D BALL_INIT_YPOS
+COMMENT_LINE $0691 lda     #BALL_INIT_YPOS    ; use init position
+COMMENT_LINE $0691 sta     enemyY2
+COMMENT $0691 reflect direction
+FORCE_SYMBOL $0691 enemy2VelocityY
+FORCE_SYMBOL $0694 Reset0Ref
+FORCE_SYMBOL $0697 Intensity_3F
+COMMENT_LINE $069A ldd	enemyY2
+COMMENT_LINE $069A jsr     Moveto_d_7F        ; move to rel position D and scale factor 7F
+COMMENT $069A address of list
+FORCE_SYMBOL $069A vData5
+COMMENT $069D Text position relative Y
+FORCE_SYMBOL $069D enemyY2
+COMMENT $06A0 Text position relative X
+FORCE_SYMBOL $06A0 enemyX2
+COMMENT $06A3 in x position of list
+COMMENT $06A5 scale positioning
+FORCE_NO_SYMBOL $06A5
+COMMENT $06A7 scale move in list
+FORCE_NO_SYMBOL $06A7
+FORCE_SYMBOL $06A9 draw_synced_list
+COMMENT $06AD create enemy
+FORCE_NO_SYMBOL $06AD
+FORCE_SYMBOL $06AF enemy_available2
+COMMENT $06B2 start at top of screen
+FORCE_SYMBOL $06B2 BALL_INIT_YPOS
+FORCE_SYMBOL $06B4 enemyY2
+COMMENT $06B7 ball y speed, negativ, since ball must move down
+FORCE_SYMBOL $06B9 frenzy_active
+COMMENT $06BC velocityY changes if frenzy
+FORCE_SYMBOL $06BC enemy2VelocityY
+COMMENT $06BF get random and decrease size to reasonable amount
+FORCE_SYMBOL $06BF Random
+FORCE_NO_SYMBOL $06C2
+FORCE_NO_SYMBOL $06C4
+FORCE_SYMBOL $06C6 enemyX2
+COMMENT $06CB now store the speed
+FORCE_SYMBOL $06CB enemy2VelocityX
+FORCE_SYMBOL $06CF marcY
+FORCE_SYMBOL $06D2 enemyY1
+COMMENT $06D6 (Height of object #1 + Height of object #2)/2
+FORCE_NO_SYMBOL $06D6
+COMMENT $06D8 (Width of object #1 + Width of object #2)/2
+FORCE_NO_SYMBOL $06D8
+FORCE_SYMBOL $06DA Obj_Hit
+COMMENT $06DD Branch if no collision
+FORCE_NO_SYMBOL $06DF
+FORCE_SYMBOL $06E1 enemy1VelocityX
+COMMENT $06E4 already stunned
+FORCE_SYMBOL $06E6 PlayerDeath
+FORCE_SYMBOL $06EA enemy_available1
+COMMENT $06ED orange eyes
+FORCE_SYMBOL $06ED frenzyCounter
+FORCE_SYMBOL $06F0 totalKills
+FORCE_NO_SYMBOL $06F3
+FORCE_SYMBOL $06F5 frenzyCounter
+FORCE_NO_SYMBOL $06FA
+FORCE_SYMBOL $06FC frenzy_active
+FORCE_NO_SYMBOL $06FF
+FORCE_SYMBOL $0701 enemy_available2
+FORCE_NO_SYMBOL $0704
+FORCE_SYMBOL $0706 score
+FORCE_NO_SYMBOL $0709
+FORCE_SYMBOL $070B lives
+FORCE_SYMBOL $0710 lives
+FORCE_NO_SYMBOL $0715
+FORCE_SYMBOL $0717 score
+FORCE_SYMBOL $071A Add_Score_a
+FORCE_SYMBOL $071D marcY
+FORCE_SYMBOL $0720 enemyY2
+COMMENT $0724 (Height of object #1 + Height of object #2)/2
+FORCE_NO_SYMBOL $0724
+COMMENT $0726 (Width of object #1 + Width of object #2)/2
+FORCE_NO_SYMBOL $0726
+FORCE_SYMBOL $0728 Obj_Hit
+COMMENT $072B Branch if no collision
+FORCE_NO_SYMBOL $072D
+FORCE_SYMBOL $072F enemy2VelocityX
+COMMENT $0732 already stunned
+FORCE_SYMBOL $0734 PlayerDeath
+FORCE_SYMBOL $0738 enemy_available2
+COMMENT $073B orange eyes
+FORCE_SYMBOL $073B frenzyCounter
+FORCE_SYMBOL $073E totalKills
+FORCE_NO_SYMBOL $0741
+FORCE_SYMBOL $0743 frenzyCounter
+FORCE_NO_SYMBOL $0748
+FORCE_SYMBOL $074A frenzy_active
+FORCE_NO_SYMBOL $074D
+FORCE_SYMBOL $074F enemy_available1
+FORCE_NO_SYMBOL $0752
+FORCE_SYMBOL $0754 score
+FORCE_NO_SYMBOL $0757
+FORCE_SYMBOL $0759 lives
+FORCE_SYMBOL $075E lives
+FORCE_NO_SYMBOL $0763
+FORCE_SYMBOL $0765 score
+COMMENT $0768 done checking enemy2 and marc stuff
+FORCE_SYMBOL $0768 Add_Score_a
+FORCE_NO_SYMBOL $076B
+FORCE_SYMBOL $076D liveBullet
+FORCE_SYMBOL $0772 bulletY
+FORCE_SYMBOL $0775 enemyY1
+FORCE_NO_SYMBOL $0779
+FORCE_NO_SYMBOL $077B
+FORCE_SYMBOL $077D Obj_Hit
+COMMENT $0780 if no collision, check enemy 2
+FORCE_NO_SYMBOL $0782
+FORCE_SYMBOL $0784 enemy1VelocityX
+COMMENT $0787 already stunned
+FORCE_SYMBOL $0789 enemy1VelocityX
+FORCE_SYMBOL $078E enemy1VelocityY
+FORCE_SYMBOL $0791 totalStuns
+FORCE_NO_SYMBOL $0794
+FORCE_SYMBOL $0796 score
+FORCE_SYMBOL $0799 Add_Score_a
+FORCE_NO_SYMBOL $079C
+FORCE_SYMBOL $079E liveBullet
+FORCE_NO_SYMBOL $07A1
+FORCE_SYMBOL $07A3 liveBullet
+FORCE_SYMBOL $07A8 bulletY
+FORCE_SYMBOL $07AB enemyY2
+FORCE_NO_SYMBOL $07AF
+FORCE_NO_SYMBOL $07B1
+FORCE_SYMBOL $07B3 Obj_Hit
+COMMENT $07B6 we done if no collision
+FORCE_NO_SYMBOL $07B8
+FORCE_SYMBOL $07BA enemy2VelocityX
+COMMENT $07BD already stunned
+FORCE_SYMBOL $07BF enemy2VelocityX
+FORCE_SYMBOL $07C4 enemy2VelocityY
+FORCE_SYMBOL $07C7 totalStuns
+FORCE_NO_SYMBOL $07CA
+FORCE_SYMBOL $07CC score
+FORCE_SYMBOL $07CF Add_Score_a
+FORCE_NO_SYMBOL $07D2
+FORCE_SYMBOL $07D4 liveBullet
+FORCE_NO_SYMBOL $07D8
+FORCE_SYMBOL $07DA liveBullet
+FORCE_SYMBOL $07DD frenzy_active
+FORCE_SYMBOL $07E0 frenzyCounter
+FORCE_SYMBOL $07E3 enemy_available1
+FORCE_SYMBOL $07E6 enemy_available2
+FORCE_NO_SYMBOL $07E9
+FORCE_SYMBOL $07EB deathTimer
+FORCE_SYMBOL $07EE deathAnim
+FORCE_NO_SYMBOL $07F1
+FORCE_SYMBOL $07F4 marcY
+FORCE_SYMBOL $07F7 directionFaced
+FORCE_SYMBOL $07FA lives
+FORCE_SYMBOL $07FD totalDeaths
+FORCE_SYMBOL $0801 start_my_sound
+FORCE_SYMBOL $0804 Wait_Recal
+FORCE_SYMBOL $0807 Do_Sound
+FORCE_SYMBOL $080A drawBorders
+FORCE_SYMBOL $080D drawScore
+FORCE_SYMBOL $0810 drawLives
+COMMENT $0813 Sets intensity to 127
+FORCE_SYMBOL $0813 Intensity_5F
+COMMENT_LINE $0816 I tried to do a rotation here
+COMMENT_LINE $0816 I dont know how to adapt it to synced lists
+COMMENT_LINE $0816 so now im just putting death text
+FORCE_SYMBOL $0816 Reset0Ref
+FORCE_SYMBOL $0819 dead_string
+FORCE_NO_SYMBOL $081C
+FORCE_SYMBOL $0820 Print_Str_d
+FORCE_SYMBOL $0823 Reset0Ref
+FORCE_SYMBOL $0826 dead2_string
+FORCE_SYMBOL $082D Print_Str_d
+COMMENT_LINE $0830 ldx vData7 ;ldx the sprite
+COMMENT_LINE $0830 ldb 	#12		; Number of vectors
+COMMENT_LINE $0830 lda	rotangle		; Scaling
+COMMENT_LINE $0830 ldu	#rotated
+COMMENT_LINE $0830 jsr	Rot_VL_ab
+COMMENT_LINE $0830 ldd	marcY
+COMMENT_LINE $0830 jsr	Moveto_d_7F
+COMMENT_LINE $0830 ldx	#rotated		; Drawing the rotation
+COMMENT_LINE $0830 lda 	#172		; Number of vectors
+COMMENT_LINE $0830 ldb	#128		; Scaling
+COMMENT_LINE $0830 jsr	Mov_Draw_VL_ab
+COMMENT_LINE $0830 LDA      marcY                          ; Text position relative Y
+COMMENT_LINE $0830 LDB      marcX                        ; Text position relative X
+COMMENT_LINE $0830 tfr      d,x                          ; in x position of list
+COMMENT_LINE $0830 lda      #130                         ; scale positioning
+COMMENT_LINE $0830 ldb      #$50                         ; scale move in list
+COMMENT_LINE $0830 jsr      draw_synced_list
+FORCE_SYMBOL $0830 rotangle
+FORCE_SYMBOL $0833 deathTimer
+FORCE_SYMBOL $0836 deathTimer
+FORCE_SYMBOL $083E Reset0Ref
+FORCE_SYMBOL $0841 Intensity_5F
+FORCE_NO_SYMBOL $0844
+FORCE_NO_SYMBOL $0846
+FORCE_SYMBOL $0848 Moveto_d_7F
+FORCE_NO_SYMBOL $084B
+FORCE_NO_SYMBOL $084D
+FORCE_SYMBOL $084F score
+FORCE_SYMBOL $0852 Print_Str_d
+FORCE_SYMBOL $0856 Reset0Ref
+FORCE_NO_SYMBOL $0859
+FORCE_SYMBOL $085B lives
+FORCE_NO_SYMBOL $0860
+FORCE_SYMBOL $0862 lives
+FORCE_SYMBOL $0867 one_string
+FORCE_NO_SYMBOL $086A
+FORCE_SYMBOL $086E Print_Str_d
+FORCE_SYMBOL $0872 three_string
+FORCE_SYMBOL $0877 two_string
+FORCE_SYMBOL $087C DP_to_C8
+FORCE_SYMBOL $087F CREDIT_TEXT_SIZE
+FORCE_SYMBOL $0882 Vec_Text_HW
+COMMENT $0884 set DP...
+FORCE_SYMBOL $0884 DP_to_C8
+FORCE_NO_SYMBOL $0887
+FORCE_SYMBOL $0889 gameState
+FORCE_NO_SYMBOL $088B
+FORCE_SYMBOL $088D deathTimer
+FORCE_SYMBOL $088F VOX_STARTING
+FORCE_SYMBOL $0891 voxStart
+COMMENT $0893 set this as marker for music start
+FORCE_SYMBOL $0893 Vec_Music_Flag
+COMMENT $0895 load a music structure
+FORCE_SYMBOL $0895 silence
+FORCE_SYMBOL $0898 music_active
+FORCE_SYMBOL $089A voxStart
+FORCE_SYMBOL $089C VOX_STARTING
+FORCE_SYMBOL $08A0 VOX_STARTED
+FORCE_SYMBOL $08A2 voxStart
+FORCE_SYMBOL $08A4 speechData
+COMMENT $08A7 start vox
+FORCE_SYMBOL $08A7 vox_addr
+FORCE_SYMBOL $08AA start_my_sound
+FORCE_SYMBOL $08AD Wait_Recal
+FORCE_SYMBOL $08B0 DP_to_D0
+FORCE_SYMBOL $08B3 Do_Sound
+FORCE_SYMBOL $08B6 Read_Btns
+FORCE_SYMBOL $08B9 vox_speak
+FORCE_SYMBOL $08BC Intensity_5F
+COMMENT $08BF address of list
+FORCE_SYMBOL $08BF vData3
+COMMENT $08C2 Text position relative Y
+FORCE_NO_SYMBOL $08C2
+COMMENT $08C4 Text position relative X
+COMMENT $08C6 in x position of list
+COMMENT $08C8 scale positioning
+FORCE_NO_SYMBOL $08C8
+COMMENT $08CA scale move in list
+FORCE_NO_SYMBOL $08CA
+FORCE_SYMBOL $08CC draw_synced_list
+FORCE_SYMBOL $08CF Reset0Ref
+FORCE_SYMBOL $08D2 gameover_string
+FORCE_NO_SYMBOL $08D5
+FORCE_SYMBOL $08D9 Print_Str_d
+FORCE_SYMBOL $08DC rise_string
+FORCE_SYMBOL $08E3 Print_Str_d
+FORCE_SYMBOL $08E6 deathTimer
+FORCE_SYMBOL $08E9 deathTimer
+COMMENT $08F1 set DP to C8
+FORCE_SYMBOL $08F1 DP_to_C8
+FORCE_SYMBOL $08F4 Vec_Music_Flag
+COMMENT $08F9 get active music
+FORCE_SYMBOL $08F9 music_active
+COMMENT $08FC and init new notes
+FORCE_SYMBOL $08FC Init_Music_chk
+FORCE_NO_SYMBOL $0900
+FORCE_SYMBOL $0902 Vec_Music_Flag
+COMMENT $0906 remember out different scale factors
+COMMENT_LINE $090A first list entry (first will be a sync + moveto_d, so we just stay here!)
+COMMENT $090A this will be a "1"
+COMMENT $090C test if real sync - or end of list (2)
+COMMENT $090D if end of list -> jump
+COMMENT_LINE $090F zero integrators
+COMMENT $090F zero the integrators
+FORCE_NO_SYMBOL $090F
+COMMENT $0911 store zeroing values to cntl
+FORCE_SYMBOL $0911 VIA_cntl
+COMMENT $0913 and wait for zeroing to be actually done
+FORCE_SYMBOL $0913 ZERO_DELAY
+COMMENT_LINE $0915 reset integrators
+COMMENT $0915 reset integrator offset
+FORCE_SYMBOL $0915 VIA_port_a
+FORCE_NO_SYMBOL $0917
+COMMENT_LINE $0919 wait that zeroing surely has the desired effect!
+COMMENT $0919 while waiting, zero offsets
+FORCE_SYMBOL $0919 VIA_port_b
+FORCE_SYMBOL $091E VIA_port_b
+COMMENT_LINE $0920 unzero is done by moveto_d
+COMMENT $0920 scalefactor move
+FORCE_NO_SYMBOL $0920
+COMMENT $0922 to timer t1 (lo=
+FORCE_SYMBOL $0922 VIA_t1_cnt_lo
+COMMENT $0924 load our coordinates of "entry" of vectorlist
+COMMENT $0926 move there
+FORCE_SYMBOL $0926 Moveto_d
+COMMENT $0929 scale factor vector
+FORCE_NO_SYMBOL $0929
+COMMENT $092B to timer T1 (lo)
+FORCE_SYMBOL $092B VIA_t1_cnt_lo
+COMMENT $092D do our "internal" moveto d
+COMMENT $092F there was a move 0,0, if so
+FORCE_SYMBOL $0931 Moveto_d
+COMMENT $0934 load next "mode" byte
+COMMENT $0936 if 0, than we should move somewhere
+COMMENT $0938 if still positive it is a 1 pr 2 _> goto sync
+COMMENT_LINE $093A now we should draw a vector
+COMMENT $093A Get next coordinate pair
+COMMENT $093C Send Y to A/D
+FORCE_SYMBOL $093C VIA_port_a
+COMMENT $093E Enable mux
+FORCE_SYMBOL $093E VIA_port_b
+COMMENT $0940 Get pattern byte
+FORCE_NO_SYMBOL $0940
+COMMENT $0942 Disable mux
+FORCE_SYMBOL $0942 VIA_port_b
+COMMENT $0944 Send X to A/D
+FORCE_SYMBOL $0944 VIA_port_a
+COMMENT $0946 B-reg = T1 interrupt bit
+FORCE_NO_SYMBOL $0946
+COMMENT $0948 Clear T1H
+FORCE_SYMBOL $0948 VIA_t1_cnt_hi
+COMMENT $094A Store pattern in shift register
+FORCE_SYMBOL $094A VIA_shift_reg
+COMMENT $094C Wait for T1 to time out
+FORCE_SYMBOL $094C VIA_int_flags
+COMMENT $094E wait till line is finished
+COMMENT $0950 switch the light off (for sure)
+FORCE_SYMBOL $0950 VIA_shift_reg
+COMMENT $0954 correct stack and go back
+COMMENT $0A06 Tip of the ship
+COMMENT_LINE $0A08 also the 'hot spot'
+COMMENT $0A3C 4 vectors are drawn
+COMMENT $0A3D next point relativ (y,x)
+COMMENT $0A3F next point relativ (y,x)
+COMMENT $0A41 next point relativ (y,x)
+COMMENT $0A43 next point relativ (y,x)
+COMMENT $0A4D number of vectors - 1
+COMMENT $0A7E sync and move to y, x
+COMMENT $0A81 draw, y, x
+COMMENT $0A84 draw, y, x
+COMMENT $0A87 draw, y, x
+COMMENT $0A8A draw, y, x
+COMMENT $0A8D draw, y, x
+COMMENT $0A90 draw, y, x
+COMMENT $0A93 draw, y, x
+COMMENT $0A96 draw, y, x
+COMMENT $0A99 draw, y, x
+COMMENT $0A9C draw, y, x
+COMMENT $0A9F draw, y, x
+COMMENT $0AA2 draw, y, x
+COMMENT $0AA5 draw, y, x
+COMMENT $0AA8 draw, y, x
+COMMENT $0AAB draw, y, x
+COMMENT $0AAE draw, y, x
+COMMENT $0AB1 draw, y, x
+COMMENT $0AB4 sync and move to y, x
+COMMENT $0AB7 draw, y, x
+COMMENT $0ABA draw, y, x
+COMMENT $0ABD draw, y, x
+COMMENT $0AC0 draw, y, x
+COMMENT $0AC3 draw, y, x
+COMMENT $0AC6 draw, y, x
+COMMENT $0AC9 draw, y, x
+COMMENT $0ACC draw, y, x
+COMMENT $0ACF draw, y, x
+COMMENT $0AD2 draw, y, x
+COMMENT $0AD5 draw, y, x
+COMMENT $0AD8 draw, y, x
+COMMENT $0ADB draw, y, x
+COMMENT $0ADE draw, y, x
+COMMENT $0AE1 draw, y, x
+COMMENT $0AE4 draw, y, x
+COMMENT $0AE7 draw, y, x
+COMMENT $0AEA sync and move to y, x
+COMMENT $0AED draw, y, x
+COMMENT $0AF0 draw, y, x
+COMMENT $0AF3 draw, y, x
+COMMENT $0AF6 draw, y, x
+COMMENT $0AF9 draw, y, x
+COMMENT $0AFC draw, y, x
+COMMENT $0AFF draw, y, x
+COMMENT $0B02 draw, y, x
+COMMENT $0B05 draw, y, x
+COMMENT $0B08 draw, y, x
+COMMENT $0B0B draw, y, x
+COMMENT $0B0E draw, y, x
+COMMENT $0B11 draw, y, x
+COMMENT $0B14 sync and move to y, x
+COMMENT $0B17 draw, y, x
+COMMENT $0B1A draw, y, x
+COMMENT $0B1D draw, y, x
+COMMENT $0B20 draw, y, x
+COMMENT $0B23 draw, y, x
+COMMENT $0B26 draw, y, x
+COMMENT $0B29 draw, y, x
+COMMENT $0B2C draw, y, x
+COMMENT $0B2F draw, y, x
+COMMENT $0B32 draw, y, x
+COMMENT $0B35 draw, y, x
+COMMENT $0B38 draw, y, x
+COMMENT $0B3B draw, y, x
+COMMENT $0B3E sync and move to y, x
+COMMENT $0B41 draw, y, x
+COMMENT $0B44 draw, y, x
+COMMENT $0B47 draw, y, x
+COMMENT $0B4A draw, y, x
+COMMENT $0B4D draw, y, x
+COMMENT $0B50 draw, y, x
+COMMENT $0B53 draw, y, x
+COMMENT $0B56 draw, y, x
+COMMENT $0B59 draw, y, x
+COMMENT $0B5C draw, y, x
+COMMENT $0B5F draw, y, x
+COMMENT $0B62 draw, y, x
+COMMENT $0B65 draw, y, x
+COMMENT $0B68 sync and move to y, x
+COMMENT $0B6B draw, y, x
+COMMENT $0B6E draw, y, x
+COMMENT $0B71 draw, y, x
+COMMENT $0B74 draw, y, x
+COMMENT $0B77 draw, y, x
+COMMENT $0B7A draw, y, x
+COMMENT $0B7D draw, y, x
+COMMENT $0B80 draw, y, x
+COMMENT $0B83 draw, y, x
+COMMENT $0B86 draw, y, x
+COMMENT $0B89 draw, y, x
+COMMENT $0B8C draw, y, x
+COMMENT $0B8F draw, y, x
+COMMENT $0B92 draw, y, x
+COMMENT $0B95 sync and move to y, x
+COMMENT $0B98 draw, y, x
+COMMENT $0B9B draw, y, x
+COMMENT $0B9E draw, y, x
+COMMENT $0BA1 draw, y, x
+COMMENT $0BA4 draw, y, x
+COMMENT $0BA7 draw, y, x
+COMMENT $0BAA draw, y, x
+COMMENT $0BAD draw, y, x
+COMMENT $0BB0 draw, y, x
+COMMENT $0BB3 draw, y, x
+COMMENT $0BB6 draw, y, x
+COMMENT $0BB9 draw, y, x
+COMMENT $0BBC draw, y, x
+COMMENT $0BBF sync and move to y, x
+COMMENT $0BC2 draw, y, x
+COMMENT $0BC5 draw, y, x
+COMMENT $0BC8 draw, y, x
+COMMENT $0BCB draw, y, x
+COMMENT $0BCE draw, y, x
+COMMENT $0BD1 draw, y, x
+COMMENT $0BD4 draw, y, x
+COMMENT $0BD7 draw, y, x
+COMMENT $0BDA draw, y, x
+COMMENT $0BDD draw, y, x
+COMMENT $0BE0 draw, y, x
+COMMENT $0BE3 draw, y, x
+COMMENT $0BE6 draw, y, x
+COMMENT $0BE9 draw, y, x
+COMMENT $0BEC sync and move to y, x
+COMMENT $0BEF draw, y, x
+COMMENT $0BF2 draw, y, x
+COMMENT $0BF5 draw, y, x
+COMMENT $0BF8 draw, y, x
+COMMENT $0BFB draw, y, x
+COMMENT $0BFE draw, y, x
+COMMENT $0C01 draw, y, x
+COMMENT $0C04 draw, y, x
+COMMENT $0C07 draw, y, x
+COMMENT $0C0A draw, y, x
+COMMENT $0C0D draw, y, x
+COMMENT $0C10 draw, y, x
+COMMENT $0C13 draw, y, x
+COMMENT $0C16 sync and move to y, x
+COMMENT $0C19 draw, y, x
+COMMENT $0C1C draw, y, x
+COMMENT $0C1F draw, y, x
+COMMENT $0C22 draw, y, x
+COMMENT $0C25 draw, y, x
+COMMENT $0C28 draw, y, x
+COMMENT $0C2B draw, y, x
+COMMENT $0C2E draw, y, x
+COMMENT $0C31 draw, y, x
+COMMENT $0C34 draw, y, x
+COMMENT $0C37 draw, y, x
+COMMENT $0C3A draw, y, x
+COMMENT $0C3D draw, y, x
+COMMENT $0C40 draw, y, x
+COMMENT $0C43 sync and move to y, x
+COMMENT $0C46 draw, y, x
+COMMENT $0C49 draw, y, x
+COMMENT $0C4C draw, y, x
+COMMENT $0C4F draw, y, x
+COMMENT $0C52 draw, y, x
+COMMENT $0C55 draw, y, x
+COMMENT $0C58 draw, y, x
+COMMENT $0C5B draw, y, x
+COMMENT $0C5E draw, y, x
+COMMENT $0C61 draw, y, x
+COMMENT $0C64 draw, y, x
+COMMENT $0C67 draw, y, x
+COMMENT $0C6A draw, y, x
+COMMENT $0C6D sync and move to y, x
+COMMENT $0C70 draw, y, x
+COMMENT $0C73 draw, y, x
+COMMENT $0C76 draw, y, x
+COMMENT $0C79 draw, y, x
+COMMENT $0C7C draw, y, x
+COMMENT $0C7F draw, y, x
+COMMENT $0C82 draw, y, x
+COMMENT $0C85 draw, y, x
+COMMENT $0C88 draw, y, x
+COMMENT $0C8B draw, y, x
+COMMENT $0C8E draw, y, x
+COMMENT $0C91 draw, y, x
+COMMENT $0C94 draw, y, x
+COMMENT $0C97 draw, y, x
+COMMENT $0C9A sync and move to y, x
+COMMENT $0C9D draw, y, x
+COMMENT $0CA0 draw, y, x
+COMMENT $0CA3 draw, y, x
+COMMENT $0CA6 draw, y, x
+COMMENT $0CA9 draw, y, x
+COMMENT $0CAC draw, y, x
+COMMENT $0CAF draw, y, x
+COMMENT $0CB2 draw, y, x
+COMMENT $0CB5 draw, y, x
+COMMENT $0CB8 draw, y, x
+COMMENT $0CBB draw, y, x
+COMMENT $0CBE draw, y, x
+COMMENT $0CC1 draw, y, x
+COMMENT $0CC4 sync and move to y, x
+COMMENT $0CC7 draw, y, x
+COMMENT $0CCA draw, y, x
+COMMENT $0CCD draw, y, x
+COMMENT $0CD0 draw, y, x
+COMMENT $0CD3 draw, y, x
+COMMENT $0CD6 draw, y, x
+COMMENT $0CD9 draw, y, x
+COMMENT $0CDC draw, y, x
+COMMENT $0CDF draw, y, x
+COMMENT $0CE2 draw, y, x
+COMMENT $0CE5 draw, y, x
+COMMENT $0CE8 draw, y, x
+COMMENT $0CEB draw, y, x
+COMMENT $0CEE draw, y, x
+COMMENT $0CF1 sync and move to y, x
+COMMENT $0CF4 draw, y, x
+COMMENT $0CF7 draw, y, x
+COMMENT $0CFA draw, y, x
+COMMENT $0CFD draw, y, x
+COMMENT $0D00 draw, y, x
+COMMENT $0D03 draw, y, x
+COMMENT $0D06 draw, y, x
+COMMENT $0D09 draw, y, x
+COMMENT $0D0C draw, y, x
+COMMENT $0D0F draw, y, x
+COMMENT $0D12 draw, y, x
+COMMENT $0D15 draw, y, x
+COMMENT $0D18 draw, y, x
+COMMENT $0D1B sync and move to y, x
+COMMENT $0D1E draw, y, x
+COMMENT $0D21 draw, y, x
+COMMENT $0D24 draw, y, x
+COMMENT $0D27 draw, y, x
+COMMENT $0D2A draw, y, x
+COMMENT $0D2D draw, y, x
+COMMENT $0D30 draw, y, x
+COMMENT $0D33 draw, y, x
+COMMENT $0D36 draw, y, x
+COMMENT $0D39 draw, y, x
+COMMENT $0D3C draw, y, x
+COMMENT $0D3F draw, y, x
+COMMENT $0D42 draw, y, x
+COMMENT $0D45 draw, y, x
+COMMENT $0D48 sync and move to y, x
+COMMENT $0D4B draw, y, x
+COMMENT $0D4E draw, y, x
+COMMENT $0D51 draw, y, x
+COMMENT $0D54 draw, y, x
+COMMENT $0D57 draw, y, x
+COMMENT $0D5A draw, y, x
+COMMENT $0D5D draw, y, x
+COMMENT $0D60 draw, y, x
+COMMENT $0D63 draw, y, x
+COMMENT $0D66 draw, y, x
+COMMENT $0D69 draw, y, x
+COMMENT $0D6C draw, y, x
+COMMENT $0D6F draw, y, x
+COMMENT $0D72 sync and move to y, x
+COMMENT $0D75 draw, y, x
+COMMENT $0D78 draw, y, x
+COMMENT $0D7B draw, y, x
+COMMENT $0D7E draw, y, x
+COMMENT $0D81 draw, y, x
+COMMENT $0D84 draw, y, x
+COMMENT $0D87 draw, y, x
+COMMENT $0D8A draw, y, x
+COMMENT $0D8D draw, y, x
+COMMENT $0D90 draw, y, x
+COMMENT $0D93 draw, y, x
+COMMENT $0D96 draw, y, x
+COMMENT $0D99 draw, y, x
+COMMENT $0D9C draw, y, x
+COMMENT $0D9F sync and move to y, x
+COMMENT $0DA2 draw, y, x
+COMMENT $0DA5 draw, y, x
+COMMENT $0DA8 draw, y, x
+COMMENT $0DAB draw, y, x
+COMMENT $0DAE sync and move to y, x
+COMMENT $0DB1 draw, y, x
+COMMENT $0DB4 draw, y, x
+COMMENT $0DB7 draw, y, x
+COMMENT $0DBA draw, y, x
+COMMENT $0DBD draw, y, x
+COMMENT $0DC0 draw, y, x
+COMMENT $0DC3 draw, y, x
+COMMENT $0DC6 draw, y, x
+COMMENT $0DC9 sync and move to y, x
+COMMENT $0DCC draw, y, x
+COMMENT $0DCF draw, y, x
+COMMENT $0DD2 draw, y, x
+COMMENT $0DD5 draw, y, x
+COMMENT $0DD8 draw, y, x
+COMMENT $0DDB sync and move to y, x
+COMMENT $0DDE draw, y, x
+COMMENT $0DE1 draw, y, x
+COMMENT $0DE4 draw, y, x
+COMMENT $0DE7 sync and move to y, x
+COMMENT $0DEA draw, y, x
+COMMENT $0DED draw, y, x
+COMMENT $0DF0 draw, y, x
+COMMENT $0DF3 draw, y, x
+COMMENT $0DF6 draw, y, x
+COMMENT $0DF9 draw, y, x
+COMMENT $0DFC sync and move to y, x
+COMMENT $0DFF draw, y, x
+COMMENT $0E02 draw, y, x
+COMMENT $0E05 sync and move to y, x
+COMMENT $0E08 draw, y, x
+COMMENT $0E0B draw, y, x
+COMMENT $0E0E draw, y, x
+COMMENT $0E11 sync and move to y, x
+COMMENT $0E14 draw, y, x
+COMMENT $0E17 draw, y, x
+COMMENT $0E1A draw, y, x
+COMMENT $0E1D draw, y, x
+COMMENT $0E20 sync and move to y, x
+COMMENT $0E23 draw, y, x
+COMMENT $0E26 draw, y, x
+COMMENT $0E29 draw, y, x
+COMMENT $0E2C draw, y, x
+COMMENT $0E2F sync and move to y, x
+COMMENT $0E32 draw, y, x
+COMMENT $0E35 draw, y, x
+COMMENT $0E38 draw, y, x
+COMMENT $0E3B draw, y, x
+COMMENT $0E3E draw, y, x
+COMMENT $0E41 draw, y, x
+COMMENT $0E44 sync and move to y, x
+COMMENT $0E47 draw, y, x
+COMMENT $0E4A draw, y, x
+COMMENT $0E4D draw, y, x
+COMMENT $0E50 sync and move to y, x
+COMMENT $0E53 draw, y, x
+COMMENT $0E56 draw, y, x
+COMMENT $0E59 draw, y, x
+COMMENT $0E5C draw, y, x
+COMMENT $0E5F sync and move to y, x
+COMMENT $0E62 draw, y, x
+COMMENT $0E65 draw, y, x
+COMMENT $0E68 draw, y, x
+COMMENT $0E6B sync and move to y, x
+COMMENT $0E6E draw, y, x
+COMMENT $0E71 draw, y, x
+COMMENT $0E74 draw, y, x
+COMMENT $0E77 draw, y, x
+COMMENT $0E7A draw, y, x
+COMMENT $0E7D sync and move to y, x
+COMMENT $0E80 draw, y, x
+COMMENT $0E83 draw, y, x
+COMMENT $0E86 draw, y, x
+COMMENT $0E89 draw, y, x
+COMMENT $0E8C draw, y, x
+COMMENT $0E8F sync and move to y, x
+COMMENT $0E92 draw, y, x
+COMMENT $0E95 draw, y, x
+COMMENT $0E98 draw, y, x
+COMMENT $0E9B draw, y, x
+COMMENT $0E9E draw, y, x
+COMMENT $0EA1 draw, y, x
+COMMENT $0EA4 sync and move to y, x
+COMMENT $0EA7 draw, y, x
+COMMENT $0EAA draw, y, x
+COMMENT $0EAD draw, y, x
+COMMENT $0EB0 draw, y, x
+COMMENT $0EB3 sync and move to y, x
+COMMENT $0EB6 draw, y, x
+COMMENT $0EB9 draw, y, x
+COMMENT $0EBC draw, y, x
+COMMENT $0EBF draw, y, x
+COMMENT $0EC2 draw, y, x
+COMMENT $0EC5 sync and move to y, x
+COMMENT $0EC8 draw, y, x
+COMMENT $0ECB draw, y, x
+COMMENT $0ECE draw, y, x
+COMMENT $0ED1 draw, y, x
+COMMENT $0ED4 sync and move to y, x
+COMMENT $0ED7 draw, y, x
+COMMENT $0EDA draw, y, x
+COMMENT $0EDD draw, y, x
+COMMENT $0EE0 draw, y, x
+COMMENT $0EE3 draw, y, x
+COMMENT $0EE6 draw, y, x
+COMMENT $0EE9 draw, y, x
+COMMENT $0EEC sync and move to y, x
+COMMENT $0EEF draw, y, x
+COMMENT $0EF2 draw, y, x
+COMMENT $0EF5 draw, y, x
+COMMENT $0EF8 sync and move to y, x
+COMMENT $0EFB draw, y, x
+COMMENT $0EFE draw, y, x
+COMMENT $0F01 draw, y, x
+COMMENT $0F04 draw, y, x
+COMMENT $0F07 draw, y, x
+COMMENT $0F0A draw, y, x
+COMMENT $0F0D sync and move to y, x
+COMMENT $0F10 draw, y, x
+COMMENT $0F13 draw, y, x
+COMMENT $0F16 draw, y, x
+COMMENT $0F19 endmarker
+COMMENT_LINE $0F1A khonshu sitting - unused
+COMMENT $0F1A sync and move to y, x
+COMMENT $0F1D draw, y, x
+COMMENT $0F20 draw, y, x
+COMMENT $0F23 draw, y, x
+COMMENT $0F26 draw, y, x
+COMMENT $0F29 draw, y, x
+COMMENT $0F2C draw, y, x
+COMMENT $0F2F draw, y, x
+COMMENT $0F32 draw, y, x
+COMMENT $0F35 draw, y, x
+COMMENT $0F38 draw, y, x
+COMMENT $0F3B draw, y, x
+COMMENT $0F3E draw, y, x
+COMMENT $0F41 draw, y, x
+COMMENT $0F44 draw, y, x
+COMMENT $0F47 draw, y, x
+COMMENT $0F4A draw, y, x
+COMMENT $0F4D draw, y, x
+COMMENT $0F50 sync and move to y, x
+COMMENT $0F53 draw, y, x
+COMMENT $0F56 draw, y, x
+COMMENT $0F59 draw, y, x
+COMMENT $0F5C draw, y, x
+COMMENT $0F5F draw, y, x
+COMMENT $0F62 draw, y, x
+COMMENT $0F65 draw, y, x
+COMMENT $0F68 draw, y, x
+COMMENT $0F6B draw, y, x
+COMMENT $0F6E draw, y, x
+COMMENT $0F71 draw, y, x
+COMMENT $0F74 draw, y, x
+COMMENT $0F77 draw, y, x
+COMMENT $0F7A draw, y, x
+COMMENT $0F7D draw, y, x
+COMMENT $0F80 draw, y, x
+COMMENT $0F83 draw, y, x
+COMMENT $0F86 sync and move to y, x
+COMMENT $0F89 draw, y, x
+COMMENT $0F8C draw, y, x
+COMMENT $0F8F draw, y, x
+COMMENT $0F92 draw, y, x
+COMMENT $0F95 draw, y, x
+COMMENT $0F98 draw, y, x
+COMMENT $0F9B draw, y, x
+COMMENT $0F9E draw, y, x
+COMMENT $0FA1 draw, y, x
+COMMENT $0FA4 draw, y, x
+COMMENT $0FA7 draw, y, x
+COMMENT $0FAA draw, y, x
+COMMENT $0FAD draw, y, x
+COMMENT $0FB0 draw, y, x
+COMMENT $0FB3 draw, y, x
+COMMENT $0FB6 draw, y, x
+COMMENT $0FB9 draw, y, x
+COMMENT $0FBC sync and move to y, x
+COMMENT $0FBF additional sync move to y, x
+COMMENT $0FC2 draw, y, x
+COMMENT $0FC5 draw, y, x
+COMMENT $0FC8 draw, y, x
+COMMENT $0FCB draw, y, x
+COMMENT $0FCE draw, y, x
+COMMENT $0FD1 draw, y, x
+COMMENT $0FD4 draw, y, x
+COMMENT $0FD7 draw, y, x
+COMMENT $0FDA draw, y, x
+COMMENT $0FDD draw, y, x
+COMMENT $0FE0 draw, y, x
+COMMENT $0FE3 draw, y, x
+COMMENT $0FE6 draw, y, x
+COMMENT $0FE9 draw, y, x
+COMMENT $0FEC draw, y, x
+COMMENT $0FEF draw, y, x
+COMMENT $0FF2 draw, y, x
+COMMENT $0FF5 draw, y, x
+COMMENT $0FF8 sync and move to y, x
+COMMENT $0FFB draw, y, x
+COMMENT $0FFE draw, y, x
+COMMENT $1001 sync and move to y, x
+COMMENT $1004 draw, y, x
+COMMENT $1007 draw, y, x
+COMMENT $100A draw, y, x
+COMMENT $100D draw, y, x
+COMMENT $1010 draw, y, x
+COMMENT $1013 sync and move to y, x
+COMMENT $1016 draw, y, x
+COMMENT $1019 draw, y, x
+COMMENT $101C draw, y, x
+COMMENT $101F draw, y, x
+COMMENT $1022 draw, y, x
+COMMENT $1025 draw, y, x
+COMMENT $1028 draw, y, x
+COMMENT $102B draw, y, x
+COMMENT $102E draw, y, x
+COMMENT $1031 draw, y, x
+COMMENT $1034 sync and move to y, x
+COMMENT $1037 draw, y, x
+COMMENT $103A draw, y, x
+COMMENT $103D sync and move to y, x
+COMMENT $1040 draw, y, x
+COMMENT $1043 draw, y, x
+COMMENT $1046 draw, y, x
+COMMENT $1049 draw, y, x
+COMMENT $104C draw, y, x
+COMMENT $104F draw, y, x
+COMMENT $1052 draw, y, x
+COMMENT $1055 draw, y, x
+COMMENT $1058 draw, y, x
+COMMENT $105B draw, y, x
+COMMENT $105E draw, y, x
+COMMENT $1061 draw, y, x
+COMMENT $1064 draw, y, x
+COMMENT $1067 draw, y, x
+COMMENT $106A draw, y, x
+COMMENT $106D draw, y, x
+COMMENT $1070 draw, y, x
+COMMENT $1073 draw, y, x
+COMMENT $1076 sync and move to y, x
+COMMENT $1079 draw, y, x
+COMMENT $107C draw, y, x
+COMMENT $107F draw, y, x
+COMMENT $1082 sync and move to y, x
+COMMENT $1085 draw, y, x
+COMMENT $1088 draw, y, x
+COMMENT $108B draw, y, x
+COMMENT $108E draw, y, x
+COMMENT $1091 draw, y, x
+COMMENT $1094 draw, y, x
+COMMENT $1097 draw, y, x
+COMMENT $109A draw, y, x
+COMMENT $109D draw, y, x
+COMMENT $10A0 draw, y, x
+COMMENT $10A3 draw, y, x
+COMMENT $10A6 draw, y, x
+COMMENT $10A9 sync and move to y, x
+COMMENT $10AC draw, y, x
+COMMENT $10AF draw, y, x
+COMMENT $10B2 draw, y, x
+COMMENT $10B5 draw, y, x
+COMMENT $10B8 draw, y, x
+COMMENT $10BB draw, y, x
+COMMENT $10BE draw, y, x
+COMMENT $10C1 draw, y, x
+COMMENT $10C4 draw, y, x
+COMMENT $10C7 draw, y, x
+COMMENT $10CA draw, y, x
+COMMENT $10CD draw, y, x
+COMMENT $10D0 sync and move to y, x
+COMMENT $10D3 draw, y, x
+COMMENT $10D6 draw, y, x
+COMMENT $10D9 draw, y, x
+COMMENT $10DC draw, y, x
+COMMENT $10DF draw, y, x
+COMMENT $10E2 draw, y, x
+COMMENT $10E5 draw, y, x
+COMMENT $10E8 draw, y, x
+COMMENT $10EB draw, y, x
+COMMENT $10EE draw, y, x
+COMMENT $10F1 draw, y, x
+COMMENT $10F4 draw, y, x
+COMMENT $10F7 sync and move to y, x
+COMMENT $10FA draw, y, x
+COMMENT $10FD draw, y, x
+COMMENT $1100 draw, y, x
+COMMENT $1103 draw, y, x
+COMMENT $1106 draw, y, x
+COMMENT $1109 draw, y, x
+COMMENT $110C draw, y, x
+COMMENT $110F draw, y, x
+COMMENT $1112 draw, y, x
+COMMENT $1115 draw, y, x
+COMMENT $1118 draw, y, x
+COMMENT $111B draw, y, x
+COMMENT $111E draw, y, x
+COMMENT $1121 sync and move to y, x
+COMMENT $1124 draw, y, x
+COMMENT $1127 draw, y, x
+COMMENT $112A draw, y, x
+COMMENT $112D sync and move to y, x
+COMMENT $1130 draw, y, x
+COMMENT $1133 draw, y, x
+COMMENT $1136 draw, y, x
+COMMENT $1139 draw, y, x
+COMMENT $113C draw, y, x
+COMMENT $113F draw, y, x
+COMMENT $1142 sync and move to y, x
+COMMENT $1145 draw, y, x
+COMMENT $1148 draw, y, x
+COMMENT $114B draw, y, x
+COMMENT $114E draw, y, x
+COMMENT $1151 sync and move to y, x
+COMMENT $1154 draw, y, x
+COMMENT $1157 draw, y, x
+COMMENT $115A sync and move to y, x
+COMMENT $115D draw, y, x
+COMMENT $1160 sync and move to y, x
+COMMENT $1163 draw, y, x
+COMMENT $1166 draw, y, x
+COMMENT $1169 sync and move to y, x
+COMMENT $116C draw, y, x
+COMMENT $116F draw, y, x
+COMMENT $1172 sync and move to y, x
+COMMENT $1175 draw, y, x
+COMMENT $1178 draw, y, x
+COMMENT $117B sync and move to y, x
+COMMENT $117E draw, y, x
+COMMENT $1181 sync and move to y, x
+COMMENT $1184 draw, y, x
+COMMENT $1187 draw, y, x
+COMMENT $118A draw, y, x
+COMMENT $118D draw, y, x
+COMMENT $1190 draw, y, x
+COMMENT $1193 draw, y, x
+COMMENT $1196 draw, y, x
+COMMENT $1199 draw, y, x
+COMMENT $119C draw, y, x
+COMMENT $119F draw, y, x
+COMMENT $11A2 sync and move to y, x
+COMMENT $11A5 draw, y, x
+COMMENT $11A8 draw, y, x
+COMMENT $11AB draw, y, x
+COMMENT $11AE draw, y, x
+COMMENT $11B1 draw, y, x
+COMMENT $11B4 sync and move to y, x
+COMMENT $11B7 draw, y, x
+COMMENT $11BA draw, y, x
+COMMENT $11BD sync and move to y, x
+COMMENT $11C0 draw, y, x
+COMMENT $11C3 draw, y, x
+COMMENT $11C6 draw, y, x
+COMMENT $11C9 draw, y, x
+COMMENT $11CC draw, y, x
+COMMENT $11CF draw, y, x
+COMMENT $11D2 draw, y, x
+COMMENT $11D5 draw, y, x
+COMMENT $11D8 draw, y, x
+COMMENT $11DB draw, y, x
+COMMENT $11DE draw, y, x
+COMMENT $11E1 draw, y, x
+COMMENT $11E4 draw, y, x
+COMMENT $11E7 draw, y, x
+COMMENT $11EA draw, y, x
+COMMENT $11ED draw, y, x
+COMMENT $11F0 draw, y, x
+COMMENT $11F3 sync and move to y, x
+COMMENT $11F6 additional sync move to y, x
+COMMENT $11F9 draw, y, x
+COMMENT $11FC draw, y, x
+COMMENT $11FF draw, y, x
+COMMENT $1202 draw, y, x
+COMMENT $1205 draw, y, x
+COMMENT $1208 draw, y, x
+COMMENT $120B draw, y, x
+COMMENT $120E draw, y, x
+COMMENT $1211 draw, y, x
+COMMENT $1214 draw, y, x
+COMMENT $1217 draw, y, x
+COMMENT $121A draw, y, x
+COMMENT $121D draw, y, x
+COMMENT $1220 draw, y, x
+COMMENT $1223 draw, y, x
+COMMENT $1226 draw, y, x
+COMMENT $1229 draw, y, x
+COMMENT $122C draw, y, x
+COMMENT $122F sync and move to y, x
+COMMENT $1232 draw, y, x
+COMMENT $1235 draw, y, x
+COMMENT $1238 draw, y, x
+COMMENT $123B sync and move to y, x
+COMMENT $123E additional sync move to y, x
+COMMENT $1241 draw, y, x
+COMMENT $1244 endmarker
+COMMENT_LINE $1245 khonshu revival
+COMMENT $1245 sync and move to y, x
+COMMENT $1248 draw, y, x
+COMMENT $124B draw, y, x
+COMMENT $124E draw, y, x
+COMMENT $1251 draw, y, x
+COMMENT $1254 draw, y, x
+COMMENT $1257 draw, y, x
+COMMENT $125A draw, y, x
+COMMENT $125D draw, y, x
+COMMENT $1260 draw, y, x
+COMMENT $1263 draw, y, x
+COMMENT $1266 draw, y, x
+COMMENT $1269 draw, y, x
+COMMENT $126C draw, y, x
+COMMENT $126F draw, y, x
+COMMENT $1272 draw, y, x
+COMMENT $1275 draw, y, x
+COMMENT $1278 sync and move to y, x
+COMMENT $127B additional sync move to y, x
+COMMENT $127E draw, y, x
+COMMENT $1281 draw, y, x
+COMMENT $1284 draw, y, x
+COMMENT $1287 draw, y, x
+COMMENT $128A draw, y, x
+COMMENT $128D draw, y, x
+COMMENT $1290 draw, y, x
+COMMENT $1293 draw, y, x
+COMMENT $1296 draw, y, x
+COMMENT $1299 draw, y, x
+COMMENT $129C draw, y, x
+COMMENT $129F draw, y, x
+COMMENT $12A2 draw, y, x
+COMMENT $12A5 draw, y, x
+COMMENT $12A8 draw, y, x
+COMMENT $12AB draw, y, x
+COMMENT $12AE draw, y, x
+COMMENT $12B1 sync and move to y, x
+COMMENT $12B4 additional sync move to y, x
+COMMENT $12B7 draw, y, x
+COMMENT $12BA draw, y, x
+COMMENT $12BD sync and move to y, x
+COMMENT $12C0 draw, y, x
+COMMENT $12C3 draw, y, x
+COMMENT $12C6 draw, y, x
+COMMENT $12C9 draw, y, x
+COMMENT $12CC draw, y, x
+COMMENT $12CF draw, y, x
+COMMENT $12D2 draw, y, x
+COMMENT $12D5 draw, y, x
+COMMENT $12D8 draw, y, x
+COMMENT $12DB draw, y, x
+COMMENT $12DE sync and move to y, x
+COMMENT $12E1 draw, y, x
+COMMENT $12E4 sync and move to y, x
+COMMENT $12E7 draw, y, x
+COMMENT $12EA draw, y, x
+COMMENT $12ED draw, y, x
+COMMENT $12F0 draw, y, x
+COMMENT $12F3 draw, y, x
+COMMENT $12F6 draw, y, x
+COMMENT $12F9 draw, y, x
+COMMENT $12FC draw, y, x
+COMMENT $12FF sync and move to y, x
+COMMENT $1302 draw, y, x
+COMMENT $1305 sync and move to y, x
+COMMENT $1308 draw, y, x
+COMMENT $130B draw, y, x
+COMMENT $130E draw, y, x
+COMMENT $1311 draw, y, x
+COMMENT $1314 draw, y, x
+COMMENT $1317 draw, y, x
+COMMENT $131A sync and move to y, x
+COMMENT $131D draw, y, x
+COMMENT $1320 draw, y, x
+COMMENT $1323 draw, y, x
+COMMENT $1326 draw, y, x
+COMMENT $1329 draw, y, x
+COMMENT $132C sync and move to y, x
+COMMENT $132F draw, y, x
+COMMENT $1332 draw, y, x
+COMMENT $1335 draw, y, x
+COMMENT $1338 draw, y, x
+COMMENT $133B draw, y, x
+COMMENT $133E sync and move to y, x
+COMMENT $1341 draw, y, x
+COMMENT $1344 draw, y, x
+COMMENT $1347 draw, y, x
+COMMENT $134A draw, y, x
+COMMENT $134D draw, y, x
+COMMENT $1350 draw, y, x
+COMMENT $1353 draw, y, x
+COMMENT $1356 draw, y, x
+COMMENT $1359 draw, y, x
+COMMENT $135C draw, y, x
+COMMENT $135F draw, y, x
+COMMENT $1362 draw, y, x
+COMMENT $1365 draw, y, x
+COMMENT $1368 draw, y, x
+COMMENT $136B draw, y, x
+COMMENT $136E sync and move to y, x
+COMMENT $1371 draw, y, x
+COMMENT $1374 draw, y, x
+COMMENT $1377 draw, y, x
+COMMENT $137A draw, y, x
+COMMENT $137D draw, y, x
+COMMENT $1380 draw, y, x
+COMMENT $1383 draw, y, x
+COMMENT $1386 draw, y, x
+COMMENT $1389 draw, y, x
+COMMENT $138C draw, y, x
+COMMENT $138F draw, y, x
+COMMENT $1392 draw, y, x
+COMMENT $1395 draw, y, x
+COMMENT $1398 draw, y, x
+COMMENT $139B draw, y, x
+COMMENT $139E sync and move to y, x
+COMMENT $13A1 draw, y, x
+COMMENT $13A4 draw, y, x
+COMMENT $13A7 draw, y, x
+COMMENT $13AA sync and move to y, x
+COMMENT $13AD draw, y, x
+COMMENT $13B0 draw, y, x
+COMMENT $13B3 draw, y, x
+COMMENT $13B6 draw, y, x
+COMMENT $13B9 sync and move to y, x
+COMMENT $13BC draw, y, x
+COMMENT $13BF draw, y, x
+COMMENT $13C2 draw, y, x
+COMMENT $13C5 draw, y, x
+COMMENT $13C8 draw, y, x
+COMMENT $13CB draw, y, x
+COMMENT $13CE draw, y, x
+COMMENT $13D1 draw, y, x
+COMMENT $13D4 draw, y, x
+COMMENT $13D7 draw, y, x
+COMMENT $13DA sync and move to y, x
+COMMENT $13DD draw, y, x
+COMMENT $13E0 draw, y, x
+COMMENT $13E3 draw, y, x
+COMMENT $13E6 draw, y, x
+COMMENT $13E9 draw, y, x
+COMMENT $13EC draw, y, x
+COMMENT $13EF draw, y, x
+COMMENT $13F2 draw, y, x
+COMMENT $13F5 draw, y, x
+COMMENT $13F8 draw, y, x
+COMMENT $13FB draw, y, x
+COMMENT $13FE sync and move to y, x
+COMMENT $1401 draw, y, x
+COMMENT $1404 draw, y, x
+COMMENT $1407 sync and move to y, x
+COMMENT $140A draw, y, x
+COMMENT $140D draw, y, x
+COMMENT $1410 draw, y, x
+COMMENT $1413 draw, y, x
+COMMENT $1416 draw, y, x
+COMMENT $1419 sync and move to y, x
+COMMENT $141C draw, y, x
+COMMENT $141F sync and move to y, x
+COMMENT $1422 draw, y, x
+COMMENT $1425 draw, y, x
+COMMENT $1428 sync and move to y, x
+COMMENT $142B additional sync move to y, x
+COMMENT $142E draw, y, x
+COMMENT $1431 draw, y, x
+COMMENT $1434 draw, y, x
+COMMENT $1437 draw, y, x
+COMMENT $143A draw, y, x
+COMMENT $143D draw, y, x
+COMMENT $1440 draw, y, x
+COMMENT $1443 draw, y, x
+COMMENT $1446 draw, y, x
+COMMENT $1449 draw, y, x
+COMMENT $144C draw, y, x
+COMMENT $144F draw, y, x
+COMMENT $1452 sync and move to y, x
+COMMENT $1455 draw, y, x
+COMMENT $1458 draw, y, x
+COMMENT $145B draw, y, x
+COMMENT $145E draw, y, x
+COMMENT $1461 draw, y, x
+COMMENT $1464 draw, y, x
+COMMENT $1467 draw, y, x
+COMMENT $146A draw, y, x
+COMMENT $146D draw, y, x
+COMMENT $1470 draw, y, x
+COMMENT $1473 draw, y, x
+COMMENT $1476 draw, y, x
+COMMENT $1479 draw, y, x
+COMMENT $147C draw, y, x
+COMMENT $147F draw, y, x
+COMMENT $1482 draw, y, x
+COMMENT $1485 draw, y, x
+COMMENT $1488 draw, y, x
+COMMENT $148B sync and move to y, x
+COMMENT $148E draw, y, x
+COMMENT $1491 draw, y, x
+COMMENT $1494 sync and move to y, x
+COMMENT $1497 draw, y, x
+COMMENT $149A draw, y, x
+COMMENT $149D sync and move to y, x
+COMMENT $14A0 draw, y, x
+COMMENT $14A3 draw, y, x
+COMMENT $14A6 draw, y, x
+COMMENT $14A9 draw, y, x
+COMMENT $14AC draw, y, x
+COMMENT $14AF draw, y, x
+COMMENT $14B2 draw, y, x
+COMMENT $14B5 draw, y, x
+COMMENT $14B8 draw, y, x
+COMMENT $14BB draw, y, x
+COMMENT $14BE draw, y, x
+COMMENT $14C1 draw, y, x
+COMMENT $14C4 sync and move to y, x
+COMMENT $14C7 draw, y, x
+COMMENT $14CA draw, y, x
+COMMENT $14CD sync and move to y, x
+COMMENT $14D0 draw, y, x
+COMMENT $14D3 draw, y, x
+COMMENT $14D6 draw, y, x
+COMMENT $14D9 draw, y, x
+COMMENT $14DC draw, y, x
+COMMENT $14DF draw, y, x
+COMMENT $14E2 draw, y, x
+COMMENT $14E5 draw, y, x
+COMMENT $14E8 draw, y, x
+COMMENT $14EB draw, y, x
+COMMENT $14EE draw, y, x
+COMMENT $14F1 draw, y, x
+COMMENT $14F4 draw, y, x
+COMMENT $14F7 endmarker
+COMMENT_LINE $14F8 fancy rabbit
+COMMENT $14F8 sync and move to y, x
+COMMENT $14FB additional sync move to y, x
+COMMENT $14FE additional sync move to y, x
+COMMENT $1501 draw, y, x
+COMMENT $1504 draw, y, x
+COMMENT $1507 draw, y, x
+COMMENT $150A draw, y, x
+COMMENT $150D draw, y, x
+COMMENT $1510 draw, y, x
+COMMENT $1513 draw, y, x
+COMMENT $1516 draw, y, x
+COMMENT $1519 draw, y, x
+COMMENT $151C draw, y, x
+COMMENT $151F draw, y, x
+COMMENT $1522 draw, y, x
+COMMENT $1525 draw, y, x
+COMMENT $1528 draw, y, x
+COMMENT $152B draw, y, x
+COMMENT $152E sync and move to y, x
+COMMENT $1531 additional sync move to y, x
+COMMENT $1534 draw, y, x
+COMMENT $1537 draw, y, x
+COMMENT $153A draw, y, x
+COMMENT $153D draw, y, x
+COMMENT $1540 draw, y, x
+COMMENT $1543 draw, y, x
+COMMENT $1546 draw, y, x
+COMMENT $1549 draw, y, x
+COMMENT $154C draw, y, x
+COMMENT $154F draw, y, x
+COMMENT $1552 draw, y, x
+COMMENT $1555 draw, y, x
+COMMENT $1558 draw, y, x
+COMMENT $155B draw, y, x
+COMMENT $155E draw, y, x
+COMMENT $1561 sync and move to y, x
+COMMENT $1564 draw, y, x
+COMMENT $1567 draw, y, x
+COMMENT $156A draw, y, x
+COMMENT $156D draw, y, x
+COMMENT $1570 draw, y, x
+COMMENT $1573 draw, y, x
+COMMENT $1576 draw, y, x
+COMMENT $1579 draw, y, x
+COMMENT $157C draw, y, x
+COMMENT $157F draw, y, x
+COMMENT $1582 draw, y, x
+COMMENT $1585 draw, y, x
+COMMENT $1588 draw, y, x
+COMMENT $158B draw, y, x
+COMMENT $158E draw, y, x
+COMMENT $1591 sync and move to y, x
+COMMENT $1594 additional sync move to y, x
+COMMENT $1597 draw, y, x
+COMMENT $159A draw, y, x
+COMMENT $159D draw, y, x
+COMMENT $15A0 draw, y, x
+COMMENT $15A3 draw, y, x
+COMMENT $15A6 draw, y, x
+COMMENT $15A9 draw, y, x
+COMMENT $15AC draw, y, x
+COMMENT $15AF draw, y, x
+COMMENT $15B2 draw, y, x
+COMMENT $15B5 draw, y, x
+COMMENT $15B8 draw, y, x
+COMMENT $15BB draw, y, x
+COMMENT $15BE draw, y, x
+COMMENT $15C1 draw, y, x
+COMMENT $15C4 draw, y, x
+COMMENT $15C7 sync and move to y, x
+COMMENT $15CA additional sync move to y, x
+COMMENT $15CD additional sync move to y, x
+COMMENT $15D0 draw, y, x
+COMMENT $15D3 draw, y, x
+COMMENT $15D6 draw, y, x
+COMMENT $15D9 draw, y, x
+COMMENT $15DC draw, y, x
+COMMENT $15DF draw, y, x
+COMMENT $15E2 draw, y, x
+COMMENT $15E5 draw, y, x
+COMMENT $15E8 draw, y, x
+COMMENT $15EB draw, y, x
+COMMENT $15EE draw, y, x
+COMMENT $15F1 draw, y, x
+COMMENT $15F4 draw, y, x
+COMMENT $15F7 draw, y, x
+COMMENT $15FA draw, y, x
+COMMENT $15FD draw, y, x
+COMMENT $1600 draw, y, x
+COMMENT $1603 sync and move to y, x
+COMMENT $1606 additional sync move to y, x
+COMMENT $1609 draw, y, x
+COMMENT $160C draw, y, x
+COMMENT $160F draw, y, x
+COMMENT $1612 draw, y, x
+COMMENT $1615 draw, y, x
+COMMENT $1618 draw, y, x
+COMMENT $161B draw, y, x
+COMMENT $161E draw, y, x
+COMMENT $1621 draw, y, x
+COMMENT $1624 draw, y, x
+COMMENT $1627 draw, y, x
+COMMENT $162A draw, y, x
+COMMENT $162D draw, y, x
+COMMENT $1630 draw, y, x
+COMMENT $1633 draw, y, x
+COMMENT $1636 draw, y, x
+COMMENT $1639 draw, y, x
+COMMENT $163C draw, y, x
+COMMENT $163F sync and move to y, x
+COMMENT $1642 draw, y, x
+COMMENT $1645 draw, y, x
+COMMENT $1648 draw, y, x
+COMMENT $164B draw, y, x
+COMMENT $164E draw, y, x
+COMMENT $1651 draw, y, x
+COMMENT $1654 draw, y, x
+COMMENT $1657 draw, y, x
+COMMENT $165A draw, y, x
+COMMENT $165D draw, y, x
+COMMENT $1660 draw, y, x
+COMMENT $1663 draw, y, x
+COMMENT $1666 draw, y, x
+COMMENT $1669 draw, y, x
+COMMENT $166C draw, y, x
+COMMENT $166F sync and move to y, x
+COMMENT $1672 draw, y, x
+COMMENT $1675 draw, y, x
+COMMENT $1678 draw, y, x
+COMMENT $167B draw, y, x
+COMMENT $167E draw, y, x
+COMMENT $1681 draw, y, x
+COMMENT $1684 draw, y, x
+COMMENT $1687 draw, y, x
+COMMENT $168A draw, y, x
+COMMENT $168D draw, y, x
+COMMENT $1690 draw, y, x
+COMMENT $1693 sync and move to y, x
+COMMENT $1696 draw, y, x
+COMMENT $1699 draw, y, x
+COMMENT $169C draw, y, x
+COMMENT $169F draw, y, x
+COMMENT $16A2 draw, y, x
+COMMENT $16A5 sync and move to y, x
+COMMENT $16A8 draw, y, x
+COMMENT $16AB draw, y, x
+COMMENT $16AE draw, y, x
+COMMENT $16B1 draw, y, x
+COMMENT $16B4 draw, y, x
+COMMENT $16B7 draw, y, x
+COMMENT $16BA draw, y, x
+COMMENT $16BD draw, y, x
+COMMENT $16C0 draw, y, x
+COMMENT $16C3 draw, y, x
+COMMENT $16C6 draw, y, x
+COMMENT $16C9 draw, y, x
+COMMENT $16CC draw, y, x
+COMMENT $16CF sync and move to y, x
+COMMENT $16D2 additional sync move to y, x
+COMMENT $16D5 draw, y, x
+COMMENT $16D8 draw, y, x
+COMMENT $16DB draw, y, x
+COMMENT $16DE draw, y, x
+COMMENT $16E1 draw, y, x
+COMMENT $16E4 draw, y, x
+COMMENT $16E7 draw, y, x
+COMMENT $16EA draw, y, x
+COMMENT $16ED draw, y, x
+COMMENT $16F0 sync and move to y, x
+COMMENT $16F3 additional sync move to y, x
+COMMENT $16F6 draw, y, x
+COMMENT $16F9 draw, y, x
+COMMENT $16FC draw, y, x
+COMMENT $16FF draw, y, x
+COMMENT $1702 draw, y, x
+COMMENT $1705 draw, y, x
+COMMENT $1708 sync and move to y, x
+COMMENT $170B draw, y, x
+COMMENT $170E draw, y, x
+COMMENT $1711 draw, y, x
+COMMENT $1714 draw, y, x
+COMMENT $1717 draw, y, x
+COMMENT $171A draw, y, x
+COMMENT $171D draw, y, x
+COMMENT $1720 draw, y, x
+COMMENT $1723 draw, y, x
+COMMENT $1726 draw, y, x
+COMMENT $1729 draw, y, x
+COMMENT $172C draw, y, x
+COMMENT $172F draw, y, x
+COMMENT $1732 draw, y, x
+COMMENT $1735 sync and move to y, x
+COMMENT $1738 draw, y, x
+COMMENT $173B draw, y, x
+COMMENT $173E draw, y, x
+COMMENT $1741 draw, y, x
+COMMENT $1744 draw, y, x
+COMMENT $1747 draw, y, x
+COMMENT $174A draw, y, x
+COMMENT $174D draw, y, x
+COMMENT $1750 draw, y, x
+COMMENT $1753 draw, y, x
+COMMENT $1756 draw, y, x
+COMMENT $1759 draw, y, x
+COMMENT $175C draw, y, x
+COMMENT $175F draw, y, x
+COMMENT $1762 draw, y, x
+COMMENT $1765 sync and move to y, x
+COMMENT $1768 draw, y, x
+COMMENT $176B draw, y, x
+COMMENT $176E draw, y, x
+COMMENT $1771 draw, y, x
+COMMENT $1774 draw, y, x
+COMMENT $1777 draw, y, x
+COMMENT $177A draw, y, x
+COMMENT $177D draw, y, x
+COMMENT $1780 draw, y, x
+COMMENT $1783 draw, y, x
+COMMENT $1786 draw, y, x
+COMMENT $1789 sync and move to y, x
+COMMENT $178C draw, y, x
+COMMENT $178F draw, y, x
+COMMENT $1792 draw, y, x
+COMMENT $1795 draw, y, x
+COMMENT $1798 draw, y, x
+COMMENT $179B draw, y, x
+COMMENT $179E draw, y, x
+COMMENT $17A1 draw, y, x
+COMMENT $17A4 draw, y, x
+COMMENT $17A7 draw, y, x
+COMMENT $17AA draw, y, x
+COMMENT $17AD draw, y, x
+COMMENT $17B0 draw, y, x
+COMMENT $17B3 draw, y, x
+COMMENT $17B6 draw, y, x
+COMMENT $17B9 sync and move to y, x
+COMMENT $17BC draw, y, x
+COMMENT $17BF draw, y, x
+COMMENT $17C2 draw, y, x
+COMMENT $17C5 draw, y, x
+COMMENT $17C8 draw, y, x
+COMMENT $17CB draw, y, x
+COMMENT $17CE draw, y, x
+COMMENT $17D1 draw, y, x
+COMMENT $17D4 draw, y, x
+COMMENT $17D7 draw, y, x
+COMMENT $17DA sync and move to y, x
+COMMENT $17DD draw, y, x
+COMMENT $17E0 draw, y, x
+COMMENT $17E3 draw, y, x
+COMMENT $17E6 draw, y, x
+COMMENT $17E9 draw, y, x
+COMMENT $17EC draw, y, x
+COMMENT $17EF draw, y, x
+COMMENT $17F2 draw, y, x
+COMMENT $17F5 draw, y, x
+COMMENT $17F8 draw, y, x
+COMMENT $17FB sync and move to y, x
+COMMENT $17FE draw, y, x
+COMMENT $1801 draw, y, x
+COMMENT $1804 draw, y, x
+COMMENT $1807 draw, y, x
+COMMENT $180A draw, y, x
+COMMENT $180D draw, y, x
+COMMENT $1810 draw, y, x
+COMMENT $1813 draw, y, x
+COMMENT $1816 draw, y, x
+COMMENT $1819 draw, y, x
+COMMENT $181C draw, y, x
+COMMENT $181F sync and move to y, x
+COMMENT $1822 draw, y, x
+COMMENT $1825 draw, y, x
+COMMENT $1828 draw, y, x
+COMMENT $182B draw, y, x
+COMMENT $182E draw, y, x
+COMMENT $1831 draw, y, x
+COMMENT $1834 draw, y, x
+COMMENT $1837 draw, y, x
+COMMENT $183A draw, y, x
+COMMENT $183D draw, y, x
+COMMENT $1840 sync and move to y, x
+COMMENT $1843 draw, y, x
+COMMENT $1846 draw, y, x
+COMMENT $1849 draw, y, x
+COMMENT $184C draw, y, x
+COMMENT $184F draw, y, x
+COMMENT $1852 draw, y, x
+COMMENT $1855 draw, y, x
+COMMENT $1858 draw, y, x
+COMMENT $185B draw, y, x
+COMMENT $185E draw, y, x
+COMMENT $1861 draw, y, x
+COMMENT $1864 sync and move to y, x
+COMMENT $1867 additional sync move to y, x
+COMMENT $186A draw, y, x
+COMMENT $186D draw, y, x
+COMMENT $1870 draw, y, x
+COMMENT $1873 draw, y, x
+COMMENT $1876 draw, y, x
+COMMENT $1879 sync and move to y, x
+COMMENT $187C additional sync move to y, x
+COMMENT $187F draw, y, x
+COMMENT $1882 draw, y, x
+COMMENT $1885 draw, y, x
+COMMENT $1888 draw, y, x
+COMMENT $188B endmarker
+COMMENT $188C sync and move to y, x
+COMMENT $188F additional sync move to y, x
+COMMENT $1892 draw, y, x
+COMMENT $1895 draw, y, x
+COMMENT $1898 draw, y, x
+COMMENT $189B draw, y, x
+COMMENT $189E draw, y, x
+COMMENT $18A1 draw, y, x
+COMMENT $18A4 draw, y, x
+COMMENT $18A7 draw, y, x
+COMMENT $18AA draw, y, x
+COMMENT $18AD draw, y, x
+COMMENT $18B0 draw, y, x
+COMMENT $18B3 draw, y, x
+COMMENT $18B6 draw, y, x
+COMMENT $18B9 draw, y, x
+COMMENT $18BC draw, y, x
+COMMENT $18BF draw, y, x
+COMMENT $18C2 draw, y, x
+COMMENT $18C5 draw, y, x
+COMMENT $18C8 sync and move to y, x
+COMMENT $18CB additional sync move to y, x
+COMMENT $18CE draw, y, x
+COMMENT $18D1 draw, y, x
+COMMENT $18D4 draw, y, x
+COMMENT $18D7 draw, y, x
+COMMENT $18DA draw, y, x
+COMMENT $18DD draw, y, x
+COMMENT $18E0 draw, y, x
+COMMENT $18E3 draw, y, x
+COMMENT $18E6 draw, y, x
+COMMENT $18E9 draw, y, x
+COMMENT $18EC draw, y, x
+COMMENT $18EF draw, y, x
+COMMENT $18F2 draw, y, x
+COMMENT $18F5 draw, y, x
+COMMENT $18F8 draw, y, x
+COMMENT $18FB draw, y, x
+COMMENT $18FE draw, y, x
+COMMENT $1901 draw, y, x
+COMMENT $1904 endmarker
+COMMENT $1905 sync and move to y, x
+COMMENT $1908 draw, y, x
+COMMENT $190B draw, y, x
+COMMENT $190E draw, y, x
+COMMENT $1911 draw, y, x
+COMMENT $1914 draw, y, x
+COMMENT $1917 draw, y, x
+COMMENT $191A draw, y, x
+COMMENT $191D draw, y, x
+COMMENT $1920 draw, y, x
+COMMENT $1923 draw, y, x
+COMMENT $1926 draw, y, x
+COMMENT $1929 draw, y, x
+COMMENT $192C sync and move to y, x
+COMMENT $192F draw, y, x
+COMMENT $1932 draw, y, x
+COMMENT $1935 draw, y, x
+COMMENT $1938 draw, y, x
+COMMENT $193B draw, y, x
+COMMENT $193E draw, y, x
+COMMENT $1941 draw, y, x
+COMMENT $1944 draw, y, x
+COMMENT $1947 draw, y, x
+COMMENT $194A sync and move to y, x
+COMMENT $194D draw, y, x
+COMMENT $1950 draw, y, x
+COMMENT $1953 draw, y, x
+COMMENT $1956 draw, y, x
+COMMENT $1959 draw, y, x
+COMMENT $195C draw, y, x
+COMMENT $195F draw, y, x
+COMMENT $1962 draw, y, x
+COMMENT $1965 draw, y, x
+COMMENT $1968 draw, y, x
+COMMENT $196B draw, y, x
+COMMENT $196E draw, y, x
+COMMENT $1971 draw, y, x
+COMMENT $1974 draw, y, x
+COMMENT $1977 draw, y, x
+COMMENT $197A endmarker
+COMMENT $197B sync and move to y, x
+COMMENT $197E draw, y, x
+COMMENT $1981 draw, y, x
+COMMENT $1984 draw, y, x
+COMMENT $1987 draw, y, x
+COMMENT $198A draw, y, x
+COMMENT $198D draw, y, x
+COMMENT $1990 draw, y, x
+COMMENT $1993 draw, y, x
+COMMENT $1996 draw, y, x
+COMMENT $1999 draw, y, x
+COMMENT $199C draw, y, x
+COMMENT $199F draw, y, x
+COMMENT $19A2 sync and move to y, x
+COMMENT $19A5 draw, y, x
+COMMENT $19A8 draw, y, x
+COMMENT $19AB draw, y, x
+COMMENT $19AE draw, y, x
+COMMENT $19B1 draw, y, x
+COMMENT $19B4 draw, y, x
+COMMENT $19B7 draw, y, x
+COMMENT $19BA draw, y, x
+COMMENT $19BD draw, y, x
+COMMENT $19C0 sync and move to y, x
+COMMENT $19C3 draw, y, x
+COMMENT $19C6 draw, y, x
+COMMENT $19C9 draw, y, x
+COMMENT $19CC draw, y, x
+COMMENT $19CF draw, y, x
+COMMENT $19D2 draw, y, x
+COMMENT $19D5 draw, y, x
+COMMENT $19D8 draw, y, x
+COMMENT $19DB draw, y, x
+COMMENT $19DE draw, y, x
+COMMENT $19E1 draw, y, x
+COMMENT $19E4 draw, y, x
+COMMENT $19E7 draw, y, x
+COMMENT $19EA draw, y, x
+COMMENT $19ED draw, y, x
+COMMENT $19F0 endmarker
+COMMENT $19F1 sync and move to y, x
+COMMENT $19F4 draw, y, x
+COMMENT $19F7 draw, y, x
+COMMENT $19FA draw, y, x
+COMMENT $19FD draw, y, x
+COMMENT $1A00 draw, y, x
+COMMENT $1A03 draw, y, x
+COMMENT $1A06 draw, y, x
+COMMENT $1A09 draw, y, x
+COMMENT $1A0C draw, y, x
+COMMENT $1A0F draw, y, x
+COMMENT $1A12 draw, y, x
+COMMENT $1A15 draw, y, x
+COMMENT $1A18 sync and move to y, x
+COMMENT $1A1B draw, y, x
+COMMENT $1A1E draw, y, x
+COMMENT $1A21 draw, y, x
+COMMENT $1A24 draw, y, x
+COMMENT $1A27 draw, y, x
+COMMENT $1A2A draw, y, x
+COMMENT $1A2D draw, y, x
+COMMENT $1A30 draw, y, x
+COMMENT $1A33 draw, y, x
+COMMENT $1A36 sync and move to y, x
+COMMENT $1A39 draw, y, x
+COMMENT $1A3C draw, y, x
+COMMENT $1A3F draw, y, x
+COMMENT $1A42 draw, y, x
+COMMENT $1A45 draw, y, x
+COMMENT $1A48 draw, y, x
+COMMENT $1A4B draw, y, x
+COMMENT $1A4E draw, y, x
+COMMENT $1A51 draw, y, x
+COMMENT $1A54 draw, y, x
+COMMENT $1A57 draw, y, x
+COMMENT $1A5A draw, y, x
+COMMENT $1A5D draw, y, x
+COMMENT $1A60 draw, y, x
+COMMENT $1A63 draw, y, x
+COMMENT $1A66 endmarker
+COMMENT $1A67 sync and move to y, x
+COMMENT $1A6A draw, y, x
+COMMENT $1A6D draw, y, x
+COMMENT $1A70 draw, y, x
+COMMENT $1A73 draw, y, x
+COMMENT $1A76 draw, y, x
+COMMENT $1A79 draw, y, x
+COMMENT $1A7C draw, y, x
+COMMENT $1A7F draw, y, x
+COMMENT $1A82 draw, y, x
+COMMENT $1A85 draw, y, x
+COMMENT $1A88 draw, y, x
+COMMENT $1A8B draw, y, x
+COMMENT $1A8E sync and move to y, x
+COMMENT $1A91 draw, y, x
+COMMENT $1A94 draw, y, x
+COMMENT $1A97 draw, y, x
+COMMENT $1A9A draw, y, x
+COMMENT $1A9D draw, y, x
+COMMENT $1AA0 draw, y, x
+COMMENT $1AA3 draw, y, x
+COMMENT $1AA6 draw, y, x
+COMMENT $1AA9 draw, y, x
+COMMENT $1AAC sync and move to y, x
+COMMENT $1AAF draw, y, x
+COMMENT $1AB2 draw, y, x
+COMMENT $1AB5 draw, y, x
+COMMENT $1AB8 draw, y, x
+COMMENT $1ABB draw, y, x
+COMMENT $1ABE draw, y, x
+COMMENT $1AC1 draw, y, x
+COMMENT $1AC4 draw, y, x
+COMMENT $1AC7 draw, y, x
+COMMENT $1ACA draw, y, x
+COMMENT $1ACD draw, y, x
+COMMENT $1AD0 draw, y, x
+COMMENT $1AD3 draw, y, x
+COMMENT $1AD6 draw, y, x
+COMMENT $1AD9 draw, y, x
+COMMENT $1ADC endmarker
+COMMENT $1ADD sync and move to y, x
+COMMENT $1AE0 draw, y, x
+COMMENT $1AE3 draw, y, x
+COMMENT $1AE6 draw, y, x
+COMMENT $1AE9 draw, y, x
+COMMENT $1AEC draw, y, x
+COMMENT $1AEF draw, y, x
+COMMENT $1AF2 draw, y, x
+COMMENT $1AF5 draw, y, x
+COMMENT $1AF8 draw, y, x
+COMMENT $1AFB draw, y, x
+COMMENT $1AFE draw, y, x
+COMMENT $1B01 draw, y, x
+COMMENT $1B04 sync and move to y, x
+COMMENT $1B07 draw, y, x
+COMMENT $1B0A draw, y, x
+COMMENT $1B0D draw, y, x
+COMMENT $1B10 draw, y, x
+COMMENT $1B13 draw, y, x
+COMMENT $1B16 draw, y, x
+COMMENT $1B19 draw, y, x
+COMMENT $1B1C draw, y, x
+COMMENT $1B1F draw, y, x
+COMMENT $1B22 sync and move to y, x
+COMMENT $1B25 draw, y, x
+COMMENT $1B28 draw, y, x
+COMMENT $1B2B draw, y, x
+COMMENT $1B2E draw, y, x
+COMMENT $1B31 draw, y, x
+COMMENT $1B34 draw, y, x
+COMMENT $1B37 draw, y, x
+COMMENT $1B3A draw, y, x
+COMMENT $1B3D draw, y, x
+COMMENT $1B40 draw, y, x
+COMMENT $1B43 draw, y, x
+COMMENT $1B46 draw, y, x
+COMMENT $1B49 draw, y, x
+COMMENT $1B4C draw, y, x
+COMMENT $1B4F draw, y, x
+COMMENT $1B52 endmarker
+COMMENT $1B53 sync and move to y, x
+COMMENT $1B56 draw, y, x
+COMMENT $1B59 draw, y, x
+COMMENT $1B5C draw, y, x
+COMMENT $1B5F draw, y, x
+COMMENT $1B62 draw, y, x
+COMMENT $1B65 draw, y, x
+COMMENT $1B68 draw, y, x
+COMMENT $1B6B draw, y, x
+COMMENT $1B6E draw, y, x
+COMMENT $1B71 draw, y, x
+COMMENT $1B74 draw, y, x
+COMMENT $1B77 draw, y, x
+COMMENT $1B7A sync and move to y, x
+COMMENT $1B7D draw, y, x
+COMMENT $1B80 draw, y, x
+COMMENT $1B83 draw, y, x
+COMMENT $1B86 draw, y, x
+COMMENT $1B89 draw, y, x
+COMMENT $1B8C draw, y, x
+COMMENT $1B8F draw, y, x
+COMMENT $1B92 draw, y, x
+COMMENT $1B95 draw, y, x
+COMMENT $1B98 sync and move to y, x
+COMMENT $1B9B draw, y, x
+COMMENT $1B9E draw, y, x
+COMMENT $1BA1 draw, y, x
+COMMENT $1BA4 draw, y, x
+COMMENT $1BA7 draw, y, x
+COMMENT $1BAA draw, y, x
+COMMENT $1BAD draw, y, x
+COMMENT $1BB0 draw, y, x
+COMMENT $1BB3 draw, y, x
+COMMENT $1BB6 draw, y, x
+COMMENT $1BB9 draw, y, x
+COMMENT $1BBC draw, y, x
+COMMENT $1BBF draw, y, x
+COMMENT $1BC2 draw, y, x
+COMMENT $1BC5 draw, y, x
+COMMENT $1BC8 endmarker
+COMMENT $1BC9 sync and move to y, x
+COMMENT $1BCC draw, y, x
+COMMENT $1BCF draw, y, x
+COMMENT $1BD2 draw, y, x
+COMMENT $1BD5 draw, y, x
+COMMENT $1BD8 draw, y, x
+COMMENT $1BDB draw, y, x
+COMMENT $1BDE draw, y, x
+COMMENT $1BE1 draw, y, x
+COMMENT $1BE4 draw, y, x
+COMMENT $1BE7 draw, y, x
+COMMENT $1BEA draw, y, x
+COMMENT $1BED draw, y, x
+COMMENT $1BF0 sync and move to y, x
+COMMENT $1BF3 draw, y, x
+COMMENT $1BF6 draw, y, x
+COMMENT $1BF9 draw, y, x
+COMMENT $1BFC draw, y, x
+COMMENT $1BFF draw, y, x
+COMMENT $1C02 draw, y, x
+COMMENT $1C05 draw, y, x
+COMMENT $1C08 draw, y, x
+COMMENT $1C0B draw, y, x
+COMMENT $1C0E sync and move to y, x
+COMMENT $1C11 draw, y, x
+COMMENT $1C14 draw, y, x
+COMMENT $1C17 draw, y, x
+COMMENT $1C1A draw, y, x
+COMMENT $1C1D draw, y, x
+COMMENT $1C20 draw, y, x
+COMMENT $1C23 draw, y, x
+COMMENT $1C26 draw, y, x
+COMMENT $1C29 draw, y, x
+COMMENT $1C2C draw, y, x
+COMMENT $1C2F draw, y, x
+COMMENT $1C32 draw, y, x
+COMMENT $1C35 draw, y, x
+COMMENT $1C38 draw, y, x
+COMMENT $1C3B draw, y, x
+COMMENT $1C3E endmarker
+COMMENT $1C3F sync and move to y, x
+COMMENT $1C42 draw, y, x
+COMMENT $1C45 draw, y, x
+COMMENT $1C48 draw, y, x
+COMMENT $1C4B draw, y, x
+COMMENT $1C4E draw, y, x
+COMMENT $1C51 draw, y, x
+COMMENT $1C54 draw, y, x
+COMMENT $1C57 draw, y, x
+COMMENT $1C5A draw, y, x
+COMMENT $1C5D draw, y, x
+COMMENT $1C60 draw, y, x
+COMMENT $1C63 draw, y, x
+COMMENT $1C66 sync and move to y, x
+COMMENT $1C69 draw, y, x
+COMMENT $1C6C draw, y, x
+COMMENT $1C6F draw, y, x
+COMMENT $1C72 draw, y, x
+COMMENT $1C75 draw, y, x
+COMMENT $1C78 draw, y, x
+COMMENT $1C7B draw, y, x
+COMMENT $1C7E draw, y, x
+COMMENT $1C81 draw, y, x
+COMMENT $1C84 sync and move to y, x
+COMMENT $1C87 draw, y, x
+COMMENT $1C8A draw, y, x
+COMMENT $1C8D draw, y, x
+COMMENT $1C90 draw, y, x
+COMMENT $1C93 draw, y, x
+COMMENT $1C96 draw, y, x
+COMMENT $1C99 draw, y, x
+COMMENT $1C9C draw, y, x
+COMMENT $1C9F draw, y, x
+COMMENT $1CA2 draw, y, x
+COMMENT $1CA5 draw, y, x
+COMMENT $1CA8 draw, y, x
+COMMENT $1CAB draw, y, x
+COMMENT $1CAE draw, y, x
+COMMENT $1CB1 draw, y, x
+COMMENT $1CB4 endmarker
+RANGE $0021-$008B DP $D0
+RANGE $0129-$01AD DP $D0
+RANGE $01AD-$01C8 DP $C8
+RANGE $01C8-$0218 DP $D0
+RANGE $0218-$0221 DP $C8
+RANGE $0221-$025A DP $D0
+RANGE $025A-$02B5 DP $C8
+RANGE $02B5-$02CE DP $D0
+RANGE $02CE-$0320 DP $C8
+RANGE $0320-$087F DP $D0
+RANGE $087F-$08B3 DP $C8
+RANGE $08B3-$1CB5 DP $D0
+RANGE $0000-$0002 DB_DATA 2
+RANGE $0002-$000A CHAR_DATA 8
+RANGE $000A-$000B DB_DATA 1
+RANGE $000B-$000D DW_DATA 1
+RANGE $000D-$000F DW_DATA 1
+RANGE $000F-$0011 DW_DATA 1
+RANGE $0011-$001C CHAR_DATA 11
+RANGE $001C-$001E DB_DATA 2
+RANGE $001E-$00B7 CODE
+RANGE $00B7-$00B9 DB_DATA 2
+RANGE $00B9-$00BF DB_DATA 6
+RANGE $00BF-$00C7 DB_DATA 8
+RANGE $00C7-$00CD DB_DATA 6
+RANGE $00CD-$00D4 DB_DATA 7
+RANGE $00D4-$00DA DB_DATA 6
+RANGE $00DA-$00E2 DB_DATA 8
+RANGE $00E2-$00E7 DB_DATA 5
+RANGE $00E7-$00EC DB_DATA 5
+RANGE $00EC-$00F1 DB_DATA 5
+RANGE $00F1-$00F6 DB_DATA 5
+RANGE $00F6-$00FB DB_DATA 5
+RANGE $00FB-$0100 DB_DATA 5
+RANGE $0100-$0105 DB_DATA 5
+RANGE $0105-$010A DB_DATA 5
+RANGE $010A-$010F DB_DATA 5
+RANGE $010F-$0115 DB_DATA 6
+RANGE $0115-$0957 CODE
+RANGE $0957-$0961 CHAR_DATA 10
+RANGE $0961-$0962 DB_DATA 1
+RANGE $0962-$096B CHAR_DATA 9
+RANGE $096B-$096C DB_DATA 1
+RANGE $096C-$0977 CHAR_DATA 11
+RANGE $0977-$0978 DB_DATA 1
+RANGE $0978-$097F CHAR_DATA 7
+RANGE $097F-$0980 DB_DATA 1
+RANGE $0980-$0995 CHAR_DATA 21
+RANGE $0995-$0996 DB_DATA 1
+RANGE $0996-$09A7 CHAR_DATA 17
+RANGE $09A7-$09A8 DB_DATA 1
+RANGE $09A8-$09B5 CHAR_DATA 13
+RANGE $09B5-$09B6 DB_DATA 1
+RANGE $09B6-$09C6 CHAR_DATA 16
+RANGE $09C6-$09C7 DB_DATA 1
+RANGE $09C7-$09D8 CHAR_DATA 17
+RANGE $09D8-$09D9 DB_DATA 1
+RANGE $09D9-$09E2 CHAR_DATA 9
+RANGE $09E2-$09E3 DB_DATA 1
+RANGE $09E3-$09F6 CHAR_DATA 19
+RANGE $09F6-$09F7 DB_DATA 1
+RANGE $09F7-$09F9 CHAR_DATA 2
+RANGE $09F9-$09FA DB_DATA 1
+RANGE $09FA-$09FC CHAR_DATA 2
+RANGE $09FC-$09FD DB_DATA 1
+RANGE $09FD-$09FF CHAR_DATA 2
+RANGE $09FF-$0A00 DB_DATA 1
+RANGE $0A00-$0A02 CHAR_DATA 2
+RANGE $0A02-$0A03 DB_DATA 1
+RANGE $0A03-$0A05 CHAR_DATA 2
+RANGE $0A05-$0A06 DB_DATA 1
+RANGE $0A06-$0A08 DB_DATA 2
+RANGE $0A08-$0A0A DB_DATA 2
+RANGE $0A0A-$0A0C DB_DATA 2
+RANGE $0A0C-$0A0E DB_DATA 2
+RANGE $0A0E-$0A10 DB_DATA 2
+RANGE $0A10-$0A12 DB_DATA 2
+RANGE $0A12-$0A14 DB_DATA 2
+RANGE $0A14-$0A16 DB_DATA 2
+RANGE $0A16-$0A18 DB_DATA 2
+RANGE $0A18-$0A1A DB_DATA 2
+RANGE $0A1A-$0A1C DB_DATA 2
+RANGE $0A1C-$0A1E DB_DATA 2
+RANGE $0A1E-$0A20 DB_DATA 2
+RANGE $0A20-$0A22 DB_DATA 2
+RANGE $0A22-$0A24 DB_DATA 2
+RANGE $0A24-$0A26 DB_DATA 2
+RANGE $0A26-$0A28 DB_DATA 2
+RANGE $0A28-$0A2A DB_DATA 2
+RANGE $0A2A-$0A2C DB_DATA 2
+RANGE $0A2C-$0A2E DB_DATA 2
+RANGE $0A2E-$0A30 DB_DATA 2
+RANGE $0A30-$0A32 DB_DATA 2
+RANGE $0A32-$0A34 DB_DATA 2
+RANGE $0A34-$0A36 DB_DATA 2
+RANGE $0A36-$0A38 DB_DATA 2
+RANGE $0A38-$0A3A DB_DATA 2
+RANGE $0A3A-$0A3C DB_DATA 2
+RANGE $0A3C-$0A3D DB_DATA 1
+RANGE $0A3D-$0A3F DB_DATA 2
+RANGE $0A3F-$0A41 DB_DATA 2
+RANGE $0A41-$0A43 DB_DATA 2
+RANGE $0A43-$0A45 DB_DATA 2
+RANGE $0A45-$0A47 DW_DATA 1
+RANGE $0A47-$0A49 DW_DATA 1
+RANGE $0A49-$0A4B DB_DATA 2
+RANGE $0A4B-$0A4D DB_DATA 2
+RANGE $0A4D-$0A4E DB_DATA 1
+RANGE $0A4E-$0A50 DB_DATA 2
+RANGE $0A50-$0A52 DB_DATA 2
+RANGE $0A52-$0A54 DB_DATA 2
+RANGE $0A54-$0A56 DB_DATA 2
+RANGE $0A56-$0A58 DB_DATA 2
+RANGE $0A58-$0A5A DB_DATA 2
+RANGE $0A5A-$0A5C DB_DATA 2
+RANGE $0A5C-$0A5E DB_DATA 2
+RANGE $0A5E-$0A60 DB_DATA 2
+RANGE $0A60-$0A62 DB_DATA 2
+RANGE $0A62-$0A64 DB_DATA 2
+RANGE $0A64-$0A66 DB_DATA 2
+RANGE $0A66-$0A68 DB_DATA 2
+RANGE $0A68-$0A6A DB_DATA 2
+RANGE $0A6A-$0A6C DB_DATA 2
+RANGE $0A6C-$0A6E DB_DATA 2
+RANGE $0A6E-$0A70 DB_DATA 2
+RANGE $0A70-$0A72 DB_DATA 2
+RANGE $0A72-$0A74 DB_DATA 2
+RANGE $0A74-$0A76 DB_DATA 2
+RANGE $0A76-$0A78 DB_DATA 2
+RANGE $0A78-$0A7A DB_DATA 2
+RANGE $0A7A-$0A7C DB_DATA 2
+RANGE $0A7C-$0A7E DB_DATA 2
+RANGE $0A7E-$0A81 DB_DATA 3
+RANGE $0A81-$0A84 DB_DATA 3
+RANGE $0A84-$0A87 DB_DATA 3
+RANGE $0A87-$0A8A DB_DATA 3
+RANGE $0A8A-$0A8D DB_DATA 3
+RANGE $0A8D-$0A90 DB_DATA 3
+RANGE $0A90-$0A93 DB_DATA 3
+RANGE $0A93-$0A96 DB_DATA 3
+RANGE $0A96-$0A99 DB_DATA 3
+RANGE $0A99-$0A9C DB_DATA 3
+RANGE $0A9C-$0A9F DB_DATA 3
+RANGE $0A9F-$0AA2 DB_DATA 3
+RANGE $0AA2-$0AA5 DB_DATA 3
+RANGE $0AA5-$0AA8 DB_DATA 3
+RANGE $0AA8-$0AAB DB_DATA 3
+RANGE $0AAB-$0AAE DB_DATA 3
+RANGE $0AAE-$0AB1 DB_DATA 3
+RANGE $0AB1-$0AB4 DB_DATA 3
+RANGE $0AB4-$0AB7 DB_DATA 3
+RANGE $0AB7-$0ABA DB_DATA 3
+RANGE $0ABA-$0ABD DB_DATA 3
+RANGE $0ABD-$0AC0 DB_DATA 3
+RANGE $0AC0-$0AC3 DB_DATA 3
+RANGE $0AC3-$0AC6 DB_DATA 3
+RANGE $0AC6-$0AC9 DB_DATA 3
+RANGE $0AC9-$0ACC DB_DATA 3
+RANGE $0ACC-$0ACF DB_DATA 3
+RANGE $0ACF-$0AD2 DB_DATA 3
+RANGE $0AD2-$0AD5 DB_DATA 3
+RANGE $0AD5-$0AD8 DB_DATA 3
+RANGE $0AD8-$0ADB DB_DATA 3
+RANGE $0ADB-$0ADE DB_DATA 3
+RANGE $0ADE-$0AE1 DB_DATA 3
+RANGE $0AE1-$0AE4 DB_DATA 3
+RANGE $0AE4-$0AE7 DB_DATA 3
+RANGE $0AE7-$0AEA DB_DATA 3
+RANGE $0AEA-$0AED DB_DATA 3
+RANGE $0AED-$0AF0 DB_DATA 3
+RANGE $0AF0-$0AF3 DB_DATA 3
+RANGE $0AF3-$0AF6 DB_DATA 3
+RANGE $0AF6-$0AF9 DB_DATA 3
+RANGE $0AF9-$0AFC DB_DATA 3
+RANGE $0AFC-$0AFF DB_DATA 3
+RANGE $0AFF-$0B02 DB_DATA 3
+RANGE $0B02-$0B05 DB_DATA 3
+RANGE $0B05-$0B08 DB_DATA 3
+RANGE $0B08-$0B0B DB_DATA 3
+RANGE $0B0B-$0B0E DB_DATA 3
+RANGE $0B0E-$0B11 DB_DATA 3
+RANGE $0B11-$0B14 DB_DATA 3
+RANGE $0B14-$0B17 DB_DATA 3
+RANGE $0B17-$0B1A DB_DATA 3
+RANGE $0B1A-$0B1D DB_DATA 3
+RANGE $0B1D-$0B20 DB_DATA 3
+RANGE $0B20-$0B23 DB_DATA 3
+RANGE $0B23-$0B26 DB_DATA 3
+RANGE $0B26-$0B29 DB_DATA 3
+RANGE $0B29-$0B2C DB_DATA 3
+RANGE $0B2C-$0B2F DB_DATA 3
+RANGE $0B2F-$0B32 DB_DATA 3
+RANGE $0B32-$0B35 DB_DATA 3
+RANGE $0B35-$0B38 DB_DATA 3
+RANGE $0B38-$0B3B DB_DATA 3
+RANGE $0B3B-$0B3E DB_DATA 3
+RANGE $0B3E-$0B41 DB_DATA 3
+RANGE $0B41-$0B44 DB_DATA 3
+RANGE $0B44-$0B47 DB_DATA 3
+RANGE $0B47-$0B4A DB_DATA 3
+RANGE $0B4A-$0B4D DB_DATA 3
+RANGE $0B4D-$0B50 DB_DATA 3
+RANGE $0B50-$0B53 DB_DATA 3
+RANGE $0B53-$0B56 DB_DATA 3
+RANGE $0B56-$0B59 DB_DATA 3
+RANGE $0B59-$0B5C DB_DATA 3
+RANGE $0B5C-$0B5F DB_DATA 3
+RANGE $0B5F-$0B62 DB_DATA 3
+RANGE $0B62-$0B65 DB_DATA 3
+RANGE $0B65-$0B68 DB_DATA 3
+RANGE $0B68-$0B6B DB_DATA 3
+RANGE $0B6B-$0B6E DB_DATA 3
+RANGE $0B6E-$0B71 DB_DATA 3
+RANGE $0B71-$0B74 DB_DATA 3
+RANGE $0B74-$0B77 DB_DATA 3
+RANGE $0B77-$0B7A DB_DATA 3
+RANGE $0B7A-$0B7D DB_DATA 3
+RANGE $0B7D-$0B80 DB_DATA 3
+RANGE $0B80-$0B83 DB_DATA 3
+RANGE $0B83-$0B86 DB_DATA 3
+RANGE $0B86-$0B89 DB_DATA 3
+RANGE $0B89-$0B8C DB_DATA 3
+RANGE $0B8C-$0B8F DB_DATA 3
+RANGE $0B8F-$0B92 DB_DATA 3
+RANGE $0B92-$0B95 DB_DATA 3
+RANGE $0B95-$0B98 DB_DATA 3
+RANGE $0B98-$0B9B DB_DATA 3
+RANGE $0B9B-$0B9E DB_DATA 3
+RANGE $0B9E-$0BA1 DB_DATA 3
+RANGE $0BA1-$0BA4 DB_DATA 3
+RANGE $0BA4-$0BA7 DB_DATA 3
+RANGE $0BA7-$0BAA DB_DATA 3
+RANGE $0BAA-$0BAD DB_DATA 3
+RANGE $0BAD-$0BB0 DB_DATA 3
+RANGE $0BB0-$0BB3 DB_DATA 3
+RANGE $0BB3-$0BB6 DB_DATA 3
+RANGE $0BB6-$0BB9 DB_DATA 3
+RANGE $0BB9-$0BBC DB_DATA 3
+RANGE $0BBC-$0BBF DB_DATA 3
+RANGE $0BBF-$0BC2 DB_DATA 3
+RANGE $0BC2-$0BC5 DB_DATA 3
+RANGE $0BC5-$0BC8 DB_DATA 3
+RANGE $0BC8-$0BCB DB_DATA 3
+RANGE $0BCB-$0BCE DB_DATA 3
+RANGE $0BCE-$0BD1 DB_DATA 3
+RANGE $0BD1-$0BD4 DB_DATA 3
+RANGE $0BD4-$0BD7 DB_DATA 3
+RANGE $0BD7-$0BDA DB_DATA 3
+RANGE $0BDA-$0BDD DB_DATA 3
+RANGE $0BDD-$0BE0 DB_DATA 3
+RANGE $0BE0-$0BE3 DB_DATA 3
+RANGE $0BE3-$0BE6 DB_DATA 3
+RANGE $0BE6-$0BE9 DB_DATA 3
+RANGE $0BE9-$0BEC DB_DATA 3
+RANGE $0BEC-$0BEF DB_DATA 3
+RANGE $0BEF-$0BF2 DB_DATA 3
+RANGE $0BF2-$0BF5 DB_DATA 3
+RANGE $0BF5-$0BF8 DB_DATA 3
+RANGE $0BF8-$0BFB DB_DATA 3
+RANGE $0BFB-$0BFE DB_DATA 3
+RANGE $0BFE-$0C01 DB_DATA 3
+RANGE $0C01-$0C04 DB_DATA 3
+RANGE $0C04-$0C07 DB_DATA 3
+RANGE $0C07-$0C0A DB_DATA 3
+RANGE $0C0A-$0C0D DB_DATA 3
+RANGE $0C0D-$0C10 DB_DATA 3
+RANGE $0C10-$0C13 DB_DATA 3
+RANGE $0C13-$0C16 DB_DATA 3
+RANGE $0C16-$0C19 DB_DATA 3
+RANGE $0C19-$0C1C DB_DATA 3
+RANGE $0C1C-$0C1F DB_DATA 3
+RANGE $0C1F-$0C22 DB_DATA 3
+RANGE $0C22-$0C25 DB_DATA 3
+RANGE $0C25-$0C28 DB_DATA 3
+RANGE $0C28-$0C2B DB_DATA 3
+RANGE $0C2B-$0C2E DB_DATA 3
+RANGE $0C2E-$0C31 DB_DATA 3
+RANGE $0C31-$0C34 DB_DATA 3
+RANGE $0C34-$0C37 DB_DATA 3
+RANGE $0C37-$0C3A DB_DATA 3
+RANGE $0C3A-$0C3D DB_DATA 3
+RANGE $0C3D-$0C40 DB_DATA 3
+RANGE $0C40-$0C43 DB_DATA 3
+RANGE $0C43-$0C46 DB_DATA 3
+RANGE $0C46-$0C49 DB_DATA 3
+RANGE $0C49-$0C4C DB_DATA 3
+RANGE $0C4C-$0C4F DB_DATA 3
+RANGE $0C4F-$0C52 DB_DATA 3
+RANGE $0C52-$0C55 DB_DATA 3
+RANGE $0C55-$0C58 DB_DATA 3
+RANGE $0C58-$0C5B DB_DATA 3
+RANGE $0C5B-$0C5E DB_DATA 3
+RANGE $0C5E-$0C61 DB_DATA 3
+RANGE $0C61-$0C64 DB_DATA 3
+RANGE $0C64-$0C67 DB_DATA 3
+RANGE $0C67-$0C6A DB_DATA 3
+RANGE $0C6A-$0C6D DB_DATA 3
+RANGE $0C6D-$0C70 DB_DATA 3
+RANGE $0C70-$0C73 DB_DATA 3
+RANGE $0C73-$0C76 DB_DATA 3
+RANGE $0C76-$0C79 DB_DATA 3
+RANGE $0C79-$0C7C DB_DATA 3
+RANGE $0C7C-$0C7F DB_DATA 3
+RANGE $0C7F-$0C82 DB_DATA 3
+RANGE $0C82-$0C85 DB_DATA 3
+RANGE $0C85-$0C88 DB_DATA 3
+RANGE $0C88-$0C8B DB_DATA 3
+RANGE $0C8B-$0C8E DB_DATA 3
+RANGE $0C8E-$0C91 DB_DATA 3
+RANGE $0C91-$0C94 DB_DATA 3
+RANGE $0C94-$0C97 DB_DATA 3
+RANGE $0C97-$0C9A DB_DATA 3
+RANGE $0C9A-$0C9D DB_DATA 3
+RANGE $0C9D-$0CA0 DB_DATA 3
+RANGE $0CA0-$0CA3 DB_DATA 3
+RANGE $0CA3-$0CA6 DB_DATA 3
+RANGE $0CA6-$0CA9 DB_DATA 3
+RANGE $0CA9-$0CAC DB_DATA 3
+RANGE $0CAC-$0CAF DB_DATA 3
+RANGE $0CAF-$0CB2 DB_DATA 3
+RANGE $0CB2-$0CB5 DB_DATA 3
+RANGE $0CB5-$0CB8 DB_DATA 3
+RANGE $0CB8-$0CBB DB_DATA 3
+RANGE $0CBB-$0CBE DB_DATA 3
+RANGE $0CBE-$0CC1 DB_DATA 3
+RANGE $0CC1-$0CC4 DB_DATA 3
+RANGE $0CC4-$0CC7 DB_DATA 3
+RANGE $0CC7-$0CCA DB_DATA 3
+RANGE $0CCA-$0CCD DB_DATA 3
+RANGE $0CCD-$0CD0 DB_DATA 3
+RANGE $0CD0-$0CD3 DB_DATA 3
+RANGE $0CD3-$0CD6 DB_DATA 3
+RANGE $0CD6-$0CD9 DB_DATA 3
+RANGE $0CD9-$0CDC DB_DATA 3
+RANGE $0CDC-$0CDF DB_DATA 3
+RANGE $0CDF-$0CE2 DB_DATA 3
+RANGE $0CE2-$0CE5 DB_DATA 3
+RANGE $0CE5-$0CE8 DB_DATA 3
+RANGE $0CE8-$0CEB DB_DATA 3
+RANGE $0CEB-$0CEE DB_DATA 3
+RANGE $0CEE-$0CF1 DB_DATA 3
+RANGE $0CF1-$0CF4 DB_DATA 3
+RANGE $0CF4-$0CF7 DB_DATA 3
+RANGE $0CF7-$0CFA DB_DATA 3
+RANGE $0CFA-$0CFD DB_DATA 3
+RANGE $0CFD-$0D00 DB_DATA 3
+RANGE $0D00-$0D03 DB_DATA 3
+RANGE $0D03-$0D06 DB_DATA 3
+RANGE $0D06-$0D09 DB_DATA 3
+RANGE $0D09-$0D0C DB_DATA 3
+RANGE $0D0C-$0D0F DB_DATA 3
+RANGE $0D0F-$0D12 DB_DATA 3
+RANGE $0D12-$0D15 DB_DATA 3
+RANGE $0D15-$0D18 DB_DATA 3
+RANGE $0D18-$0D1B DB_DATA 3
+RANGE $0D1B-$0D1E DB_DATA 3
+RANGE $0D1E-$0D21 DB_DATA 3
+RANGE $0D21-$0D24 DB_DATA 3
+RANGE $0D24-$0D27 DB_DATA 3
+RANGE $0D27-$0D2A DB_DATA 3
+RANGE $0D2A-$0D2D DB_DATA 3
+RANGE $0D2D-$0D30 DB_DATA 3
+RANGE $0D30-$0D33 DB_DATA 3
+RANGE $0D33-$0D36 DB_DATA 3
+RANGE $0D36-$0D39 DB_DATA 3
+RANGE $0D39-$0D3C DB_DATA 3
+RANGE $0D3C-$0D3F DB_DATA 3
+RANGE $0D3F-$0D42 DB_DATA 3
+RANGE $0D42-$0D45 DB_DATA 3
+RANGE $0D45-$0D48 DB_DATA 3
+RANGE $0D48-$0D4B DB_DATA 3
+RANGE $0D4B-$0D4E DB_DATA 3
+RANGE $0D4E-$0D51 DB_DATA 3
+RANGE $0D51-$0D54 DB_DATA 3
+RANGE $0D54-$0D57 DB_DATA 3
+RANGE $0D57-$0D5A DB_DATA 3
+RANGE $0D5A-$0D5D DB_DATA 3
+RANGE $0D5D-$0D60 DB_DATA 3
+RANGE $0D60-$0D63 DB_DATA 3
+RANGE $0D63-$0D66 DB_DATA 3
+RANGE $0D66-$0D69 DB_DATA 3
+RANGE $0D69-$0D6C DB_DATA 3
+RANGE $0D6C-$0D6F DB_DATA 3
+RANGE $0D6F-$0D72 DB_DATA 3
+RANGE $0D72-$0D75 DB_DATA 3
+RANGE $0D75-$0D78 DB_DATA 3
+RANGE $0D78-$0D7B DB_DATA 3
+RANGE $0D7B-$0D7E DB_DATA 3
+RANGE $0D7E-$0D81 DB_DATA 3
+RANGE $0D81-$0D84 DB_DATA 3
+RANGE $0D84-$0D87 DB_DATA 3
+RANGE $0D87-$0D8A DB_DATA 3
+RANGE $0D8A-$0D8D DB_DATA 3
+RANGE $0D8D-$0D90 DB_DATA 3
+RANGE $0D90-$0D93 DB_DATA 3
+RANGE $0D93-$0D96 DB_DATA 3
+RANGE $0D96-$0D99 DB_DATA 3
+RANGE $0D99-$0D9C DB_DATA 3
+RANGE $0D9C-$0D9F DB_DATA 3
+RANGE $0D9F-$0DA2 DB_DATA 3
+RANGE $0DA2-$0DA5 DB_DATA 3
+RANGE $0DA5-$0DA8 DB_DATA 3
+RANGE $0DA8-$0DAB DB_DATA 3
+RANGE $0DAB-$0DAE DB_DATA 3
+RANGE $0DAE-$0DB1 DB_DATA 3
+RANGE $0DB1-$0DB4 DB_DATA 3
+RANGE $0DB4-$0DB7 DB_DATA 3
+RANGE $0DB7-$0DBA DB_DATA 3
+RANGE $0DBA-$0DBD DB_DATA 3
+RANGE $0DBD-$0DC0 DB_DATA 3
+RANGE $0DC0-$0DC3 DB_DATA 3
+RANGE $0DC3-$0DC6 DB_DATA 3
+RANGE $0DC6-$0DC9 DB_DATA 3
+RANGE $0DC9-$0DCC DB_DATA 3
+RANGE $0DCC-$0DCF DB_DATA 3
+RANGE $0DCF-$0DD2 DB_DATA 3
+RANGE $0DD2-$0DD5 DB_DATA 3
+RANGE $0DD5-$0DD8 DB_DATA 3
+RANGE $0DD8-$0DDB DB_DATA 3
+RANGE $0DDB-$0DDE DB_DATA 3
+RANGE $0DDE-$0DE1 DB_DATA 3
+RANGE $0DE1-$0DE4 DB_DATA 3
+RANGE $0DE4-$0DE7 DB_DATA 3
+RANGE $0DE7-$0DEA DB_DATA 3
+RANGE $0DEA-$0DED DB_DATA 3
+RANGE $0DED-$0DF0 DB_DATA 3
+RANGE $0DF0-$0DF3 DB_DATA 3
+RANGE $0DF3-$0DF6 DB_DATA 3
+RANGE $0DF6-$0DF9 DB_DATA 3
+RANGE $0DF9-$0DFC DB_DATA 3
+RANGE $0DFC-$0DFF DB_DATA 3
+RANGE $0DFF-$0E02 DB_DATA 3
+RANGE $0E02-$0E05 DB_DATA 3
+RANGE $0E05-$0E08 DB_DATA 3
+RANGE $0E08-$0E0B DB_DATA 3
+RANGE $0E0B-$0E0E DB_DATA 3
+RANGE $0E0E-$0E11 DB_DATA 3
+RANGE $0E11-$0E14 DB_DATA 3
+RANGE $0E14-$0E17 DB_DATA 3
+RANGE $0E17-$0E1A DB_DATA 3
+RANGE $0E1A-$0E1D DB_DATA 3
+RANGE $0E1D-$0E20 DB_DATA 3
+RANGE $0E20-$0E23 DB_DATA 3
+RANGE $0E23-$0E26 DB_DATA 3
+RANGE $0E26-$0E29 DB_DATA 3
+RANGE $0E29-$0E2C DB_DATA 3
+RANGE $0E2C-$0E2F DB_DATA 3
+RANGE $0E2F-$0E32 DB_DATA 3
+RANGE $0E32-$0E35 DB_DATA 3
+RANGE $0E35-$0E38 DB_DATA 3
+RANGE $0E38-$0E3B DB_DATA 3
+RANGE $0E3B-$0E3E DB_DATA 3
+RANGE $0E3E-$0E41 DB_DATA 3
+RANGE $0E41-$0E44 DB_DATA 3
+RANGE $0E44-$0E47 DB_DATA 3
+RANGE $0E47-$0E4A DB_DATA 3
+RANGE $0E4A-$0E4D DB_DATA 3
+RANGE $0E4D-$0E50 DB_DATA 3
+RANGE $0E50-$0E53 DB_DATA 3
+RANGE $0E53-$0E56 DB_DATA 3
+RANGE $0E56-$0E59 DB_DATA 3
+RANGE $0E59-$0E5C DB_DATA 3
+RANGE $0E5C-$0E5F DB_DATA 3
+RANGE $0E5F-$0E62 DB_DATA 3
+RANGE $0E62-$0E65 DB_DATA 3
+RANGE $0E65-$0E68 DB_DATA 3
+RANGE $0E68-$0E6B DB_DATA 3
+RANGE $0E6B-$0E6E DB_DATA 3
+RANGE $0E6E-$0E71 DB_DATA 3
+RANGE $0E71-$0E74 DB_DATA 3
+RANGE $0E74-$0E77 DB_DATA 3
+RANGE $0E77-$0E7A DB_DATA 3
+RANGE $0E7A-$0E7D DB_DATA 3
+RANGE $0E7D-$0E80 DB_DATA 3
+RANGE $0E80-$0E83 DB_DATA 3
+RANGE $0E83-$0E86 DB_DATA 3
+RANGE $0E86-$0E89 DB_DATA 3
+RANGE $0E89-$0E8C DB_DATA 3
+RANGE $0E8C-$0E8F DB_DATA 3
+RANGE $0E8F-$0E92 DB_DATA 3
+RANGE $0E92-$0E95 DB_DATA 3
+RANGE $0E95-$0E98 DB_DATA 3
+RANGE $0E98-$0E9B DB_DATA 3
+RANGE $0E9B-$0E9E DB_DATA 3
+RANGE $0E9E-$0EA1 DB_DATA 3
+RANGE $0EA1-$0EA4 DB_DATA 3
+RANGE $0EA4-$0EA7 DB_DATA 3
+RANGE $0EA7-$0EAA DB_DATA 3
+RANGE $0EAA-$0EAD DB_DATA 3
+RANGE $0EAD-$0EB0 DB_DATA 3
+RANGE $0EB0-$0EB3 DB_DATA 3
+RANGE $0EB3-$0EB6 DB_DATA 3
+RANGE $0EB6-$0EB9 DB_DATA 3
+RANGE $0EB9-$0EBC DB_DATA 3
+RANGE $0EBC-$0EBF DB_DATA 3
+RANGE $0EBF-$0EC2 DB_DATA 3
+RANGE $0EC2-$0EC5 DB_DATA 3
+RANGE $0EC5-$0EC8 DB_DATA 3
+RANGE $0EC8-$0ECB DB_DATA 3
+RANGE $0ECB-$0ECE DB_DATA 3
+RANGE $0ECE-$0ED1 DB_DATA 3
+RANGE $0ED1-$0ED4 DB_DATA 3
+RANGE $0ED4-$0ED7 DB_DATA 3
+RANGE $0ED7-$0EDA DB_DATA 3
+RANGE $0EDA-$0EDD DB_DATA 3
+RANGE $0EDD-$0EE0 DB_DATA 3
+RANGE $0EE0-$0EE3 DB_DATA 3
+RANGE $0EE3-$0EE6 DB_DATA 3
+RANGE $0EE6-$0EE9 DB_DATA 3
+RANGE $0EE9-$0EEC DB_DATA 3
+RANGE $0EEC-$0EEF DB_DATA 3
+RANGE $0EEF-$0EF2 DB_DATA 3
+RANGE $0EF2-$0EF5 DB_DATA 3
+RANGE $0EF5-$0EF8 DB_DATA 3
+RANGE $0EF8-$0EFB DB_DATA 3
+RANGE $0EFB-$0EFE DB_DATA 3
+RANGE $0EFE-$0F01 DB_DATA 3
+RANGE $0F01-$0F04 DB_DATA 3
+RANGE $0F04-$0F07 DB_DATA 3
+RANGE $0F07-$0F0A DB_DATA 3
+RANGE $0F0A-$0F0D DB_DATA 3
+RANGE $0F0D-$0F10 DB_DATA 3
+RANGE $0F10-$0F13 DB_DATA 3
+RANGE $0F13-$0F16 DB_DATA 3
+RANGE $0F16-$0F19 DB_DATA 3
+RANGE $0F19-$0F1A DB_DATA 1
+RANGE $0F1A-$0F1D DB_DATA 3
+RANGE $0F1D-$0F20 DB_DATA 3
+RANGE $0F20-$0F23 DB_DATA 3
+RANGE $0F23-$0F26 DB_DATA 3
+RANGE $0F26-$0F29 DB_DATA 3
+RANGE $0F29-$0F2C DB_DATA 3
+RANGE $0F2C-$0F2F DB_DATA 3
+RANGE $0F2F-$0F32 DB_DATA 3
+RANGE $0F32-$0F35 DB_DATA 3
+RANGE $0F35-$0F38 DB_DATA 3
+RANGE $0F38-$0F3B DB_DATA 3
+RANGE $0F3B-$0F3E DB_DATA 3
+RANGE $0F3E-$0F41 DB_DATA 3
+RANGE $0F41-$0F44 DB_DATA 3
+RANGE $0F44-$0F47 DB_DATA 3
+RANGE $0F47-$0F4A DB_DATA 3
+RANGE $0F4A-$0F4D DB_DATA 3
+RANGE $0F4D-$0F50 DB_DATA 3
+RANGE $0F50-$0F53 DB_DATA 3
+RANGE $0F53-$0F56 DB_DATA 3
+RANGE $0F56-$0F59 DB_DATA 3
+RANGE $0F59-$0F5C DB_DATA 3
+RANGE $0F5C-$0F5F DB_DATA 3
+RANGE $0F5F-$0F62 DB_DATA 3
+RANGE $0F62-$0F65 DB_DATA 3
+RANGE $0F65-$0F68 DB_DATA 3
+RANGE $0F68-$0F6B DB_DATA 3
+RANGE $0F6B-$0F6E DB_DATA 3
+RANGE $0F6E-$0F71 DB_DATA 3
+RANGE $0F71-$0F74 DB_DATA 3
+RANGE $0F74-$0F77 DB_DATA 3
+RANGE $0F77-$0F7A DB_DATA 3
+RANGE $0F7A-$0F7D DB_DATA 3
+RANGE $0F7D-$0F80 DB_DATA 3
+RANGE $0F80-$0F83 DB_DATA 3
+RANGE $0F83-$0F86 DB_DATA 3
+RANGE $0F86-$0F89 DB_DATA 3
+RANGE $0F89-$0F8C DB_DATA 3
+RANGE $0F8C-$0F8F DB_DATA 3
+RANGE $0F8F-$0F92 DB_DATA 3
+RANGE $0F92-$0F95 DB_DATA 3
+RANGE $0F95-$0F98 DB_DATA 3
+RANGE $0F98-$0F9B DB_DATA 3
+RANGE $0F9B-$0F9E DB_DATA 3
+RANGE $0F9E-$0FA1 DB_DATA 3
+RANGE $0FA1-$0FA4 DB_DATA 3
+RANGE $0FA4-$0FA7 DB_DATA 3
+RANGE $0FA7-$0FAA DB_DATA 3
+RANGE $0FAA-$0FAD DB_DATA 3
+RANGE $0FAD-$0FB0 DB_DATA 3
+RANGE $0FB0-$0FB3 DB_DATA 3
+RANGE $0FB3-$0FB6 DB_DATA 3
+RANGE $0FB6-$0FB9 DB_DATA 3
+RANGE $0FB9-$0FBC DB_DATA 3
+RANGE $0FBC-$0FBF DB_DATA 3
+RANGE $0FBF-$0FC2 DB_DATA 3
+RANGE $0FC2-$0FC5 DB_DATA 3
+RANGE $0FC5-$0FC8 DB_DATA 3
+RANGE $0FC8-$0FCB DB_DATA 3
+RANGE $0FCB-$0FCE DB_DATA 3
+RANGE $0FCE-$0FD1 DB_DATA 3
+RANGE $0FD1-$0FD4 DB_DATA 3
+RANGE $0FD4-$0FD7 DB_DATA 3
+RANGE $0FD7-$0FDA DB_DATA 3
+RANGE $0FDA-$0FDD DB_DATA 3
+RANGE $0FDD-$0FE0 DB_DATA 3
+RANGE $0FE0-$0FE3 DB_DATA 3
+RANGE $0FE3-$0FE6 DB_DATA 3
+RANGE $0FE6-$0FE9 DB_DATA 3
+RANGE $0FE9-$0FEC DB_DATA 3
+RANGE $0FEC-$0FEF DB_DATA 3
+RANGE $0FEF-$0FF2 DB_DATA 3
+RANGE $0FF2-$0FF5 DB_DATA 3
+RANGE $0FF5-$0FF8 DB_DATA 3
+RANGE $0FF8-$0FFB DB_DATA 3
+RANGE $0FFB-$0FFE DB_DATA 3
+RANGE $0FFE-$1001 DB_DATA 3
+RANGE $1001-$1004 DB_DATA 3
+RANGE $1004-$1007 DB_DATA 3
+RANGE $1007-$100A DB_DATA 3
+RANGE $100A-$100D DB_DATA 3
+RANGE $100D-$1010 DB_DATA 3
+RANGE $1010-$1013 DB_DATA 3
+RANGE $1013-$1016 DB_DATA 3
+RANGE $1016-$1019 DB_DATA 3
+RANGE $1019-$101C DB_DATA 3
+RANGE $101C-$101F DB_DATA 3
+RANGE $101F-$1022 DB_DATA 3
+RANGE $1022-$1025 DB_DATA 3
+RANGE $1025-$1028 DB_DATA 3
+RANGE $1028-$102B DB_DATA 3
+RANGE $102B-$102E DB_DATA 3
+RANGE $102E-$1031 DB_DATA 3
+RANGE $1031-$1034 DB_DATA 3
+RANGE $1034-$1037 DB_DATA 3
+RANGE $1037-$103A DB_DATA 3
+RANGE $103A-$103D DB_DATA 3
+RANGE $103D-$1040 DB_DATA 3
+RANGE $1040-$1043 DB_DATA 3
+RANGE $1043-$1046 DB_DATA 3
+RANGE $1046-$1049 DB_DATA 3
+RANGE $1049-$104C DB_DATA 3
+RANGE $104C-$104F DB_DATA 3
+RANGE $104F-$1052 DB_DATA 3
+RANGE $1052-$1055 DB_DATA 3
+RANGE $1055-$1058 DB_DATA 3
+RANGE $1058-$105B DB_DATA 3
+RANGE $105B-$105E DB_DATA 3
+RANGE $105E-$1061 DB_DATA 3
+RANGE $1061-$1064 DB_DATA 3
+RANGE $1064-$1067 DB_DATA 3
+RANGE $1067-$106A DB_DATA 3
+RANGE $106A-$106D DB_DATA 3
+RANGE $106D-$1070 DB_DATA 3
+RANGE $1070-$1073 DB_DATA 3
+RANGE $1073-$1076 DB_DATA 3
+RANGE $1076-$1079 DB_DATA 3
+RANGE $1079-$107C DB_DATA 3
+RANGE $107C-$107F DB_DATA 3
+RANGE $107F-$1082 DB_DATA 3
+RANGE $1082-$1085 DB_DATA 3
+RANGE $1085-$1088 DB_DATA 3
+RANGE $1088-$108B DB_DATA 3
+RANGE $108B-$108E DB_DATA 3
+RANGE $108E-$1091 DB_DATA 3
+RANGE $1091-$1094 DB_DATA 3
+RANGE $1094-$1097 DB_DATA 3
+RANGE $1097-$109A DB_DATA 3
+RANGE $109A-$109D DB_DATA 3
+RANGE $109D-$10A0 DB_DATA 3
+RANGE $10A0-$10A3 DB_DATA 3
+RANGE $10A3-$10A6 DB_DATA 3
+RANGE $10A6-$10A9 DB_DATA 3
+RANGE $10A9-$10AC DB_DATA 3
+RANGE $10AC-$10AF DB_DATA 3
+RANGE $10AF-$10B2 DB_DATA 3
+RANGE $10B2-$10B5 DB_DATA 3
+RANGE $10B5-$10B8 DB_DATA 3
+RANGE $10B8-$10BB DB_DATA 3
+RANGE $10BB-$10BE DB_DATA 3
+RANGE $10BE-$10C1 DB_DATA 3
+RANGE $10C1-$10C4 DB_DATA 3
+RANGE $10C4-$10C7 DB_DATA 3
+RANGE $10C7-$10CA DB_DATA 3
+RANGE $10CA-$10CD DB_DATA 3
+RANGE $10CD-$10D0 DB_DATA 3
+RANGE $10D0-$10D3 DB_DATA 3
+RANGE $10D3-$10D6 DB_DATA 3
+RANGE $10D6-$10D9 DB_DATA 3
+RANGE $10D9-$10DC DB_DATA 3
+RANGE $10DC-$10DF DB_DATA 3
+RANGE $10DF-$10E2 DB_DATA 3
+RANGE $10E2-$10E5 DB_DATA 3
+RANGE $10E5-$10E8 DB_DATA 3
+RANGE $10E8-$10EB DB_DATA 3
+RANGE $10EB-$10EE DB_DATA 3
+RANGE $10EE-$10F1 DB_DATA 3
+RANGE $10F1-$10F4 DB_DATA 3
+RANGE $10F4-$10F7 DB_DATA 3
+RANGE $10F7-$10FA DB_DATA 3
+RANGE $10FA-$10FD DB_DATA 3
+RANGE $10FD-$1100 DB_DATA 3
+RANGE $1100-$1103 DB_DATA 3
+RANGE $1103-$1106 DB_DATA 3
+RANGE $1106-$1109 DB_DATA 3
+RANGE $1109-$110C DB_DATA 3
+RANGE $110C-$110F DB_DATA 3
+RANGE $110F-$1112 DB_DATA 3
+RANGE $1112-$1115 DB_DATA 3
+RANGE $1115-$1118 DB_DATA 3
+RANGE $1118-$111B DB_DATA 3
+RANGE $111B-$111E DB_DATA 3
+RANGE $111E-$1121 DB_DATA 3
+RANGE $1121-$1124 DB_DATA 3
+RANGE $1124-$1127 DB_DATA 3
+RANGE $1127-$112A DB_DATA 3
+RANGE $112A-$112D DB_DATA 3
+RANGE $112D-$1130 DB_DATA 3
+RANGE $1130-$1133 DB_DATA 3
+RANGE $1133-$1136 DB_DATA 3
+RANGE $1136-$1139 DB_DATA 3
+RANGE $1139-$113C DB_DATA 3
+RANGE $113C-$113F DB_DATA 3
+RANGE $113F-$1142 DB_DATA 3
+RANGE $1142-$1145 DB_DATA 3
+RANGE $1145-$1148 DB_DATA 3
+RANGE $1148-$114B DB_DATA 3
+RANGE $114B-$114E DB_DATA 3
+RANGE $114E-$1151 DB_DATA 3
+RANGE $1151-$1154 DB_DATA 3
+RANGE $1154-$1157 DB_DATA 3
+RANGE $1157-$115A DB_DATA 3
+RANGE $115A-$115D DB_DATA 3
+RANGE $115D-$1160 DB_DATA 3
+RANGE $1160-$1163 DB_DATA 3
+RANGE $1163-$1166 DB_DATA 3
+RANGE $1166-$1169 DB_DATA 3
+RANGE $1169-$116C DB_DATA 3
+RANGE $116C-$116F DB_DATA 3
+RANGE $116F-$1172 DB_DATA 3
+RANGE $1172-$1175 DB_DATA 3
+RANGE $1175-$1178 DB_DATA 3
+RANGE $1178-$117B DB_DATA 3
+RANGE $117B-$117E DB_DATA 3
+RANGE $117E-$1181 DB_DATA 3
+RANGE $1181-$1184 DB_DATA 3
+RANGE $1184-$1187 DB_DATA 3
+RANGE $1187-$118A DB_DATA 3
+RANGE $118A-$118D DB_DATA 3
+RANGE $118D-$1190 DB_DATA 3
+RANGE $1190-$1193 DB_DATA 3
+RANGE $1193-$1196 DB_DATA 3
+RANGE $1196-$1199 DB_DATA 3
+RANGE $1199-$119C DB_DATA 3
+RANGE $119C-$119F DB_DATA 3
+RANGE $119F-$11A2 DB_DATA 3
+RANGE $11A2-$11A5 DB_DATA 3
+RANGE $11A5-$11A8 DB_DATA 3
+RANGE $11A8-$11AB DB_DATA 3
+RANGE $11AB-$11AE DB_DATA 3
+RANGE $11AE-$11B1 DB_DATA 3
+RANGE $11B1-$11B4 DB_DATA 3
+RANGE $11B4-$11B7 DB_DATA 3
+RANGE $11B7-$11BA DB_DATA 3
+RANGE $11BA-$11BD DB_DATA 3
+RANGE $11BD-$11C0 DB_DATA 3
+RANGE $11C0-$11C3 DB_DATA 3
+RANGE $11C3-$11C6 DB_DATA 3
+RANGE $11C6-$11C9 DB_DATA 3
+RANGE $11C9-$11CC DB_DATA 3
+RANGE $11CC-$11CF DB_DATA 3
+RANGE $11CF-$11D2 DB_DATA 3
+RANGE $11D2-$11D5 DB_DATA 3
+RANGE $11D5-$11D8 DB_DATA 3
+RANGE $11D8-$11DB DB_DATA 3
+RANGE $11DB-$11DE DB_DATA 3
+RANGE $11DE-$11E1 DB_DATA 3
+RANGE $11E1-$11E4 DB_DATA 3
+RANGE $11E4-$11E7 DB_DATA 3
+RANGE $11E7-$11EA DB_DATA 3
+RANGE $11EA-$11ED DB_DATA 3
+RANGE $11ED-$11F0 DB_DATA 3
+RANGE $11F0-$11F3 DB_DATA 3
+RANGE $11F3-$11F6 DB_DATA 3
+RANGE $11F6-$11F9 DB_DATA 3
+RANGE $11F9-$11FC DB_DATA 3
+RANGE $11FC-$11FF DB_DATA 3
+RANGE $11FF-$1202 DB_DATA 3
+RANGE $1202-$1205 DB_DATA 3
+RANGE $1205-$1208 DB_DATA 3
+RANGE $1208-$120B DB_DATA 3
+RANGE $120B-$120E DB_DATA 3
+RANGE $120E-$1211 DB_DATA 3
+RANGE $1211-$1214 DB_DATA 3
+RANGE $1214-$1217 DB_DATA 3
+RANGE $1217-$121A DB_DATA 3
+RANGE $121A-$121D DB_DATA 3
+RANGE $121D-$1220 DB_DATA 3
+RANGE $1220-$1223 DB_DATA 3
+RANGE $1223-$1226 DB_DATA 3
+RANGE $1226-$1229 DB_DATA 3
+RANGE $1229-$122C DB_DATA 3
+RANGE $122C-$122F DB_DATA 3
+RANGE $122F-$1232 DB_DATA 3
+RANGE $1232-$1235 DB_DATA 3
+RANGE $1235-$1238 DB_DATA 3
+RANGE $1238-$123B DB_DATA 3
+RANGE $123B-$123E DB_DATA 3
+RANGE $123E-$1241 DB_DATA 3
+RANGE $1241-$1244 DB_DATA 3
+RANGE $1244-$1245 DB_DATA 1
+RANGE $1245-$1248 DB_DATA 3
+RANGE $1248-$124B DB_DATA 3
+RANGE $124B-$124E DB_DATA 3
+RANGE $124E-$1251 DB_DATA 3
+RANGE $1251-$1254 DB_DATA 3
+RANGE $1254-$1257 DB_DATA 3
+RANGE $1257-$125A DB_DATA 3
+RANGE $125A-$125D DB_DATA 3
+RANGE $125D-$1260 DB_DATA 3
+RANGE $1260-$1263 DB_DATA 3
+RANGE $1263-$1266 DB_DATA 3
+RANGE $1266-$1269 DB_DATA 3
+RANGE $1269-$126C DB_DATA 3
+RANGE $126C-$126F DB_DATA 3
+RANGE $126F-$1272 DB_DATA 3
+RANGE $1272-$1275 DB_DATA 3
+RANGE $1275-$1278 DB_DATA 3
+RANGE $1278-$127B DB_DATA 3
+RANGE $127B-$127E DB_DATA 3
+RANGE $127E-$1281 DB_DATA 3
+RANGE $1281-$1284 DB_DATA 3
+RANGE $1284-$1287 DB_DATA 3
+RANGE $1287-$128A DB_DATA 3
+RANGE $128A-$128D DB_DATA 3
+RANGE $128D-$1290 DB_DATA 3
+RANGE $1290-$1293 DB_DATA 3
+RANGE $1293-$1296 DB_DATA 3
+RANGE $1296-$1299 DB_DATA 3
+RANGE $1299-$129C DB_DATA 3
+RANGE $129C-$129F DB_DATA 3
+RANGE $129F-$12A2 DB_DATA 3
+RANGE $12A2-$12A5 DB_DATA 3
+RANGE $12A5-$12A8 DB_DATA 3
+RANGE $12A8-$12AB DB_DATA 3
+RANGE $12AB-$12AE DB_DATA 3
+RANGE $12AE-$12B1 DB_DATA 3
+RANGE $12B1-$12B4 DB_DATA 3
+RANGE $12B4-$12B7 DB_DATA 3
+RANGE $12B7-$12BA DB_DATA 3
+RANGE $12BA-$12BD DB_DATA 3
+RANGE $12BD-$12C0 DB_DATA 3
+RANGE $12C0-$12C3 DB_DATA 3
+RANGE $12C3-$12C6 DB_DATA 3
+RANGE $12C6-$12C9 DB_DATA 3
+RANGE $12C9-$12CC DB_DATA 3
+RANGE $12CC-$12CF DB_DATA 3
+RANGE $12CF-$12D2 DB_DATA 3
+RANGE $12D2-$12D5 DB_DATA 3
+RANGE $12D5-$12D8 DB_DATA 3
+RANGE $12D8-$12DB DB_DATA 3
+RANGE $12DB-$12DE DB_DATA 3
+RANGE $12DE-$12E1 DB_DATA 3
+RANGE $12E1-$12E4 DB_DATA 3
+RANGE $12E4-$12E7 DB_DATA 3
+RANGE $12E7-$12EA DB_DATA 3
+RANGE $12EA-$12ED DB_DATA 3
+RANGE $12ED-$12F0 DB_DATA 3
+RANGE $12F0-$12F3 DB_DATA 3
+RANGE $12F3-$12F6 DB_DATA 3
+RANGE $12F6-$12F9 DB_DATA 3
+RANGE $12F9-$12FC DB_DATA 3
+RANGE $12FC-$12FF DB_DATA 3
+RANGE $12FF-$1302 DB_DATA 3
+RANGE $1302-$1305 DB_DATA 3
+RANGE $1305-$1308 DB_DATA 3
+RANGE $1308-$130B DB_DATA 3
+RANGE $130B-$130E DB_DATA 3
+RANGE $130E-$1311 DB_DATA 3
+RANGE $1311-$1314 DB_DATA 3
+RANGE $1314-$1317 DB_DATA 3
+RANGE $1317-$131A DB_DATA 3
+RANGE $131A-$131D DB_DATA 3
+RANGE $131D-$1320 DB_DATA 3
+RANGE $1320-$1323 DB_DATA 3
+RANGE $1323-$1326 DB_DATA 3
+RANGE $1326-$1329 DB_DATA 3
+RANGE $1329-$132C DB_DATA 3
+RANGE $132C-$132F DB_DATA 3
+RANGE $132F-$1332 DB_DATA 3
+RANGE $1332-$1335 DB_DATA 3
+RANGE $1335-$1338 DB_DATA 3
+RANGE $1338-$133B DB_DATA 3
+RANGE $133B-$133E DB_DATA 3
+RANGE $133E-$1341 DB_DATA 3
+RANGE $1341-$1344 DB_DATA 3
+RANGE $1344-$1347 DB_DATA 3
+RANGE $1347-$134A DB_DATA 3
+RANGE $134A-$134D DB_DATA 3
+RANGE $134D-$1350 DB_DATA 3
+RANGE $1350-$1353 DB_DATA 3
+RANGE $1353-$1356 DB_DATA 3
+RANGE $1356-$1359 DB_DATA 3
+RANGE $1359-$135C DB_DATA 3
+RANGE $135C-$135F DB_DATA 3
+RANGE $135F-$1362 DB_DATA 3
+RANGE $1362-$1365 DB_DATA 3
+RANGE $1365-$1368 DB_DATA 3
+RANGE $1368-$136B DB_DATA 3
+RANGE $136B-$136E DB_DATA 3
+RANGE $136E-$1371 DB_DATA 3
+RANGE $1371-$1374 DB_DATA 3
+RANGE $1374-$1377 DB_DATA 3
+RANGE $1377-$137A DB_DATA 3
+RANGE $137A-$137D DB_DATA 3
+RANGE $137D-$1380 DB_DATA 3
+RANGE $1380-$1383 DB_DATA 3
+RANGE $1383-$1386 DB_DATA 3
+RANGE $1386-$1389 DB_DATA 3
+RANGE $1389-$138C DB_DATA 3
+RANGE $138C-$138F DB_DATA 3
+RANGE $138F-$1392 DB_DATA 3
+RANGE $1392-$1395 DB_DATA 3
+RANGE $1395-$1398 DB_DATA 3
+RANGE $1398-$139B DB_DATA 3
+RANGE $139B-$139E DB_DATA 3
+RANGE $139E-$13A1 DB_DATA 3
+RANGE $13A1-$13A4 DB_DATA 3
+RANGE $13A4-$13A7 DB_DATA 3
+RANGE $13A7-$13AA DB_DATA 3
+RANGE $13AA-$13AD DB_DATA 3
+RANGE $13AD-$13B0 DB_DATA 3
+RANGE $13B0-$13B3 DB_DATA 3
+RANGE $13B3-$13B6 DB_DATA 3
+RANGE $13B6-$13B9 DB_DATA 3
+RANGE $13B9-$13BC DB_DATA 3
+RANGE $13BC-$13BF DB_DATA 3
+RANGE $13BF-$13C2 DB_DATA 3
+RANGE $13C2-$13C5 DB_DATA 3
+RANGE $13C5-$13C8 DB_DATA 3
+RANGE $13C8-$13CB DB_DATA 3
+RANGE $13CB-$13CE DB_DATA 3
+RANGE $13CE-$13D1 DB_DATA 3
+RANGE $13D1-$13D4 DB_DATA 3
+RANGE $13D4-$13D7 DB_DATA 3
+RANGE $13D7-$13DA DB_DATA 3
+RANGE $13DA-$13DD DB_DATA 3
+RANGE $13DD-$13E0 DB_DATA 3
+RANGE $13E0-$13E3 DB_DATA 3
+RANGE $13E3-$13E6 DB_DATA 3
+RANGE $13E6-$13E9 DB_DATA 3
+RANGE $13E9-$13EC DB_DATA 3
+RANGE $13EC-$13EF DB_DATA 3
+RANGE $13EF-$13F2 DB_DATA 3
+RANGE $13F2-$13F5 DB_DATA 3
+RANGE $13F5-$13F8 DB_DATA 3
+RANGE $13F8-$13FB DB_DATA 3
+RANGE $13FB-$13FE DB_DATA 3
+RANGE $13FE-$1401 DB_DATA 3
+RANGE $1401-$1404 DB_DATA 3
+RANGE $1404-$1407 DB_DATA 3
+RANGE $1407-$140A DB_DATA 3
+RANGE $140A-$140D DB_DATA 3
+RANGE $140D-$1410 DB_DATA 3
+RANGE $1410-$1413 DB_DATA 3
+RANGE $1413-$1416 DB_DATA 3
+RANGE $1416-$1419 DB_DATA 3
+RANGE $1419-$141C DB_DATA 3
+RANGE $141C-$141F DB_DATA 3
+RANGE $141F-$1422 DB_DATA 3
+RANGE $1422-$1425 DB_DATA 3
+RANGE $1425-$1428 DB_DATA 3
+RANGE $1428-$142B DB_DATA 3
+RANGE $142B-$142E DB_DATA 3
+RANGE $142E-$1431 DB_DATA 3
+RANGE $1431-$1434 DB_DATA 3
+RANGE $1434-$1437 DB_DATA 3
+RANGE $1437-$143A DB_DATA 3
+RANGE $143A-$143D DB_DATA 3
+RANGE $143D-$1440 DB_DATA 3
+RANGE $1440-$1443 DB_DATA 3
+RANGE $1443-$1446 DB_DATA 3
+RANGE $1446-$1449 DB_DATA 3
+RANGE $1449-$144C DB_DATA 3
+RANGE $144C-$144F DB_DATA 3
+RANGE $144F-$1452 DB_DATA 3
+RANGE $1452-$1455 DB_DATA 3
+RANGE $1455-$1458 DB_DATA 3
+RANGE $1458-$145B DB_DATA 3
+RANGE $145B-$145E DB_DATA 3
+RANGE $145E-$1461 DB_DATA 3
+RANGE $1461-$1464 DB_DATA 3
+RANGE $1464-$1467 DB_DATA 3
+RANGE $1467-$146A DB_DATA 3
+RANGE $146A-$146D DB_DATA 3
+RANGE $146D-$1470 DB_DATA 3
+RANGE $1470-$1473 DB_DATA 3
+RANGE $1473-$1476 DB_DATA 3
+RANGE $1476-$1479 DB_DATA 3
+RANGE $1479-$147C DB_DATA 3
+RANGE $147C-$147F DB_DATA 3
+RANGE $147F-$1482 DB_DATA 3
+RANGE $1482-$1485 DB_DATA 3
+RANGE $1485-$1488 DB_DATA 3
+RANGE $1488-$148B DB_DATA 3
+RANGE $148B-$148E DB_DATA 3
+RANGE $148E-$1491 DB_DATA 3
+RANGE $1491-$1494 DB_DATA 3
+RANGE $1494-$1497 DB_DATA 3
+RANGE $1497-$149A DB_DATA 3
+RANGE $149A-$149D DB_DATA 3
+RANGE $149D-$14A0 DB_DATA 3
+RANGE $14A0-$14A3 DB_DATA 3
+RANGE $14A3-$14A6 DB_DATA 3
+RANGE $14A6-$14A9 DB_DATA 3
+RANGE $14A9-$14AC DB_DATA 3
+RANGE $14AC-$14AF DB_DATA 3
+RANGE $14AF-$14B2 DB_DATA 3
+RANGE $14B2-$14B5 DB_DATA 3
+RANGE $14B5-$14B8 DB_DATA 3
+RANGE $14B8-$14BB DB_DATA 3
+RANGE $14BB-$14BE DB_DATA 3
+RANGE $14BE-$14C1 DB_DATA 3
+RANGE $14C1-$14C4 DB_DATA 3
+RANGE $14C4-$14C7 DB_DATA 3
+RANGE $14C7-$14CA DB_DATA 3
+RANGE $14CA-$14CD DB_DATA 3
+RANGE $14CD-$14D0 DB_DATA 3
+RANGE $14D0-$14D3 DB_DATA 3
+RANGE $14D3-$14D6 DB_DATA 3
+RANGE $14D6-$14D9 DB_DATA 3
+RANGE $14D9-$14DC DB_DATA 3
+RANGE $14DC-$14DF DB_DATA 3
+RANGE $14DF-$14E2 DB_DATA 3
+RANGE $14E2-$14E5 DB_DATA 3
+RANGE $14E5-$14E8 DB_DATA 3
+RANGE $14E8-$14EB DB_DATA 3
+RANGE $14EB-$14EE DB_DATA 3
+RANGE $14EE-$14F1 DB_DATA 3
+RANGE $14F1-$14F4 DB_DATA 3
+RANGE $14F4-$14F7 DB_DATA 3
+RANGE $14F7-$14F8 DB_DATA 1
+RANGE $14F8-$14FB DB_DATA 3
+RANGE $14FB-$14FE DB_DATA 3
+RANGE $14FE-$1501 DB_DATA 3
+RANGE $1501-$1504 DB_DATA 3
+RANGE $1504-$1507 DB_DATA 3
+RANGE $1507-$150A DB_DATA 3
+RANGE $150A-$150D DB_DATA 3
+RANGE $150D-$1510 DB_DATA 3
+RANGE $1510-$1513 DB_DATA 3
+RANGE $1513-$1516 DB_DATA 3
+RANGE $1516-$1519 DB_DATA 3
+RANGE $1519-$151C DB_DATA 3
+RANGE $151C-$151F DB_DATA 3
+RANGE $151F-$1522 DB_DATA 3
+RANGE $1522-$1525 DB_DATA 3
+RANGE $1525-$1528 DB_DATA 3
+RANGE $1528-$152B DB_DATA 3
+RANGE $152B-$152E DB_DATA 3
+RANGE $152E-$1531 DB_DATA 3
+RANGE $1531-$1534 DB_DATA 3
+RANGE $1534-$1537 DB_DATA 3
+RANGE $1537-$153A DB_DATA 3
+RANGE $153A-$153D DB_DATA 3
+RANGE $153D-$1540 DB_DATA 3
+RANGE $1540-$1543 DB_DATA 3
+RANGE $1543-$1546 DB_DATA 3
+RANGE $1546-$1549 DB_DATA 3
+RANGE $1549-$154C DB_DATA 3
+RANGE $154C-$154F DB_DATA 3
+RANGE $154F-$1552 DB_DATA 3
+RANGE $1552-$1555 DB_DATA 3
+RANGE $1555-$1558 DB_DATA 3
+RANGE $1558-$155B DB_DATA 3
+RANGE $155B-$155E DB_DATA 3
+RANGE $155E-$1561 DB_DATA 3
+RANGE $1561-$1564 DB_DATA 3
+RANGE $1564-$1567 DB_DATA 3
+RANGE $1567-$156A DB_DATA 3
+RANGE $156A-$156D DB_DATA 3
+RANGE $156D-$1570 DB_DATA 3
+RANGE $1570-$1573 DB_DATA 3
+RANGE $1573-$1576 DB_DATA 3
+RANGE $1576-$1579 DB_DATA 3
+RANGE $1579-$157C DB_DATA 3
+RANGE $157C-$157F DB_DATA 3
+RANGE $157F-$1582 DB_DATA 3
+RANGE $1582-$1585 DB_DATA 3
+RANGE $1585-$1588 DB_DATA 3
+RANGE $1588-$158B DB_DATA 3
+RANGE $158B-$158E DB_DATA 3
+RANGE $158E-$1591 DB_DATA 3
+RANGE $1591-$1594 DB_DATA 3
+RANGE $1594-$1597 DB_DATA 3
+RANGE $1597-$159A DB_DATA 3
+RANGE $159A-$159D DB_DATA 3
+RANGE $159D-$15A0 DB_DATA 3
+RANGE $15A0-$15A3 DB_DATA 3
+RANGE $15A3-$15A6 DB_DATA 3
+RANGE $15A6-$15A9 DB_DATA 3
+RANGE $15A9-$15AC DB_DATA 3
+RANGE $15AC-$15AF DB_DATA 3
+RANGE $15AF-$15B2 DB_DATA 3
+RANGE $15B2-$15B5 DB_DATA 3
+RANGE $15B5-$15B8 DB_DATA 3
+RANGE $15B8-$15BB DB_DATA 3
+RANGE $15BB-$15BE DB_DATA 3
+RANGE $15BE-$15C1 DB_DATA 3
+RANGE $15C1-$15C4 DB_DATA 3
+RANGE $15C4-$15C7 DB_DATA 3
+RANGE $15C7-$15CA DB_DATA 3
+RANGE $15CA-$15CD DB_DATA 3
+RANGE $15CD-$15D0 DB_DATA 3
+RANGE $15D0-$15D3 DB_DATA 3
+RANGE $15D3-$15D6 DB_DATA 3
+RANGE $15D6-$15D9 DB_DATA 3
+RANGE $15D9-$15DC DB_DATA 3
+RANGE $15DC-$15DF DB_DATA 3
+RANGE $15DF-$15E2 DB_DATA 3
+RANGE $15E2-$15E5 DB_DATA 3
+RANGE $15E5-$15E8 DB_DATA 3
+RANGE $15E8-$15EB DB_DATA 3
+RANGE $15EB-$15EE DB_DATA 3
+RANGE $15EE-$15F1 DB_DATA 3
+RANGE $15F1-$15F4 DB_DATA 3
+RANGE $15F4-$15F7 DB_DATA 3
+RANGE $15F7-$15FA DB_DATA 3
+RANGE $15FA-$15FD DB_DATA 3
+RANGE $15FD-$1600 DB_DATA 3
+RANGE $1600-$1603 DB_DATA 3
+RANGE $1603-$1606 DB_DATA 3
+RANGE $1606-$1609 DB_DATA 3
+RANGE $1609-$160C DB_DATA 3
+RANGE $160C-$160F DB_DATA 3
+RANGE $160F-$1612 DB_DATA 3
+RANGE $1612-$1615 DB_DATA 3
+RANGE $1615-$1618 DB_DATA 3
+RANGE $1618-$161B DB_DATA 3
+RANGE $161B-$161E DB_DATA 3
+RANGE $161E-$1621 DB_DATA 3
+RANGE $1621-$1624 DB_DATA 3
+RANGE $1624-$1627 DB_DATA 3
+RANGE $1627-$162A DB_DATA 3
+RANGE $162A-$162D DB_DATA 3
+RANGE $162D-$1630 DB_DATA 3
+RANGE $1630-$1633 DB_DATA 3
+RANGE $1633-$1636 DB_DATA 3
+RANGE $1636-$1639 DB_DATA 3
+RANGE $1639-$163C DB_DATA 3
+RANGE $163C-$163F DB_DATA 3
+RANGE $163F-$1642 DB_DATA 3
+RANGE $1642-$1645 DB_DATA 3
+RANGE $1645-$1648 DB_DATA 3
+RANGE $1648-$164B DB_DATA 3
+RANGE $164B-$164E DB_DATA 3
+RANGE $164E-$1651 DB_DATA 3
+RANGE $1651-$1654 DB_DATA 3
+RANGE $1654-$1657 DB_DATA 3
+RANGE $1657-$165A DB_DATA 3
+RANGE $165A-$165D DB_DATA 3
+RANGE $165D-$1660 DB_DATA 3
+RANGE $1660-$1663 DB_DATA 3
+RANGE $1663-$1666 DB_DATA 3
+RANGE $1666-$1669 DB_DATA 3
+RANGE $1669-$166C DB_DATA 3
+RANGE $166C-$166F DB_DATA 3
+RANGE $166F-$1672 DB_DATA 3
+RANGE $1672-$1675 DB_DATA 3
+RANGE $1675-$1678 DB_DATA 3
+RANGE $1678-$167B DB_DATA 3
+RANGE $167B-$167E DB_DATA 3
+RANGE $167E-$1681 DB_DATA 3
+RANGE $1681-$1684 DB_DATA 3
+RANGE $1684-$1687 DB_DATA 3
+RANGE $1687-$168A DB_DATA 3
+RANGE $168A-$168D DB_DATA 3
+RANGE $168D-$1690 DB_DATA 3
+RANGE $1690-$1693 DB_DATA 3
+RANGE $1693-$1696 DB_DATA 3
+RANGE $1696-$1699 DB_DATA 3
+RANGE $1699-$169C DB_DATA 3
+RANGE $169C-$169F DB_DATA 3
+RANGE $169F-$16A2 DB_DATA 3
+RANGE $16A2-$16A5 DB_DATA 3
+RANGE $16A5-$16A8 DB_DATA 3
+RANGE $16A8-$16AB DB_DATA 3
+RANGE $16AB-$16AE DB_DATA 3
+RANGE $16AE-$16B1 DB_DATA 3
+RANGE $16B1-$16B4 DB_DATA 3
+RANGE $16B4-$16B7 DB_DATA 3
+RANGE $16B7-$16BA DB_DATA 3
+RANGE $16BA-$16BD DB_DATA 3
+RANGE $16BD-$16C0 DB_DATA 3
+RANGE $16C0-$16C3 DB_DATA 3
+RANGE $16C3-$16C6 DB_DATA 3
+RANGE $16C6-$16C9 DB_DATA 3
+RANGE $16C9-$16CC DB_DATA 3
+RANGE $16CC-$16CF DB_DATA 3
+RANGE $16CF-$16D2 DB_DATA 3
+RANGE $16D2-$16D5 DB_DATA 3
+RANGE $16D5-$16D8 DB_DATA 3
+RANGE $16D8-$16DB DB_DATA 3
+RANGE $16DB-$16DE DB_DATA 3
+RANGE $16DE-$16E1 DB_DATA 3
+RANGE $16E1-$16E4 DB_DATA 3
+RANGE $16E4-$16E7 DB_DATA 3
+RANGE $16E7-$16EA DB_DATA 3
+RANGE $16EA-$16ED DB_DATA 3
+RANGE $16ED-$16F0 DB_DATA 3
+RANGE $16F0-$16F3 DB_DATA 3
+RANGE $16F3-$16F6 DB_DATA 3
+RANGE $16F6-$16F9 DB_DATA 3
+RANGE $16F9-$16FC DB_DATA 3
+RANGE $16FC-$16FF DB_DATA 3
+RANGE $16FF-$1702 DB_DATA 3
+RANGE $1702-$1705 DB_DATA 3
+RANGE $1705-$1708 DB_DATA 3
+RANGE $1708-$170B DB_DATA 3
+RANGE $170B-$170E DB_DATA 3
+RANGE $170E-$1711 DB_DATA 3
+RANGE $1711-$1714 DB_DATA 3
+RANGE $1714-$1717 DB_DATA 3
+RANGE $1717-$171A DB_DATA 3
+RANGE $171A-$171D DB_DATA 3
+RANGE $171D-$1720 DB_DATA 3
+RANGE $1720-$1723 DB_DATA 3
+RANGE $1723-$1726 DB_DATA 3
+RANGE $1726-$1729 DB_DATA 3
+RANGE $1729-$172C DB_DATA 3
+RANGE $172C-$172F DB_DATA 3
+RANGE $172F-$1732 DB_DATA 3
+RANGE $1732-$1735 DB_DATA 3
+RANGE $1735-$1738 DB_DATA 3
+RANGE $1738-$173B DB_DATA 3
+RANGE $173B-$173E DB_DATA 3
+RANGE $173E-$1741 DB_DATA 3
+RANGE $1741-$1744 DB_DATA 3
+RANGE $1744-$1747 DB_DATA 3
+RANGE $1747-$174A DB_DATA 3
+RANGE $174A-$174D DB_DATA 3
+RANGE $174D-$1750 DB_DATA 3
+RANGE $1750-$1753 DB_DATA 3
+RANGE $1753-$1756 DB_DATA 3
+RANGE $1756-$1759 DB_DATA 3
+RANGE $1759-$175C DB_DATA 3
+RANGE $175C-$175F DB_DATA 3
+RANGE $175F-$1762 DB_DATA 3
+RANGE $1762-$1765 DB_DATA 3
+RANGE $1765-$1768 DB_DATA 3
+RANGE $1768-$176B DB_DATA 3
+RANGE $176B-$176E DB_DATA 3
+RANGE $176E-$1771 DB_DATA 3
+RANGE $1771-$1774 DB_DATA 3
+RANGE $1774-$1777 DB_DATA 3
+RANGE $1777-$177A DB_DATA 3
+RANGE $177A-$177D DB_DATA 3
+RANGE $177D-$1780 DB_DATA 3
+RANGE $1780-$1783 DB_DATA 3
+RANGE $1783-$1786 DB_DATA 3
+RANGE $1786-$1789 DB_DATA 3
+RANGE $1789-$178C DB_DATA 3
+RANGE $178C-$178F DB_DATA 3
+RANGE $178F-$1792 DB_DATA 3
+RANGE $1792-$1795 DB_DATA 3
+RANGE $1795-$1798 DB_DATA 3
+RANGE $1798-$179B DB_DATA 3
+RANGE $179B-$179E DB_DATA 3
+RANGE $179E-$17A1 DB_DATA 3
+RANGE $17A1-$17A4 DB_DATA 3
+RANGE $17A4-$17A7 DB_DATA 3
+RANGE $17A7-$17AA DB_DATA 3
+RANGE $17AA-$17AD DB_DATA 3
+RANGE $17AD-$17B0 DB_DATA 3
+RANGE $17B0-$17B3 DB_DATA 3
+RANGE $17B3-$17B6 DB_DATA 3
+RANGE $17B6-$17B9 DB_DATA 3
+RANGE $17B9-$17BC DB_DATA 3
+RANGE $17BC-$17BF DB_DATA 3
+RANGE $17BF-$17C2 DB_DATA 3
+RANGE $17C2-$17C5 DB_DATA 3
+RANGE $17C5-$17C8 DB_DATA 3
+RANGE $17C8-$17CB DB_DATA 3
+RANGE $17CB-$17CE DB_DATA 3
+RANGE $17CE-$17D1 DB_DATA 3
+RANGE $17D1-$17D4 DB_DATA 3
+RANGE $17D4-$17D7 DB_DATA 3
+RANGE $17D7-$17DA DB_DATA 3
+RANGE $17DA-$17DD DB_DATA 3
+RANGE $17DD-$17E0 DB_DATA 3
+RANGE $17E0-$17E3 DB_DATA 3
+RANGE $17E3-$17E6 DB_DATA 3
+RANGE $17E6-$17E9 DB_DATA 3
+RANGE $17E9-$17EC DB_DATA 3
+RANGE $17EC-$17EF DB_DATA 3
+RANGE $17EF-$17F2 DB_DATA 3
+RANGE $17F2-$17F5 DB_DATA 3
+RANGE $17F5-$17F8 DB_DATA 3
+RANGE $17F8-$17FB DB_DATA 3
+RANGE $17FB-$17FE DB_DATA 3
+RANGE $17FE-$1801 DB_DATA 3
+RANGE $1801-$1804 DB_DATA 3
+RANGE $1804-$1807 DB_DATA 3
+RANGE $1807-$180A DB_DATA 3
+RANGE $180A-$180D DB_DATA 3
+RANGE $180D-$1810 DB_DATA 3
+RANGE $1810-$1813 DB_DATA 3
+RANGE $1813-$1816 DB_DATA 3
+RANGE $1816-$1819 DB_DATA 3
+RANGE $1819-$181C DB_DATA 3
+RANGE $181C-$181F DB_DATA 3
+RANGE $181F-$1822 DB_DATA 3
+RANGE $1822-$1825 DB_DATA 3
+RANGE $1825-$1828 DB_DATA 3
+RANGE $1828-$182B DB_DATA 3
+RANGE $182B-$182E DB_DATA 3
+RANGE $182E-$1831 DB_DATA 3
+RANGE $1831-$1834 DB_DATA 3
+RANGE $1834-$1837 DB_DATA 3
+RANGE $1837-$183A DB_DATA 3
+RANGE $183A-$183D DB_DATA 3
+RANGE $183D-$1840 DB_DATA 3
+RANGE $1840-$1843 DB_DATA 3
+RANGE $1843-$1846 DB_DATA 3
+RANGE $1846-$1849 DB_DATA 3
+RANGE $1849-$184C DB_DATA 3
+RANGE $184C-$184F DB_DATA 3
+RANGE $184F-$1852 DB_DATA 3
+RANGE $1852-$1855 DB_DATA 3
+RANGE $1855-$1858 DB_DATA 3
+RANGE $1858-$185B DB_DATA 3
+RANGE $185B-$185E DB_DATA 3
+RANGE $185E-$1861 DB_DATA 3
+RANGE $1861-$1864 DB_DATA 3
+RANGE $1864-$1867 DB_DATA 3
+RANGE $1867-$186A DB_DATA 3
+RANGE $186A-$186D DB_DATA 3
+RANGE $186D-$1870 DB_DATA 3
+RANGE $1870-$1873 DB_DATA 3
+RANGE $1873-$1876 DB_DATA 3
+RANGE $1876-$1879 DB_DATA 3
+RANGE $1879-$187C DB_DATA 3
+RANGE $187C-$187F DB_DATA 3
+RANGE $187F-$1882 DB_DATA 3
+RANGE $1882-$1885 DB_DATA 3
+RANGE $1885-$1888 DB_DATA 3
+RANGE $1888-$188B DB_DATA 3
+RANGE $188B-$188C DB_DATA 1
+RANGE $188C-$188F DB_DATA 3
+RANGE $188F-$1892 DB_DATA 3
+RANGE $1892-$1895 DB_DATA 3
+RANGE $1895-$1898 DB_DATA 3
+RANGE $1898-$189B DB_DATA 3
+RANGE $189B-$189E DB_DATA 3
+RANGE $189E-$18A1 DB_DATA 3
+RANGE $18A1-$18A4 DB_DATA 3
+RANGE $18A4-$18A7 DB_DATA 3
+RANGE $18A7-$18AA DB_DATA 3
+RANGE $18AA-$18AD DB_DATA 3
+RANGE $18AD-$18B0 DB_DATA 3
+RANGE $18B0-$18B3 DB_DATA 3
+RANGE $18B3-$18B6 DB_DATA 3
+RANGE $18B6-$18B9 DB_DATA 3
+RANGE $18B9-$18BC DB_DATA 3
+RANGE $18BC-$18BF DB_DATA 3
+RANGE $18BF-$18C2 DB_DATA 3
+RANGE $18C2-$18C5 DB_DATA 3
+RANGE $18C5-$18C8 DB_DATA 3
+RANGE $18C8-$18CB DB_DATA 3
+RANGE $18CB-$18CE DB_DATA 3
+RANGE $18CE-$18D1 DB_DATA 3
+RANGE $18D1-$18D4 DB_DATA 3
+RANGE $18D4-$18D7 DB_DATA 3
+RANGE $18D7-$18DA DB_DATA 3
+RANGE $18DA-$18DD DB_DATA 3
+RANGE $18DD-$18E0 DB_DATA 3
+RANGE $18E0-$18E3 DB_DATA 3
+RANGE $18E3-$18E6 DB_DATA 3
+RANGE $18E6-$18E9 DB_DATA 3
+RANGE $18E9-$18EC DB_DATA 3
+RANGE $18EC-$18EF DB_DATA 3
+RANGE $18EF-$18F2 DB_DATA 3
+RANGE $18F2-$18F5 DB_DATA 3
+RANGE $18F5-$18F8 DB_DATA 3
+RANGE $18F8-$18FB DB_DATA 3
+RANGE $18FB-$18FE DB_DATA 3
+RANGE $18FE-$1901 DB_DATA 3
+RANGE $1901-$1904 DB_DATA 3
+RANGE $1904-$1905 DB_DATA 1
+RANGE $1905-$1908 DB_DATA 3
+RANGE $1908-$190B DB_DATA 3
+RANGE $190B-$190E DB_DATA 3
+RANGE $190E-$1911 DB_DATA 3
+RANGE $1911-$1914 DB_DATA 3
+RANGE $1914-$1917 DB_DATA 3
+RANGE $1917-$191A DB_DATA 3
+RANGE $191A-$191D DB_DATA 3
+RANGE $191D-$1920 DB_DATA 3
+RANGE $1920-$1923 DB_DATA 3
+RANGE $1923-$1926 DB_DATA 3
+RANGE $1926-$1929 DB_DATA 3
+RANGE $1929-$192C DB_DATA 3
+RANGE $192C-$192F DB_DATA 3
+RANGE $192F-$1932 DB_DATA 3
+RANGE $1932-$1935 DB_DATA 3
+RANGE $1935-$1938 DB_DATA 3
+RANGE $1938-$193B DB_DATA 3
+RANGE $193B-$193E DB_DATA 3
+RANGE $193E-$1941 DB_DATA 3
+RANGE $1941-$1944 DB_DATA 3
+RANGE $1944-$1947 DB_DATA 3
+RANGE $1947-$194A DB_DATA 3
+RANGE $194A-$194D DB_DATA 3
+RANGE $194D-$1950 DB_DATA 3
+RANGE $1950-$1953 DB_DATA 3
+RANGE $1953-$1956 DB_DATA 3
+RANGE $1956-$1959 DB_DATA 3
+RANGE $1959-$195C DB_DATA 3
+RANGE $195C-$195F DB_DATA 3
+RANGE $195F-$1962 DB_DATA 3
+RANGE $1962-$1965 DB_DATA 3
+RANGE $1965-$1968 DB_DATA 3
+RANGE $1968-$196B DB_DATA 3
+RANGE $196B-$196E DB_DATA 3
+RANGE $196E-$1971 DB_DATA 3
+RANGE $1971-$1974 DB_DATA 3
+RANGE $1974-$1977 DB_DATA 3
+RANGE $1977-$197A DB_DATA 3
+RANGE $197A-$197B DB_DATA 1
+RANGE $197B-$197E DB_DATA 3
+RANGE $197E-$1981 DB_DATA 3
+RANGE $1981-$1984 DB_DATA 3
+RANGE $1984-$1987 DB_DATA 3
+RANGE $1987-$198A DB_DATA 3
+RANGE $198A-$198D DB_DATA 3
+RANGE $198D-$1990 DB_DATA 3
+RANGE $1990-$1993 DB_DATA 3
+RANGE $1993-$1996 DB_DATA 3
+RANGE $1996-$1999 DB_DATA 3
+RANGE $1999-$199C DB_DATA 3
+RANGE $199C-$199F DB_DATA 3
+RANGE $199F-$19A2 DB_DATA 3
+RANGE $19A2-$19A5 DB_DATA 3
+RANGE $19A5-$19A8 DB_DATA 3
+RANGE $19A8-$19AB DB_DATA 3
+RANGE $19AB-$19AE DB_DATA 3
+RANGE $19AE-$19B1 DB_DATA 3
+RANGE $19B1-$19B4 DB_DATA 3
+RANGE $19B4-$19B7 DB_DATA 3
+RANGE $19B7-$19BA DB_DATA 3
+RANGE $19BA-$19BD DB_DATA 3
+RANGE $19BD-$19C0 DB_DATA 3
+RANGE $19C0-$19C3 DB_DATA 3
+RANGE $19C3-$19C6 DB_DATA 3
+RANGE $19C6-$19C9 DB_DATA 3
+RANGE $19C9-$19CC DB_DATA 3
+RANGE $19CC-$19CF DB_DATA 3
+RANGE $19CF-$19D2 DB_DATA 3
+RANGE $19D2-$19D5 DB_DATA 3
+RANGE $19D5-$19D8 DB_DATA 3
+RANGE $19D8-$19DB DB_DATA 3
+RANGE $19DB-$19DE DB_DATA 3
+RANGE $19DE-$19E1 DB_DATA 3
+RANGE $19E1-$19E4 DB_DATA 3
+RANGE $19E4-$19E7 DB_DATA 3
+RANGE $19E7-$19EA DB_DATA 3
+RANGE $19EA-$19ED DB_DATA 3
+RANGE $19ED-$19F0 DB_DATA 3
+RANGE $19F0-$19F1 DB_DATA 1
+RANGE $19F1-$19F4 DB_DATA 3
+RANGE $19F4-$19F7 DB_DATA 3
+RANGE $19F7-$19FA DB_DATA 3
+RANGE $19FA-$19FD DB_DATA 3
+RANGE $19FD-$1A00 DB_DATA 3
+RANGE $1A00-$1A03 DB_DATA 3
+RANGE $1A03-$1A06 DB_DATA 3
+RANGE $1A06-$1A09 DB_DATA 3
+RANGE $1A09-$1A0C DB_DATA 3
+RANGE $1A0C-$1A0F DB_DATA 3
+RANGE $1A0F-$1A12 DB_DATA 3
+RANGE $1A12-$1A15 DB_DATA 3
+RANGE $1A15-$1A18 DB_DATA 3
+RANGE $1A18-$1A1B DB_DATA 3
+RANGE $1A1B-$1A1E DB_DATA 3
+RANGE $1A1E-$1A21 DB_DATA 3
+RANGE $1A21-$1A24 DB_DATA 3
+RANGE $1A24-$1A27 DB_DATA 3
+RANGE $1A27-$1A2A DB_DATA 3
+RANGE $1A2A-$1A2D DB_DATA 3
+RANGE $1A2D-$1A30 DB_DATA 3
+RANGE $1A30-$1A33 DB_DATA 3
+RANGE $1A33-$1A36 DB_DATA 3
+RANGE $1A36-$1A39 DB_DATA 3
+RANGE $1A39-$1A3C DB_DATA 3
+RANGE $1A3C-$1A3F DB_DATA 3
+RANGE $1A3F-$1A42 DB_DATA 3
+RANGE $1A42-$1A45 DB_DATA 3
+RANGE $1A45-$1A48 DB_DATA 3
+RANGE $1A48-$1A4B DB_DATA 3
+RANGE $1A4B-$1A4E DB_DATA 3
+RANGE $1A4E-$1A51 DB_DATA 3
+RANGE $1A51-$1A54 DB_DATA 3
+RANGE $1A54-$1A57 DB_DATA 3
+RANGE $1A57-$1A5A DB_DATA 3
+RANGE $1A5A-$1A5D DB_DATA 3
+RANGE $1A5D-$1A60 DB_DATA 3
+RANGE $1A60-$1A63 DB_DATA 3
+RANGE $1A63-$1A66 DB_DATA 3
+RANGE $1A66-$1A67 DB_DATA 1
+RANGE $1A67-$1A6A DB_DATA 3
+RANGE $1A6A-$1A6D DB_DATA 3
+RANGE $1A6D-$1A70 DB_DATA 3
+RANGE $1A70-$1A73 DB_DATA 3
+RANGE $1A73-$1A76 DB_DATA 3
+RANGE $1A76-$1A79 DB_DATA 3
+RANGE $1A79-$1A7C DB_DATA 3
+RANGE $1A7C-$1A7F DB_DATA 3
+RANGE $1A7F-$1A82 DB_DATA 3
+RANGE $1A82-$1A85 DB_DATA 3
+RANGE $1A85-$1A88 DB_DATA 3
+RANGE $1A88-$1A8B DB_DATA 3
+RANGE $1A8B-$1A8E DB_DATA 3
+RANGE $1A8E-$1A91 DB_DATA 3
+RANGE $1A91-$1A94 DB_DATA 3
+RANGE $1A94-$1A97 DB_DATA 3
+RANGE $1A97-$1A9A DB_DATA 3
+RANGE $1A9A-$1A9D DB_DATA 3
+RANGE $1A9D-$1AA0 DB_DATA 3
+RANGE $1AA0-$1AA3 DB_DATA 3
+RANGE $1AA3-$1AA6 DB_DATA 3
+RANGE $1AA6-$1AA9 DB_DATA 3
+RANGE $1AA9-$1AAC DB_DATA 3
+RANGE $1AAC-$1AAF DB_DATA 3
+RANGE $1AAF-$1AB2 DB_DATA 3
+RANGE $1AB2-$1AB5 DB_DATA 3
+RANGE $1AB5-$1AB8 DB_DATA 3
+RANGE $1AB8-$1ABB DB_DATA 3
+RANGE $1ABB-$1ABE DB_DATA 3
+RANGE $1ABE-$1AC1 DB_DATA 3
+RANGE $1AC1-$1AC4 DB_DATA 3
+RANGE $1AC4-$1AC7 DB_DATA 3
+RANGE $1AC7-$1ACA DB_DATA 3
+RANGE $1ACA-$1ACD DB_DATA 3
+RANGE $1ACD-$1AD0 DB_DATA 3
+RANGE $1AD0-$1AD3 DB_DATA 3
+RANGE $1AD3-$1AD6 DB_DATA 3
+RANGE $1AD6-$1AD9 DB_DATA 3
+RANGE $1AD9-$1ADC DB_DATA 3
+RANGE $1ADC-$1ADD DB_DATA 1
+RANGE $1ADD-$1AE0 DB_DATA 3
+RANGE $1AE0-$1AE3 DB_DATA 3
+RANGE $1AE3-$1AE6 DB_DATA 3
+RANGE $1AE6-$1AE9 DB_DATA 3
+RANGE $1AE9-$1AEC DB_DATA 3
+RANGE $1AEC-$1AEF DB_DATA 3
+RANGE $1AEF-$1AF2 DB_DATA 3
+RANGE $1AF2-$1AF5 DB_DATA 3
+RANGE $1AF5-$1AF8 DB_DATA 3
+RANGE $1AF8-$1AFB DB_DATA 3
+RANGE $1AFB-$1AFE DB_DATA 3
+RANGE $1AFE-$1B01 DB_DATA 3
+RANGE $1B01-$1B04 DB_DATA 3
+RANGE $1B04-$1B07 DB_DATA 3
+RANGE $1B07-$1B0A DB_DATA 3
+RANGE $1B0A-$1B0D DB_DATA 3
+RANGE $1B0D-$1B10 DB_DATA 3
+RANGE $1B10-$1B13 DB_DATA 3
+RANGE $1B13-$1B16 DB_DATA 3
+RANGE $1B16-$1B19 DB_DATA 3
+RANGE $1B19-$1B1C DB_DATA 3
+RANGE $1B1C-$1B1F DB_DATA 3
+RANGE $1B1F-$1B22 DB_DATA 3
+RANGE $1B22-$1B25 DB_DATA 3
+RANGE $1B25-$1B28 DB_DATA 3
+RANGE $1B28-$1B2B DB_DATA 3
+RANGE $1B2B-$1B2E DB_DATA 3
+RANGE $1B2E-$1B31 DB_DATA 3
+RANGE $1B31-$1B34 DB_DATA 3
+RANGE $1B34-$1B37 DB_DATA 3
+RANGE $1B37-$1B3A DB_DATA 3
+RANGE $1B3A-$1B3D DB_DATA 3
+RANGE $1B3D-$1B40 DB_DATA 3
+RANGE $1B40-$1B43 DB_DATA 3
+RANGE $1B43-$1B46 DB_DATA 3
+RANGE $1B46-$1B49 DB_DATA 3
+RANGE $1B49-$1B4C DB_DATA 3
+RANGE $1B4C-$1B4F DB_DATA 3
+RANGE $1B4F-$1B52 DB_DATA 3
+RANGE $1B52-$1B53 DB_DATA 1
+RANGE $1B53-$1B56 DB_DATA 3
+RANGE $1B56-$1B59 DB_DATA 3
+RANGE $1B59-$1B5C DB_DATA 3
+RANGE $1B5C-$1B5F DB_DATA 3
+RANGE $1B5F-$1B62 DB_DATA 3
+RANGE $1B62-$1B65 DB_DATA 3
+RANGE $1B65-$1B68 DB_DATA 3
+RANGE $1B68-$1B6B DB_DATA 3
+RANGE $1B6B-$1B6E DB_DATA 3
+RANGE $1B6E-$1B71 DB_DATA 3
+RANGE $1B71-$1B74 DB_DATA 3
+RANGE $1B74-$1B77 DB_DATA 3
+RANGE $1B77-$1B7A DB_DATA 3
+RANGE $1B7A-$1B7D DB_DATA 3
+RANGE $1B7D-$1B80 DB_DATA 3
+RANGE $1B80-$1B83 DB_DATA 3
+RANGE $1B83-$1B86 DB_DATA 3
+RANGE $1B86-$1B89 DB_DATA 3
+RANGE $1B89-$1B8C DB_DATA 3
+RANGE $1B8C-$1B8F DB_DATA 3
+RANGE $1B8F-$1B92 DB_DATA 3
+RANGE $1B92-$1B95 DB_DATA 3
+RANGE $1B95-$1B98 DB_DATA 3
+RANGE $1B98-$1B9B DB_DATA 3
+RANGE $1B9B-$1B9E DB_DATA 3
+RANGE $1B9E-$1BA1 DB_DATA 3
+RANGE $1BA1-$1BA4 DB_DATA 3
+RANGE $1BA4-$1BA7 DB_DATA 3
+RANGE $1BA7-$1BAA DB_DATA 3
+RANGE $1BAA-$1BAD DB_DATA 3
+RANGE $1BAD-$1BB0 DB_DATA 3
+RANGE $1BB0-$1BB3 DB_DATA 3
+RANGE $1BB3-$1BB6 DB_DATA 3
+RANGE $1BB6-$1BB9 DB_DATA 3
+RANGE $1BB9-$1BBC DB_DATA 3
+RANGE $1BBC-$1BBF DB_DATA 3
+RANGE $1BBF-$1BC2 DB_DATA 3
+RANGE $1BC2-$1BC5 DB_DATA 3
+RANGE $1BC5-$1BC8 DB_DATA 3
+RANGE $1BC8-$1BC9 DB_DATA 1
+RANGE $1BC9-$1BCC DB_DATA 3
+RANGE $1BCC-$1BCF DB_DATA 3
+RANGE $1BCF-$1BD2 DB_DATA 3
+RANGE $1BD2-$1BD5 DB_DATA 3
+RANGE $1BD5-$1BD8 DB_DATA 3
+RANGE $1BD8-$1BDB DB_DATA 3
+RANGE $1BDB-$1BDE DB_DATA 3
+RANGE $1BDE-$1BE1 DB_DATA 3
+RANGE $1BE1-$1BE4 DB_DATA 3
+RANGE $1BE4-$1BE7 DB_DATA 3
+RANGE $1BE7-$1BEA DB_DATA 3
+RANGE $1BEA-$1BED DB_DATA 3
+RANGE $1BED-$1BF0 DB_DATA 3
+RANGE $1BF0-$1BF3 DB_DATA 3
+RANGE $1BF3-$1BF6 DB_DATA 3
+RANGE $1BF6-$1BF9 DB_DATA 3
+RANGE $1BF9-$1BFC DB_DATA 3
+RANGE $1BFC-$1BFF DB_DATA 3
+RANGE $1BFF-$1C02 DB_DATA 3
+RANGE $1C02-$1C05 DB_DATA 3
+RANGE $1C05-$1C08 DB_DATA 3
+RANGE $1C08-$1C0B DB_DATA 3
+RANGE $1C0B-$1C0E DB_DATA 3
+RANGE $1C0E-$1C11 DB_DATA 3
+RANGE $1C11-$1C14 DB_DATA 3
+RANGE $1C14-$1C17 DB_DATA 3
+RANGE $1C17-$1C1A DB_DATA 3
+RANGE $1C1A-$1C1D DB_DATA 3
+RANGE $1C1D-$1C20 DB_DATA 3
+RANGE $1C20-$1C23 DB_DATA 3
+RANGE $1C23-$1C26 DB_DATA 3
+RANGE $1C26-$1C29 DB_DATA 3
+RANGE $1C29-$1C2C DB_DATA 3
+RANGE $1C2C-$1C2F DB_DATA 3
+RANGE $1C2F-$1C32 DB_DATA 3
+RANGE $1C32-$1C35 DB_DATA 3
+RANGE $1C35-$1C38 DB_DATA 3
+RANGE $1C38-$1C3B DB_DATA 3
+RANGE $1C3B-$1C3E DB_DATA 3
+RANGE $1C3E-$1C3F DB_DATA 1
+RANGE $1C3F-$1C42 DB_DATA 3
+RANGE $1C42-$1C45 DB_DATA 3
+RANGE $1C45-$1C48 DB_DATA 3
+RANGE $1C48-$1C4B DB_DATA 3
+RANGE $1C4B-$1C4E DB_DATA 3
+RANGE $1C4E-$1C51 DB_DATA 3
+RANGE $1C51-$1C54 DB_DATA 3
+RANGE $1C54-$1C57 DB_DATA 3
+RANGE $1C57-$1C5A DB_DATA 3
+RANGE $1C5A-$1C5D DB_DATA 3
+RANGE $1C5D-$1C60 DB_DATA 3
+RANGE $1C60-$1C63 DB_DATA 3
+RANGE $1C63-$1C66 DB_DATA 3
+RANGE $1C66-$1C69 DB_DATA 3
+RANGE $1C69-$1C6C DB_DATA 3
+RANGE $1C6C-$1C6F DB_DATA 3
+RANGE $1C6F-$1C72 DB_DATA 3
+RANGE $1C72-$1C75 DB_DATA 3
+RANGE $1C75-$1C78 DB_DATA 3
+RANGE $1C78-$1C7B DB_DATA 3
+RANGE $1C7B-$1C7E DB_DATA 3
+RANGE $1C7E-$1C81 DB_DATA 3
+RANGE $1C81-$1C84 DB_DATA 3
+RANGE $1C84-$1C87 DB_DATA 3
+RANGE $1C87-$1C8A DB_DATA 3
+RANGE $1C8A-$1C8D DB_DATA 3
+RANGE $1C8D-$1C90 DB_DATA 3
+RANGE $1C90-$1C93 DB_DATA 3
+RANGE $1C93-$1C96 DB_DATA 3
+RANGE $1C96-$1C99 DB_DATA 3
+RANGE $1C99-$1C9C DB_DATA 3
+RANGE $1C9C-$1C9F DB_DATA 3
+RANGE $1C9F-$1CA2 DB_DATA 3
+RANGE $1CA2-$1CA5 DB_DATA 3
+RANGE $1CA5-$1CA8 DB_DATA 3
+RANGE $1CA8-$1CAB DB_DATA 3
+RANGE $1CAB-$1CAE DB_DATA 3
+RANGE $1CAE-$1CB1 DB_DATA 3
+RANGE $1CB1-$1CB4 DB_DATA 3
+RANGE $1CB4-$1CB5 DB_DATA 1
+
